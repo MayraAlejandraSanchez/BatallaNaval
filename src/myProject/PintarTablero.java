@@ -26,7 +26,7 @@ public class PintarTablero extends JPanel {
         gbc.gridy = 0;
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
-        gbc.insets = new Insets(0,30,0,30);
+        gbc.insets = new Insets(0,0,0,30);
         this.add(panelTableroPosicion, gbc);
 
         // Panel tablero principal
@@ -38,7 +38,7 @@ public class PintarTablero extends JPanel {
         gbc.gridy = 0;
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
-        gbc.insets = new Insets(0,30,0,30);
+        gbc.insets = new Insets(0,30,0,0);
         this.add(panelTableroPrincipal, gbc);
 
         tableroPosicion = new Tableros();

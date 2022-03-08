@@ -33,7 +33,9 @@ public class GUI_Principal extends JFrame {
     private ImageIcon team, help, enemy, play;
     private JPanel contentPane;
     private PintarTablero pintarTablero;
+    private Flota flota;
     private GUI_Secundaria ventanaEnemy;
+    private int estadoJuego; // 0 si se distribuye la flota, de lo contrario 1
 
     /**
      * Constructor of GUI class
@@ -81,8 +83,15 @@ public class GUI_Principal extends JFrame {
         panelPrincipal.add(panelCentral,BorderLayout.CENTER);
         panelCentral.setLayout(new BorderLayout(0,0));
 
+        // Estado del juego
+        estadoJuego = 0;
+
         // Create Listener Object and Control Object
         escucha = new Escucha();
+
+        // Creates Flota object
+        flota = new Flota();
+        flota.getBotonBarco().addActionListener(escucha);
 
         // Set up JComponents
         // Imagenes
@@ -171,10 +180,15 @@ public class GUI_Principal extends JFrame {
 
 
                     }else {
+                        if(e.getSource() == flota.getBotonBarco()){
+                            flota.getBotonBarco().removeActionListener(escucha);
+                        }
+                        /*
                         if(e.getSource()==movimientosEnemigo){
                             GUI_Secundaria ventanaEnemy = new GUI_Secundaria();
                             ventanaEnemy.setVisible(true);
                         }
+                         */
                     }
                 }
             }
@@ -183,7 +197,11 @@ public class GUI_Principal extends JFrame {
         @Override
         public void mouseClicked(MouseEvent e) {
             if(e.getSource() == pintarTablero.getMatrizPosicion()[1][1]){
-                System.out.println("hola");
+                if(estadoJuego == 0){
+                    pintarTablero.getMatrizPosicion()[1][1].setIcon(new ImageIcon(getClass().getResource("/recursos/team.png")));
+                }else{
+                    System.out.println("hola");
+                }
             }
         }
 
