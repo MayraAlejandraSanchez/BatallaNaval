@@ -27,13 +27,17 @@ public class GUI_Principal extends JFrame {
     public  static final String CREDITOS="CRÉDITOS\n" +
             "-> BRAYAN STIVEN SANCHEZ LEON\n" +
             "-> MAYRA ALEJANDRA SANCHEZ SALINAS";
+    public static final String INFO = "• 1 portaaviones: ocupa 4 casillas"+"\n• 2 submarinos: ocupan 3 casillas cada uno"+"\n• 3 destructores: ocupan 2 casillas cada uno"+"\n• 4 fragatas: ocupan 1 casilla cada uno";
     private Header headerProject;
     private JButton ayuda, creditos, comenzarPartida, movimientosEnemigo;
     private Escucha escucha;
     private ImageIcon team, help, enemy, play;
-    private JPanel contentPane;
+    private JPanel flota, textFlota;
+    private JTextArea textoInfoBarcos;
     private PintarTablero pintarTablero;
     private GUI_Secundaria ventanaEnemy;
+    private Border blackline;
+    private TitledBorder tituloFlota,tituloInfo;
 
     JPanel norte = new JPanel();
     JPanel sur = new JPanel();
@@ -51,7 +55,7 @@ public class GUI_Principal extends JFrame {
         Image image = new ImageIcon(getClass().getResource(PATH+"barcoIcono.png")).getImage();
         this.setIconImage(image);
         this.setUndecorated(false);
-        this.setSize(1200,700);
+        this.setSize(1500,700);
         this.setResizable(true);
         this.setVisible(true);
         this.setLocationRelativeTo(null);
@@ -65,12 +69,13 @@ public class GUI_Principal extends JFrame {
 
         sur.setLayout(new FlowLayout(FlowLayout.CENTER,200,5));
         norte.setLayout(new FlowLayout(FlowLayout.CENTER,200,5));
-        este.setLayout(new FlowLayout(FlowLayout.CENTER,0,0));
+        este.setLayout(new FlowLayout(FlowLayout.CENTER,100,60));
         centro.setLayout(new FlowLayout(FlowLayout.CENTER,0,0));
 
         sur.setPreferredSize(new Dimension(100,60));
         norte.setPreferredSize(new Dimension(100,60));
-        este.setPreferredSize(new Dimension(850,60));
+        este.setPreferredSize(new Dimension(1000,60));
+        centro.setPreferredSize(new Dimension(500,60));
 
         this.add(norte,BorderLayout.NORTH);
         this.add(sur,BorderLayout.SOUTH);
@@ -88,7 +93,7 @@ public class GUI_Principal extends JFrame {
 
         // Create Listener Object and Control Object
         escucha = new Escucha();
-
+        blackline = BorderFactory.createLineBorder(Color.black);
         // Set up JComponents
         // Imagenes
         team = new ImageIcon(getClass().getResource(PATH + "team.png"));
@@ -121,6 +126,29 @@ public class GUI_Principal extends JFrame {
         // Tablero
         pintarTablero = new PintarTablero();
         este.add(pintarTablero);
+
+        // Flota
+        flota = new JPanel();
+        flota.setPreferredSize(new Dimension(350,400));
+        flota.setBackground(new Color(178, 161, 255,152));
+        tituloFlota = BorderFactory.createTitledBorder(blackline, "Tu barcos");
+        tituloFlota.setTitleJustification(TitledBorder.CENTER);
+        flota.setBorder(tituloFlota);
+        centro.add(flota);
+
+        // Texto bajo flota
+        textFlota = new JPanel();
+        textoInfoBarcos = new JTextArea();
+        textoInfoBarcos= new JTextArea(4,5);
+        textoInfoBarcos.setText(INFO);
+        textoInfoBarcos.setEditable(false);
+        textFlota.setPreferredSize(new Dimension(350,100));
+        textFlota.setBackground(Color.white);
+        tituloInfo = BorderFactory.createTitledBorder(blackline, "Información de barcos");
+        tituloInfo.setTitleJustification(TitledBorder.CENTER);
+        textFlota.setBorder(tituloInfo);
+        textFlota.add(textoInfoBarcos);
+        centro.add(textFlota);
 
         //JComponents de la parte Inferior
         // Creación de botón comenzar partida

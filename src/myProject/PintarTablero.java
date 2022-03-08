@@ -16,6 +16,7 @@ public class PintarTablero extends JPanel {
         GridBagLayout gb = new GridBagLayout();
         GridBagConstraints gbc = new GridBagConstraints();
         this.setLayout(gb);
+        this.setBackground(Color.CYAN);
 
         // Panel tablero posicion
         panelTableroPosicion = new JPanel(new GridLayout(11, 11));
