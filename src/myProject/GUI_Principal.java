@@ -44,7 +44,7 @@ public class GUI_Principal extends JFrame {
         Image image = new ImageIcon(getClass().getResource(PATH+"barcoIcono.png")).getImage();
         this.setIconImage(image);
         this.setUndecorated(false);
-        this.setSize(1000,700);
+        this.setSize(1200,700);
         this.setResizable(true);
         this.setVisible(true);
         this.setLocationRelativeTo(null);

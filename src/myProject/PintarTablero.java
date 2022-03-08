@@ -21,7 +21,7 @@ public class PintarTablero extends JPanel {
             for (int m=0;m<10;m++){
                 if (tablero[n][m] == 0){
                     g.setColor(Color.BLACK);
-                    g.drawRect(x+n*30, y+m*30,30,30);
+                    g.drawRect(x+n*35, y+m*35,35,35);
                 }
                 tableroPosicion[n][m] = 0;
             }
@@ -39,8 +39,8 @@ public class PintarTablero extends JPanel {
                 G2D.setPaint(gp);
                 setBackground(Color.CYAN);
                 G2D.fillRect(0,0,width,height);
-                pintarTablero(g,tableroPosicion,150,50);
-                pintarTablero(g,tableroPrincipal,550,50);
+                pintarTablero(g,tableroPosicion,450,50);
+                pintarTablero(g,tableroPrincipal,820,50);
                 break;
         }
 
