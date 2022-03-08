@@ -4,45 +4,68 @@ import javax.swing.*;
 import java.awt.*;
 
 public class PintarTablero extends JPanel {
-    private int step=1;
-    int tableroPosicion [][] = new int [10][10],tableroPrincipal [][] = new int [10][10] ;
+    private Tableros tableroPosicion, tableroPrincipal;
+    private JPanel panelTableroPosicion, panelTableroPrincipal;
+    private String abecedario[];
 
-    public void start(){
-        for (int i = 0; i<10;i++){
-            for (int j=0;j<10;j++){
-                tableroPosicion[i][j] = 0;
-                tableroPrincipal[i][j] = 0;
-            }
-        }
-    }
+    public PintarTablero(){
+        this.setLayout(new GridLayout(1,2, 10, 0));
+        panelTableroPosicion = new JPanel(new GridLayout(11, 11));
+        panelTableroPrincipal = new JPanel(new GridLayout(11, 11));
+        tableroPosicion = new Tableros();
+        tableroPrincipal = new Tableros();
+        abecedario = new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
 
-    public void pintarTablero(Graphics g, int tablero[][] , int x, int y){
-        for (int n = 0; n<10;n++){
-            for (int m=0;m<10;m++){
-                if (tablero[n][m] == 0){
-                    g.setColor(Color.BLACK);
-                    g.drawRect(x+n*35, y+m*35,35,35);
+        panelTableroPosicion.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        panelTableroPosicion.setBackground(Color.BLACK);
+        //panelTableroPosicion.setPreferredSize(new Dimension(200, 200));
+        panelTableroPrincipal.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        panelTableroPrincipal.setBackground(Color.BLACK);
+        //panelTableroPrincipal.setPreferredSize(new Dimension(200, 200));
+
+        for (int row = 0; row < 11; row++) {
+            for (int col = 0; col < 11; col++) {
+                if(row == 0 && col == 0){
+                    tableroPosicion.getMatriz()[row][col] = new JLabel("", SwingConstants.CENTER);
+                    tableroPrincipal.getMatriz()[row][col] = new JLabel("", SwingConstants.CENTER);
+                }else{
+                    if(row == 0 && col > 0){
+                        tableroPosicion.getMatriz()[row][col] = new JLabel(abecedario[col-1], SwingConstants.CENTER);
+                        tableroPrincipal.getMatriz()[row][col] = new JLabel(abecedario[col-1], SwingConstants.CENTER);
+                    }else{
+                        if(row > 0 && col == 0){
+                            tableroPosicion.getMatriz()[row][col] = new JLabel(String.valueOf(row), SwingConstants.CENTER);
+                            tableroPrincipal.getMatriz()[row][col] = new JLabel(String.valueOf(row), SwingConstants.CENTER);
+                        }else{
+                            tableroPosicion.getMatriz()[row][col] = new JLabel(new ImageIcon(getClass().getResource("/recursos/enemy.png")), SwingConstants.CENTER);
+                            tableroPrincipal.getMatriz()[row][col] = new JLabel(new ImageIcon(getClass().getResource("/recursos/enemy.png")), SwingConstants.CENTER);
+                        }
+                    }
                 }
-                tableroPosicion[n][m] = 0;
+                tableroPosicion.getMatriz()[row][col].setOpaque(true);
+                tableroPosicion.getMatriz()[row][col].setBackground(Color.WHITE);
+                tableroPosicion.getMatriz()[row][col].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+                tableroPrincipal.getMatriz()[row][col].setOpaque(true);
+                tableroPrincipal.getMatriz()[row][col].setBackground(Color.WHITE);
+                tableroPrincipal.getMatriz()[row][col].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+                panelTableroPosicion.add(tableroPosicion.getMatriz()[row][col]);
+                panelTableroPrincipal.add(tableroPrincipal.getMatriz()[row][col]);
             }
         }
+
+        add(panelTableroPosicion);
+        add(panelTableroPrincipal);
     }
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        switch (step){
-            case 1:
-                int height = getHeight(), width = getWidth();
-                Graphics2D G2D=(Graphics2D) g;
-                GradientPaint gp = new GradientPaint(0,0,Color.CYAN,0,height,Color.CYAN);
-                G2D.setPaint(gp);
-                setBackground(Color.CYAN);
-                G2D.fillRect(0,0,width,height);
-                pintarTablero(g,tableroPosicion,450,50);
-                pintarTablero(g,tableroPrincipal,820,50);
-                break;
-        }
+    // Retorna la matriz posicion
+    public JLabel[][] getMatrizPosicion(){
+        return tableroPosicion.getMatriz();
+    }
 
+    // Retorna la matriz principal
+    public JLabel[][] getMatrizPrincipal(){
+        return tableroPrincipal.getMatriz();
     }
 }

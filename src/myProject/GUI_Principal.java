@@ -6,6 +6,8 @@ import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 /**
  *
@@ -131,6 +133,13 @@ public class GUI_Principal extends JFrame {
         movimientosEnemigo.setFocusable(false);
         movimientosEnemigo.setBorder(null);
         panelInferior.add(movimientosEnemigo,FlowLayout.CENTER);
+
+        // Agrega el escucha a cada uno de los JLabel de la matriz de PintarTablero
+        for (int row = 0; row < pintarTablero.getMatrizPosicion().length; row++) {
+            for (int col = 0; col < pintarTablero.getMatrizPosicion()[row].length; col++) {
+                pintarTablero.getMatrizPosicion()[row][col].addMouseListener(escucha);
+            }
+        }
     }
 
     /**
@@ -147,7 +156,7 @@ public class GUI_Principal extends JFrame {
     /**
      * inner class that extends an Adapter Class or implements Listeners used by GUI class
      */
-    private class Escucha implements ActionListener {
+    private class Escucha implements ActionListener, MouseListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -170,5 +179,33 @@ public class GUI_Principal extends JFrame {
                 }
             }
         }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            if(e.getSource() == pintarTablero.getMatrizPosicion()[1][1]){
+                System.out.println("hola");
+            }
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+
+        }
     }
+
 }
