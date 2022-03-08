@@ -35,6 +35,11 @@ public class GUI_Principal extends JFrame {
     private PintarTablero pintarTablero;
     private GUI_Secundaria ventanaEnemy;
 
+    JPanel norte = new JPanel();
+    JPanel sur = new JPanel();
+    JPanel este = new JPanel();
+    JPanel centro = new JPanel();
+
     /**
      * Constructor of GUI class
      */
@@ -51,6 +56,27 @@ public class GUI_Principal extends JFrame {
         this.setVisible(true);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // Creación de paneles
+        norte.setBackground(Color.cyan);
+        sur.setBackground(Color.cyan);
+        este.setBackground(Color.cyan);
+        centro.setBackground(Color.blue);
+
+        sur.setLayout(new FlowLayout(FlowLayout.CENTER,200,5));
+        norte.setLayout(new FlowLayout(FlowLayout.CENTER,200,5));
+        este.setLayout(new FlowLayout(FlowLayout.CENTER,0,0));
+        centro.setLayout(new FlowLayout(FlowLayout.CENTER,0,0));
+
+        sur.setPreferredSize(new Dimension(100,60));
+        norte.setPreferredSize(new Dimension(100,60));
+        este.setPreferredSize(new Dimension(850,60));
+
+        this.add(norte,BorderLayout.NORTH);
+        this.add(sur,BorderLayout.SOUTH);
+        this.add(este,BorderLayout.EAST);
+        this.add(centro,BorderLayout.CENTER);
+
     }
 
     /**
@@ -59,27 +85,6 @@ public class GUI_Principal extends JFrame {
      */
     private void initGUI() {
         // Set up JFrame Container's Layout
-        getContentPane().setLayout(new BorderLayout(0,0));
-
-        JPanel panelPrincipal = new JPanel();
-        panelPrincipal.setBackground(Color.CYAN);
-        getContentPane().add(panelPrincipal,BorderLayout.CENTER);
-        panelPrincipal.setLayout(new BorderLayout(0,0));
-
-        JPanel panelSup = new JPanel();
-        panelSup.setBackground(Color.CYAN);
-        panelPrincipal.add(panelSup,BorderLayout.NORTH);
-        panelSup.setLayout(new FlowLayout(FlowLayout.CENTER,194,0));
-
-        JPanel panelInferior = new JPanel();
-        panelInferior.setBackground(Color.CYAN);
-        panelPrincipal.add(panelInferior,BorderLayout.SOUTH);
-        panelInferior.setLayout(new FlowLayout(FlowLayout.CENTER,200,0));
-
-        JPanel panelCentral = new JPanel();
-        panelCentral.setBackground(Color.cyan);
-        panelPrincipal.add(panelCentral,BorderLayout.CENTER);
-        panelCentral.setLayout(new BorderLayout(0,0));
 
         // Create Listener Object and Control Object
         escucha = new Escucha();
@@ -94,7 +99,7 @@ public class GUI_Principal extends JFrame {
         // JComponents de la parte superior
         // Titulo
         headerProject = new Header("B A T A L L A   N A V A L", Color.CYAN);
-        panelSup.add(headerProject,FlowLayout.LEFT);
+        norte.add(headerProject,FlowLayout.LEFT);
 
         // Creación botón ayuda
         ayuda = new JButton("", help);
@@ -102,7 +107,7 @@ public class GUI_Principal extends JFrame {
         ayuda.setBackground(Color.CYAN);
         ayuda.setFocusable(false);
         ayuda.setBorder(null);
-        panelSup.add(ayuda,FlowLayout.CENTER);
+        norte.add(ayuda,FlowLayout.CENTER);
 
         // Creación botón créditos
         creditos = new JButton("", team);
@@ -110,12 +115,12 @@ public class GUI_Principal extends JFrame {
         creditos.setBackground(Color.CYAN);
         creditos.setFocusable(false);
         creditos.setBorder(null);
-        panelSup.add(creditos,FlowLayout.LEFT);
+        norte.add(creditos,FlowLayout.LEFT);
 
         // JComponents de la parte central
         // Tablero
         pintarTablero = new PintarTablero();
-        panelCentral.add(pintarTablero, BorderLayout.CENTER);
+        este.add(pintarTablero);
 
         //JComponents de la parte Inferior
         // Creación de botón comenzar partida
@@ -124,7 +129,7 @@ public class GUI_Principal extends JFrame {
         comenzarPartida.setBackground(Color.CYAN);
         comenzarPartida.setFocusable(false);
         comenzarPartida.setBorder(null);
-        panelInferior.add(comenzarPartida,FlowLayout.LEFT);
+        sur.add(comenzarPartida,FlowLayout.LEFT);
 
         // Creación de botón de movimientos del oponente
         movimientosEnemigo = new JButton("Movimientos oponente", enemy);
@@ -132,7 +137,7 @@ public class GUI_Principal extends JFrame {
         movimientosEnemigo.setBackground(Color.CYAN);
         movimientosEnemigo.setFocusable(false);
         movimientosEnemigo.setBorder(null);
-        panelInferior.add(movimientosEnemigo,FlowLayout.CENTER);
+        sur.add(movimientosEnemigo,FlowLayout.CENTER);
 
         // Agrega el escucha a cada uno de los JLabel de la matriz de PintarTablero
         for (int row = 0; row < pintarTablero.getMatrizPosicion().length; row++) {
