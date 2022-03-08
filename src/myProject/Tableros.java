@@ -3,7 +3,7 @@ package myProject;
 import javax.swing.*;
 import java.util.HashMap;
 
-public class Tableros  {
+public class Tableros {
     private JLabel tablero[][];
     private HashMap<Integer, String> coordenadas;
 
