@@ -26,7 +26,7 @@ public class Flota extends JPanel{
 
         // Imagenes
         imageDestructor = new ImageIcon(getClass().getResource(PATH + "destructor.png"));
-        imagePortavion = new  ImageIcon(getClass().getResource(PATH+"portaavion.png"));
+        imagePortavion = new  ImageIcon(getClass().getResource(PATH+"portavion.png"));
         imageFragata = new ImageIcon(getClass().getResource(PATH+"fragata.png"));
         imageSubmarino = new ImageIcon(getClass().getResource(PATH+"submarino.png"));
 

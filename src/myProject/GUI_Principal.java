@@ -1,8 +1,6 @@
 package myProject;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -236,7 +234,25 @@ public class GUI_Principal extends JFrame {
                         if(e.getSource() == pintarTablero.getMatrizPosicion()[row][col]) {
                             if(col <= 7){
                                 for(int pic=col; pic < col+4; pic++){
-                                    pintarTablero.getMatrizPosicion()[row][pic].setIcon(new ImageIcon(getClass().getResource("/recursos/portaavion.png")));
+                                    if(pic < 10){
+                                        if(pintarTablero.getCasillasOcupadas().get(pintarTablero.getMatrizPosicion()[row][pic+1]) == Integer.valueOf(1)){
+                                            System.out.println("Oye, No se puede colocar aqui");
+                                            System.out.println(col);
+                                            break;
+                                        }else{
+                                            pintarTablero.getMatrizPosicion()[row][pic].setIcon(new ImageIcon(getClass().getResource("/recursos/portavion.png")));
+                                            pintarTablero.getCasillasOcupadas().put(pintarTablero.getMatrizPosicion()[row][pic], 1);
+                                        }
+                                    }else{
+                                        if(pintarTablero.getCasillasOcupadas().get(pintarTablero.getMatrizPosicion()[row][pic]) == Integer.valueOf(1)){
+                                            System.out.println("Oye, No se puede colocar aqui");
+                                            System.out.println(col);
+                                            break;
+                                        }else{
+                                            pintarTablero.getMatrizPosicion()[row][pic].setIcon(new ImageIcon(getClass().getResource("/recursos/portavion.png")));
+                                            pintarTablero.getCasillasOcupadas().put(pintarTablero.getMatrizPosicion()[row][pic], 1);
+                                        }
+                                    }
                                 }
                             }else{
                                 System.out.println("No se puede colocar aqui");
