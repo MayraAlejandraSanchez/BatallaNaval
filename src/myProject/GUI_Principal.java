@@ -69,7 +69,7 @@ public class GUI_Principal extends JFrame {
         panelNorte.setBackground(Color.cyan);
         panelSur.setBackground(Color.cyan);
         panelEste.setBackground(Color.cyan);
-        panelCentro.setBackground(Color.blue);
+        panelCentro.setBackground(Color.cyan);
 
         panelSur.setLayout(new FlowLayout(FlowLayout.CENTER,200,5));
         panelNorte.setLayout(new FlowLayout(FlowLayout.CENTER,200,5));

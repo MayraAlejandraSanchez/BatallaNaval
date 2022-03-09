@@ -32,9 +32,21 @@ public class Flota extends JPanel{
 
         // Botones
         portavion = new JButton("",imagePortavion);
+        portavion.setFocusable(false);
+        portavion.setBorder(null);
+
         destuctor = new JButton("",imageDestructor);
+        destuctor.setFocusable(false);
+        destuctor.setBorder(null);
+
         fragata = new JButton("",imageFragata);
+        fragata.setFocusable(false);
+        fragata.setBorder(null);
+
         submarino = new JButton("",imageSubmarino);
+        submarino.setFocusable(false);
+        submarino.setBorder(null);
+
         vertical = new JButton("Vertical");
         horizontal = new JButton("Horizontal");
 
