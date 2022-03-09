@@ -230,13 +230,23 @@ public class GUI_Principal extends JFrame {
         @Override
         public void mouseClicked(MouseEvent e) {
             if(estadoJuego == 0){
-                for (int row = 0; row < 11; row++) {
-                    for (int col = 0; col < 11; col++) {
-                        if(e.getSource() == pintarTablero.getMatrizPosicion()[row][col]){
-                            pintarTablero.getMatrizPosicion()[row][col].setIcon(new ImageIcon(getClass().getResource("/recursos/portaavion.png")));
-                            System.out.print("hola");
-                            break;
+                int auxiliar = 0; // Variable para indicar cuando se debe terminar el primer ciclo
+                for (int row = 1; row < 11; row++) {
+                    for (int col = 1; col < 11; col++) {
+                        if(e.getSource() == pintarTablero.getMatrizPosicion()[row][col]) {
+                            if(col <= 7){
+                                for(int pic=col; pic < col+4; pic++){
+                                    pintarTablero.getMatrizPosicion()[row][pic].setIcon(new ImageIcon(getClass().getResource("/recursos/portaavion.png")));
+                                }
+                            }else{
+                                System.out.println("No se puede colocar aqui");
+                                System.out.println(col);
+                            }
+                            auxiliar = 1;
                         }
+                    }
+                    if(auxiliar == 1){
+                        break;
                     }
                 }
             }else{
