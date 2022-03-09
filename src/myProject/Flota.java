@@ -8,10 +8,10 @@ import java.awt.*;
 public class Flota extends JPanel{
     public static final String INFO = "• 1 portaaviones: ocupa 4 casillas"+"\n• 2 submarinos: ocupan 3 casillas cada uno"+"\n• 3 destructores: ocupan 2 casillas cada uno"+"\n• 4 fragatas: ocupan 1 casilla cada uno";
     public static final String PATH ="/recursos/";
-    private JButton portaavion, destuctor, fragata, submarino;
+    private JButton portavion, destuctor, fragata, submarino, vertical, horizontal;
     private JPanel panelFlota, textFlota;
     private JTextArea textoInfoBarcos;
-    private ImageIcon imageDestructor, imagePortaavion, imageFragata, imageSubmarino;
+    private ImageIcon imageDestructor, imagePortavion, imageFragata, imageSubmarino;
     private TitledBorder tituloFlota,tituloInfo;
     private Border blackline;
 
@@ -24,14 +24,33 @@ public class Flota extends JPanel{
     public void barcos(){
         GridBagConstraints gbc = new GridBagConstraints();
 
+        // Imagenes
+        imageDestructor = new ImageIcon(getClass().getResource(PATH + "destructor.png"));
+        imagePortavion = new  ImageIcon(getClass().getResource(PATH+"portaavion.png"));
+        imageFragata = new ImageIcon(getClass().getResource(PATH+"fragata.png"));
+        imageSubmarino = new ImageIcon(getClass().getResource(PATH+"submarino.png"));
+
+        // Botones
+        portavion = new JButton("",imagePortavion);
+        destuctor = new JButton("",imageDestructor);
+        fragata = new JButton("",imageFragata);
+        submarino = new JButton("",imageSubmarino);
+        vertical = new JButton("Vertical");
+        horizontal = new JButton("Horizontal");
+
         // Flota
         blackline = BorderFactory.createLineBorder(Color.black);
         panelFlota = new JPanel();
+        panelFlota.setLayout(new GridLayout(2,2));
         panelFlota.setPreferredSize(new Dimension(350,400));
         panelFlota.setBackground(new Color(178, 161, 255,152));
-        tituloFlota = BorderFactory.createTitledBorder(blackline, "Tu barcos");
+        tituloFlota = BorderFactory.createTitledBorder(blackline, "Tus barcos");
         tituloFlota.setTitleJustification(TitledBorder.CENTER);
         panelFlota.setBorder(tituloFlota);
+        panelFlota.add(portavion);
+        panelFlota.add(destuctor);
+        panelFlota.add(fragata);
+        panelFlota.add(submarino);
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 1;
@@ -55,20 +74,29 @@ public class Flota extends JPanel{
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
         this.add(textFlota, gbc);
-
-        // Imagenes
-        imageDestructor = new ImageIcon(getClass().getResource(PATH + "destructor.png"));
-        imagePortaavion = new  ImageIcon(getClass().getResource(PATH+"portaavion.png"));
-        imageFragata = new ImageIcon(getClass().getResource(PATH+"fragata.png"));
-        imageSubmarino = new ImageIcon(getClass().getResource(PATH+"submarino.png"));
-        // Botones
-        portaavion = new JButton("",imagePortaavion);
-        destuctor = new JButton("",imageDestructor);
-        fragata = new JButton("",imageFragata);
-        submarino = new JButton("",imageSubmarino);
     }
 
-    public JButton getBotonPortaavion(){
-        return portaavion;
+    public JButton getBotonPortavion(){
+        return portavion;
+    }
+
+    public JButton getBotonDestructor(){
+        return destuctor;
+    }
+
+    public JButton getBotonFragata(){
+        return fragata;
+    }
+
+    public JButton getBotonSubmarino(){
+        return submarino;
+    }
+
+    public JButton getBotonVertical(){
+        return vertical;
+    }
+
+    public JButton getBotonHorizontal(){
+        return horizontal;
     }
 }

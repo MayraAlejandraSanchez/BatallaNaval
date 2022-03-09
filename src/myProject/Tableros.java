@@ -10,10 +10,16 @@ public class Tableros {
     // Constructor
     public Tableros(){
         tablero = new JLabel[11][11];
+        coordenadas = new HashMap<>();
     }
 
     // Retorna la matriz
     public JLabel[][] getMatriz(){
         return tablero;
+    }
+
+    // Retorna las coordenadas
+    public HashMap getCoordenadas(){
+        return coordenadas;
     }
 }

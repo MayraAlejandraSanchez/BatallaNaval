@@ -96,7 +96,14 @@ public class GUI_Principal extends JFrame {
 
         // Creates Flota object
         flota = new Flota();
-        flota.getBotonPortaavion().addActionListener(escucha);
+
+        // Se agrega el escucha a cada boton de la clase Flota
+        flota.getBotonPortavion().addActionListener(escucha);
+        flota.getBotonDestructor().addActionListener(escucha);
+        flota.getBotonFragata().addActionListener(escucha);
+        flota.getBotonSubmarino().addActionListener(escucha);
+        flota.getBotonVertical().addActionListener(escucha);
+        flota.getBotonHorizontal().addActionListener(escucha);
 
         // Set up JComponents
         // Imagenes
@@ -143,7 +150,7 @@ public class GUI_Principal extends JFrame {
         comenzarPartida.setBorder(null);
         panelSur.add(comenzarPartida,FlowLayout.LEFT);
 
-        // Creación de botón de movimientos del oponente
+        // Creacion de botón de movimientos del oponente
         movimientosEnemigo = new JButton("Movimientos oponente", enemy);
         movimientosEnemigo.addActionListener(escucha);
         movimientosEnemigo.setBackground(Color.CYAN);
@@ -188,8 +195,26 @@ public class GUI_Principal extends JFrame {
 
 
                     }else {
-                        if(e.getSource() == flota.getBotonPortaavion()){
-                            flota.getBotonPortaavion().removeActionListener(escucha);
+                        if(e.getSource() == flota.getBotonPortavion()){
+                            flota.getBotonPortavion().removeActionListener(escucha);
+                            System.out.print("Selecciona la casilla donde quieres poner el portavion");
+                        }else{
+                            if(e.getSource() == flota.getBotonDestructor()){
+                                flota.getBotonPortavion().removeActionListener(escucha);
+                                System.out.print("Selecciona la casilla donde quieres poner el destructor");
+                            }else{
+                                if(e.getSource() == flota.getBotonFragata()){
+                                    flota.getBotonPortavion().removeActionListener(escucha);
+                                    System.out.print("Selecciona la casilla donde quieres poner la fragata");
+                                }else{
+                                    if(e.getSource() == flota.getBotonSubmarino()){
+                                        flota.getBotonPortavion().removeActionListener(escucha);
+                                        System.out.print("Selecciona la casilla donde quieres poner el submarino");
+                                    }else{
+
+                                    }
+                                }
+                            }
                         }
                         /*
                         if(e.getSource()==movimientosEnemigo){
@@ -204,12 +229,18 @@ public class GUI_Principal extends JFrame {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-            if(e.getSource() == pintarTablero.getMatrizPosicion()[1][1]){
-                if(estadoJuego == 0){
-                    pintarTablero.getMatrizPosicion()[1][1].setIcon(new ImageIcon(getClass().getResource("/recursos/team.png")));
-                }else{
-                    System.out.println("hola");
+            if(estadoJuego == 0){
+                for (int row = 0; row < 11; row++) {
+                    for (int col = 0; col < 11; col++) {
+                        if(e.getSource() == pintarTablero.getMatrizPosicion()[row][col]){
+                            pintarTablero.getMatrizPosicion()[row][col].setIcon(new ImageIcon(getClass().getResource("/recursos/portaavion.png")));
+                            System.out.print("hola");
+                            break;
+                        }
+                    }
                 }
+            }else{
+                System.out.println("hola");
             }
         }
 
