@@ -5,7 +5,7 @@ import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 
-public class Flota extends JPanel{
+public class PanelFlota extends JPanel{
     public static final String INFO = "• 1 portaaviones: ocupa 4 casillas"+"\n• 2 submarinos: ocupan 3 casillas cada uno"+"\n• 3 destructores: ocupan 2 casillas cada uno"+"\n• 4 fragatas: ocupan 1 casilla cada uno";
     public static final String PATH ="/recursos/";
     private JButton portavion, destuctor, fragata, submarino, vertical, horizontal;
@@ -15,7 +15,7 @@ public class Flota extends JPanel{
     private TitledBorder tituloFlota,tituloInfo;
     private Border blackline;
 
-    public Flota(){
+    public PanelFlota(){
         GridBagLayout gbl = new GridBagLayout();
         this.setLayout(gbl);
         barcos();
