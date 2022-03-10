@@ -229,36 +229,37 @@ public class GUI_Principal extends JFrame {
         public void mouseClicked(MouseEvent e) {
             if(estadoJuego == 0){
                 int auxiliar = 0; // Variable para indicar cuando se debe terminar el primer ciclo
+                int nextImage = 1; // Acumulador para cambiar de imagen
+                int ultimasCasillas = 0;
+                int casillasUsadas = 0;
                 for (int row = 1; row < 11; row++) {
                     for (int col = 1; col < 11; col++) {
                         if(e.getSource() == pintarTablero.getMatrizPosicion()[row][col]) {
-                            if(col <= 7){
-                                for(int pic=col; pic < col+4; pic++){
-                                    if(pic < 10){
-                                        if(pintarTablero.getCasillasOcupadas().get(pintarTablero.getMatrizPosicion()[row][pic+1]) == Integer.valueOf(1)){
-                                            System.out.println("Oye, No se puede colocar aqui");
-                                            System.out.println(col);
-                                            break;
-                                        }else{
-                                            pintarTablero.getMatrizPosicion()[row][pic].setIcon(new ImageIcon(getClass().getResource("/recursos/portavion.png")));
-                                            pintarTablero.getCasillasOcupadas().put(pintarTablero.getMatrizPosicion()[row][pic], 1);
-                                        }
-                                    }else{
-                                        if(pintarTablero.getCasillasOcupadas().get(pintarTablero.getMatrizPosicion()[row][pic]) == Integer.valueOf(1)){
-                                            System.out.println("Oye, No se puede colocar aqui");
-                                            System.out.println(col);
-                                            break;
-                                        }else{
-                                            pintarTablero.getMatrizPosicion()[row][pic].setIcon(new ImageIcon(getClass().getResource("/recursos/portavion.png")));
-                                            pintarTablero.getCasillasOcupadas().put(pintarTablero.getMatrizPosicion()[row][pic], 1);
-                                        }
+                            ultimasCasillas = 10 - col;
+                            if(ultimasCasillas < 3){
+                                System.out.println("No hay espacio para colocar el portavion");
+                                System.out.println(col);
+                            }else{
+                                for(int casilla=col; casilla < col+4; casilla++){
+                                    if(pintarTablero.getCasillasOcupadas().get(pintarTablero.getMatrizPosicion()[row][casilla]) == Integer.valueOf(1)) {
+                                        casillasUsadas++;
                                     }
                                 }
-                            }else{
-                                System.out.println("No se puede colocar aqui");
-                                System.out.println(col);
+
+                                if(casillasUsadas == 0){
+                                    for(int pic=col; pic < col+4; pic++){
+                                        pintarTablero.getMatrizPosicion()[row][pic].setIcon(new ImageIcon(getClass().getResource("/recursos/portavion_H_I_D/" + String.valueOf(nextImage) + ".png")));
+                                        pintarTablero.getCasillasOcupadas().put(pintarTablero.getMatrizPosicion()[row][pic], 1);
+                                        nextImage++;
+                                    }
+                                }else{
+                                    System.out.println("Oye, No se puede colocar aqui");
+                                    System.out.println(col);
+                                    System.out.println("Casillas usadas es " + casillasUsadas);
+                                }
                             }
                             auxiliar = 1;
+                            break;
                         }
                     }
                     if(auxiliar == 1){
