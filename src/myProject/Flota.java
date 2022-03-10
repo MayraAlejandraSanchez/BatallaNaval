@@ -32,19 +32,39 @@ public class Flota extends JPanel{
         imageSubmarino = new ImageIcon(getClass().getResource(PATH+"submarino.png"));
 
         // Botones
-        portavion = new JButton("",imagePortavion);
+        portavion = new JButton();
+        portavion.setText("PORTAVION");
+        portavion.setIcon(imagePortavion);
+        portavion.setBackground(Color.CYAN);
+        portavion.setHorizontalTextPosition( SwingConstants.CENTER );
+        portavion.setVerticalTextPosition( SwingConstants.BOTTOM );
         portavion.setFocusable(false);
         portavion.setBorder(null);
 
-        destuctor = new JButton("",imageDestructor);
+        destuctor = new JButton();
+        destuctor.setText("DESTRUCTOR");
+        destuctor.setIcon(imageDestructor);
+        destuctor.setBackground(Color.CYAN);
+        destuctor.setHorizontalTextPosition( SwingConstants.CENTER );
+        destuctor.setVerticalTextPosition( SwingConstants.BOTTOM );
         destuctor.setFocusable(false);
         destuctor.setBorder(null);
 
-        fragata = new JButton("",imageFragata);
+        fragata = new JButton();
+        fragata.setText("FRAGATA");
+        fragata.setIcon(imageFragata);
+        fragata.setBackground(Color.CYAN);
+        fragata.setHorizontalTextPosition( SwingConstants.CENTER );
+        fragata.setVerticalTextPosition( SwingConstants.BOTTOM );
         fragata.setFocusable(false);
         fragata.setBorder(null);
 
-        submarino = new JButton("",imageSubmarino);
+        submarino = new JButton();
+        submarino.setText("SUBMARINO");
+        submarino.setIcon(imageSubmarino);
+        submarino.setBackground(Color.CYAN);
+        submarino.setHorizontalTextPosition( SwingConstants.CENTER );
+        submarino.setVerticalTextPosition( SwingConstants.BOTTOM );
         submarino.setFocusable(false);
         submarino.setBorder(null);
 
@@ -54,9 +74,9 @@ public class Flota extends JPanel{
         // Flota
         blackline = BorderFactory.createLineBorder(Color.black);
         panelFlota = new JPanel();
-        panelFlota.setLayout(new GridLayout(2,2));
+        panelFlota.setLayout(new GridLayout(2,2,10,10));
         panelFlota.setPreferredSize(new Dimension(350,400));
-        panelFlota.setBackground(new Color(178, 161, 255,152));
+        panelFlota.setBackground(Color.CYAN);
         tituloFlota = BorderFactory.createTitledBorder(blackline, "Tus barcos");
         tituloFlota.setTitleJustification(TitledBorder.CENTER);
         panelFlota.setBorder(tituloFlota);
