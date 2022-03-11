@@ -15,6 +15,8 @@ public class PanelFlota extends JPanel{
     private TitledBorder tituloFlota,tituloInfo, titulo_Orientacion;
     private Border blackline;
     private String nombreBoton; // Guarda el texto del boton
+    private int orientacion; // 0 si es vertical, 1 si es horizontal
+    private int sentidoOrientacion; // 1 superior-inferior, 2 inferior-superior, 3 izquierda-derecha, 4 derecha-izquierda
 
     public PanelFlota(){
         GridBagLayout gbl = new GridBagLayout();
@@ -28,6 +30,8 @@ public class PanelFlota extends JPanel{
         GridBagConstraints gbc = new GridBagConstraints();
 
         nombreBoton = "";
+        orientacion = 0;
+        sentidoOrientacion = 0;
 
         // Imagenes
         imageDestructor = new ImageIcon(getClass().getResource(PATH + "destructor.png"));
@@ -220,11 +224,46 @@ public class PanelFlota extends JPanel{
         return horizontal;
     }
 
+    public JButton getBotonSup_inf(){
+        return sup_inf;
+    }
+    public JButton getBotonInf_sup(){
+        return inf_sup;
+    }
+
+    public JButton getBotonIzq_der(){
+        return izq_der;
+    }
+
+    public JButton getBotonDer_izq(){
+        return der_izq;
+    }
+
     public void setNombreBoton(String _nombreBoton){
         nombreBoton = _nombreBoton;
     }
 
     public String getNombreBoton(){
         return nombreBoton;
+    }
+
+    // Asigna el estado de orientacion
+    public void setOrientacion(int _orientacion){
+        orientacion = _orientacion;
+    }
+
+    // Asigna el estado de sentidoOrientacion
+    public void setSentidoOrientacion(int _sentidoOrientacion){
+        sentidoOrientacion = _sentidoOrientacion;
+    }
+
+    // Retorna el estado de orientacion
+    public int getOrientacion(){
+        return orientacion;
+    }
+
+    // Retorna el estado de sentidoOrientacion
+    public int getSentidoOrientacion(){
+        return sentidoOrientacion;
     }
 }

@@ -10,16 +10,12 @@ public class PintarTablero extends JPanel {
     private JLabel nombreTableroPosicion, nombreTableroPrincipal;
     private String abecedario[];
     private HashMap<JLabel, Integer> casillasOcupadas; // Si value es 1, el JLabel esta ocupado, de lo contrario 0
-    private int orientacion; // 0 si es vertical, 1 si es horizontal
-    private int sentidoOrientacion; // 1 superior-inferior, 2 inferior-superior, 3 izquierda-derecha, 4 derecha-izquierda
 
     public PintarTablero(){
         iniciar();
     }
 
     public void iniciar(){
-        sentidoOrientacion = 3;
-
         GridBagLayout gb = new GridBagLayout();
         GridBagConstraints gbc = new GridBagConstraints();
         this.setLayout(gb);
@@ -120,15 +116,5 @@ public class PintarTablero extends JPanel {
     // Retorna el Map casillasOcupadas
     public HashMap getCasillasOcupadas(){
         return casillasOcupadas;
-    }
-
-    // Retorna el estado de orientacion
-    public int getOrientacion(){
-        return orientacion;
-    }
-
-    // Retorna el estado de sentidoOrientacion
-    public int getSentidoOrientacion(){
-        return sentidoOrientacion;
     }
 }

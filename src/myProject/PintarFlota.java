@@ -35,12 +35,13 @@ public class PintarFlota {
         return path;
     }
 
-    public void funcionesFlota(String barco, int estadoOrientacion, int estadoSentidoOrientacion, int col, int row){
+    public boolean funcionesFlota(String barco, int estadoOrientacion, int estadoSentidoOrientacion, int col, int row){
         int casillasAUsar = 0;
         int casillasUsadas = 0;
         int columnaReferencia = 0;
         int filaReferencia = 0;
         int nextImage = 0;
+        boolean auxiliar = false; // false si no pudo colocar el barco, de lo contrario true
 
         if(barco == "portavion"){
             casillasAUsar = 4;
@@ -83,6 +84,7 @@ public class PintarFlota {
                             pintarTablero.getMatrizPosicion()[row][pic].setIcon(new ImageIcon(getClass().getResource(pathImages(barco, estadoOrientacion, estadoSentidoOrientacion) + String.valueOf(nextImage) + ".png")));
                             pintarTablero.getCasillasOcupadas().put(pintarTablero.getMatrizPosicion()[row][pic], 1);
                             nextImage++;
+                            auxiliar = true;
                         }
                     }else{
                         System.out.println("Oye, No se puede colocar aqui");
@@ -102,6 +104,7 @@ public class PintarFlota {
                             pintarTablero.getMatrizPosicion()[row][pic].setIcon(new ImageIcon(getClass().getResource(pathImages(barco, estadoOrientacion, estadoSentidoOrientacion) + String.valueOf(nextImage) + ".png")));
                             pintarTablero.getCasillasOcupadas().put(pintarTablero.getMatrizPosicion()[row][pic], 1);
                             nextImage--;
+                            auxiliar = true;
                         }
                     }else{
                         System.out.println("Oye, No se puede colocar aqui");
@@ -137,6 +140,7 @@ public class PintarFlota {
                             pintarTablero.getMatrizPosicion()[pic][col].setIcon(new ImageIcon(getClass().getResource(pathImages(barco, estadoOrientacion, estadoSentidoOrientacion) + String.valueOf(nextImage) + ".png")));
                             pintarTablero.getCasillasOcupadas().put(pintarTablero.getMatrizPosicion()[pic][col], 1);
                             nextImage++;
+                            auxiliar = true;
                         }
                     }else{
                         System.out.println("Oye, No se puede colocar aqui");
@@ -156,6 +160,7 @@ public class PintarFlota {
                             pintarTablero.getMatrizPosicion()[pic][col].setIcon(new ImageIcon(getClass().getResource(pathImages(barco, estadoOrientacion, estadoSentidoOrientacion) + String.valueOf(nextImage) + ".png")));
                             pintarTablero.getCasillasOcupadas().put(pintarTablero.getMatrizPosicion()[pic][col], 1);
                             nextImage--;
+                            auxiliar = true;
                         }
                     }else{
                         System.out.println("Oye, No se puede colocar aqui");
@@ -165,5 +170,6 @@ public class PintarFlota {
                 }
             }
         }
+        return auxiliar;
     }
 }
