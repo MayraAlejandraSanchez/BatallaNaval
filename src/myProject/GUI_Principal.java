@@ -1,8 +1,6 @@
 package myProject;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,7 +32,8 @@ public class GUI_Principal extends JFrame {
     private ImageIcon team, help, enemy, play;
     private JPanel panelNorte, panelSur, panelEste, panelCentro;
     private PintarTablero pintarTablero;
-    private Flota flota;
+    private PintarFlota pintarFlota;
+    private PanelFlota flota;
     private GUI_Secundaria ventanaEnemy;
     private int estadoJuego; // 0 si se distribuye la flota, de lo contrario 1
 
@@ -49,7 +48,7 @@ public class GUI_Principal extends JFrame {
         Image image = new ImageIcon(getClass().getResource(PATH+"barcoIcono.png")).getImage();
         this.setIconImage(image);
         this.setUndecorated(false);
-        this.setSize(1500,700);
+        this.setSize(1500,750);
         this.setResizable(true);
         this.setVisible(true);
         this.setLocationRelativeTo(null);
@@ -76,12 +75,12 @@ public class GUI_Principal extends JFrame {
         panelSur.setLayout(new FlowLayout(FlowLayout.CENTER,200,5));
         panelNorte.setLayout(new FlowLayout(FlowLayout.CENTER,200,5));
         panelEste.setLayout(new FlowLayout(FlowLayout.CENTER,100,60));
-        panelCentro.setLayout(new GridBagLayout());
+        panelCentro.setLayout(new GridLayout(1,1,0,100));
 
         panelSur.setPreferredSize(new Dimension(100,60));
         panelNorte.setPreferredSize(new Dimension(100,60));
         panelEste.setPreferredSize(new Dimension(1000,60));
-        panelCentro.setPreferredSize(new Dimension(500,60));
+        panelCentro.setPreferredSize(new Dimension(600,100));
 
         this.add(panelNorte,BorderLayout.NORTH);
         this.add(panelSur,BorderLayout.SOUTH);
@@ -95,7 +94,7 @@ public class GUI_Principal extends JFrame {
         escucha = new Escucha();
 
         // Creates Flota object
-        flota = new Flota();
+        flota = new PanelFlota();
 
         // Se agrega el escucha a cada boton de la clase Flota
         flota.getBotonPortavion().addActionListener(escucha);
@@ -136,9 +135,11 @@ public class GUI_Principal extends JFrame {
         // JComponents de la parte central
         // Tablero
         pintarTablero = new PintarTablero();
+        pintarFlota = new PintarFlota(pintarTablero);
         panelEste.add(pintarTablero);
 
         // Flota
+
         panelCentro.add(flota);
 
         //JComponents de la parte Inferior
@@ -231,18 +232,43 @@ public class GUI_Principal extends JFrame {
         public void mouseClicked(MouseEvent e) {
             if(estadoJuego == 0){
                 int auxiliar = 0; // Variable para indicar cuando se debe terminar el primer ciclo
+                //int nextImage = 1; // Acumulador para cambiar de imagen
+                //int ultimasCasillas = 0;
+                int casillasUsadas = 0;
                 for (int row = 1; row < 11; row++) {
                     for (int col = 1; col < 11; col++) {
                         if(e.getSource() == pintarTablero.getMatrizPosicion()[row][col]) {
-                            if(col <= 7){
-                                for(int pic=col; pic < col+4; pic++){
-                                    pintarTablero.getMatrizPosicion()[row][pic].setIcon(new ImageIcon(getClass().getResource("/recursos/portaavion.png")));
-                                }
-                            }else{
-                                System.out.println("No se puede colocar aqui");
+                            pintarFlota.funcionesFlota("destructor", 1, 4, col, row, casillasUsadas);
+                            //funciones(2, 1, col, row, casillasUsadas, nextImage);
+                            /*
+                            ultimasCasillas = Math.abs(col - 10);
+                            System.out.print(ultimasCasillas);
+                            if(ultimasCasillas < 3){
+                                System.out.println("No hay espacio para colocar el portavion");
                                 System.out.println(col);
+                            }else{
+                                for(int casilla=col; casilla < col+4; casilla++){
+                                    if(pintarTablero.getCasillasOcupadas().get(pintarTablero.getMatrizPosicion()[row][casilla]) == Integer.valueOf(1)) {
+                                        casillasUsadas++;
+                                    }
+                                }
+
+                                if(casillasUsadas == 0){
+                                    for(int pic=col; pic < col+4; pic++){
+                                        pintarTablero.getMatrizPosicion()[row][pic].setIcon(new ImageIcon(getClass().getResource("/recursos/portavion_H_I_D/" + String.valueOf(nextImage) + ".png")));
+                                        pintarTablero.getCasillasOcupadas().put(pintarTablero.getMatrizPosicion()[row][pic], 1);
+                                        nextImage++;
+                                    }
+                                }else{
+                                    System.out.println("Oye, No se puede colocar aqui");
+                                    System.out.println(col);
+                                    System.out.println("Casillas usadas es " + casillasUsadas);
+                                }
                             }
+
+                             */
                             auxiliar = 1;
+                            break;
                         }
                     }
                     if(auxiliar == 1){
@@ -275,4 +301,57 @@ public class GUI_Principal extends JFrame {
         }
     }
 
+    /*
+    public void funciones(int estadoOrientacion, int estadoSentidoOrientacion, int col, int row, int casillasUsadas, int nextImage){
+        if(estadoOrientacion == 1){
+            int ultimasCasillas = Math.abs(col - 10);
+            if(ultimasCasillas < 3){
+                System.out.println("No hay espacio para colocar el portavion");
+                System.out.println(col);
+            }else{
+                for(int casilla=col; casilla < col+4; casilla++){
+                    if(pintarTablero.getCasillasOcupadas().get(pintarTablero.getMatrizPosicion()[row][casilla]) == Integer.valueOf(1)) {
+                        casillasUsadas++;
+                    }
+                }
+
+                if(casillasUsadas == 0){
+                    for(int pic=col; pic < col+4; pic++){
+                        pintarTablero.getMatrizPosicion()[row][pic].setIcon(new ImageIcon(getClass().getResource("/recursos/portavion_H_I_D/" + String.valueOf(nextImage) + ".png")));
+                        pintarTablero.getCasillasOcupadas().put(pintarTablero.getMatrizPosicion()[row][pic], 1);
+                        nextImage++;
+                    }
+                }else{
+                    System.out.println("Oye, No se puede colocar aqui");
+                    System.out.println(col);
+                    System.out.println("Casillas usadas es " + casillasUsadas);
+                }
+            }
+        }else{
+            int ultimasCasillas = Math.abs(row - 10);
+            if(ultimasCasillas < 3){
+                System.out.println("No hay espacio para colocar el portavion");
+                System.out.println(row);
+            }else{
+                for(int casilla=row; casilla < row+4; casilla++){
+                    if(pintarTablero.getCasillasOcupadas().get(pintarTablero.getMatrizPosicion()[casilla][col]) == Integer.valueOf(1)) {
+                        casillasUsadas++;
+                    }
+                }
+
+                if(casillasUsadas == 0){
+                    for(int pic=row; pic < row+4; pic++){
+                        pintarTablero.getMatrizPosicion()[pic][col].setIcon(new ImageIcon(getClass().getResource("/recursos/portavion_V_S_I/" + String.valueOf(nextImage) + ".png")));
+                        pintarTablero.getCasillasOcupadas().put(pintarTablero.getMatrizPosicion()[pic][col], 1);
+                        nextImage++;
+                    }
+                }else{
+                    System.out.println("Oye, No se puede colocar aqui");
+                    System.out.println(col);
+                    System.out.println("Casillas usadas es " + casillasUsadas);
+                }
+            }
+        }
+    }
+     */
 }

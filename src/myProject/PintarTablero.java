@@ -2,22 +2,30 @@ package myProject;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashMap;
 
 public class PintarTablero extends JPanel {
     private Tableros tableroPosicion, tableroPrincipal;
     private JPanel panelTableroPosicion, panelTableroPrincipal;
     private JLabel nombreTableroPosicion, nombreTableroPrincipal;
     private String abecedario[];
+    private HashMap<JLabel, Integer> casillasOcupadas; // Si value es 1, el JLabel esta ocupado, de lo contrario 0
+    private int orientacion; // 0 si es vertical, 1 si es horizontal
+    private int sentidoOrientacion; // 1 superior-inferior, 2 inferior-superior, 3 izquierda-derecha, 4 derecha-izquierda
 
     public PintarTablero(){
         iniciar();
     }
 
     public void iniciar(){
+        sentidoOrientacion = 3;
+
         GridBagLayout gb = new GridBagLayout();
         GridBagConstraints gbc = new GridBagConstraints();
         this.setLayout(gb);
         this.setBackground(Color.CYAN);
+
+        casillasOcupadas = new HashMap<>();
 
         // Panel tablero posicion
         nombreTableroPosicion = new JLabel("T A B L E R O   P O S I C I O N");
@@ -107,5 +115,20 @@ public class PintarTablero extends JPanel {
     // Retorna la matriz principal
     public JLabel[][] getMatrizPrincipal(){
         return tableroPrincipal.getMatriz();
+    }
+
+    // Retorna el Map casillasOcupadas
+    public HashMap getCasillasOcupadas(){
+        return casillasOcupadas;
+    }
+
+    // Retorna el estado de orientacion
+    public int getOrientacion(){
+        return orientacion;
+    }
+
+    // Retorna el estado de sentidoOrientacion
+    public int getSentidoOrientacion(){
+        return sentidoOrientacion;
     }
 }
