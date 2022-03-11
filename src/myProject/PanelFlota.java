@@ -8,17 +8,19 @@ import java.awt.*;
 public class PanelFlota extends JPanel{
     public static final String INFO = "• 1 portaaviones: ocupa 4 casillas"+"\n• 2 submarinos: ocupan 3 casillas cada uno"+"\n• 3 destructores: ocupan 2 casillas cada uno"+"\n• 4 fragatas: ocupan 1 casilla cada uno";
     public static final String PATH ="/recursos/";
-    private JButton portavion, destuctor, fragata, submarino, vertical, horizontal;
-    private JPanel panelFlota, textFlota;
+    private JButton portavion, destuctor, fragata, submarino, vertical, horizontal,sup_inf,inf_sup,izq_der,der_izq,explicacionBotones;
+    private JPanel panelFlota, textFlota, panelBotones, subpanelBotones, subpanelBotones2;
     private JTextArea textoInfoBarcos;
     private ImageIcon imageDestructor, imagePortavion, imageFragata, imageSubmarino;
-    private TitledBorder tituloFlota,tituloInfo;
+    private TitledBorder tituloFlota,tituloInfo, titulo_Orientacion;
     private Border blackline;
     private String nombreBoton; // Guarda el texto del boton
 
     public PanelFlota(){
         GridBagLayout gbl = new GridBagLayout();
         this.setLayout(gbl);
+        this.setBackground(Color.CYAN);
+        this.setPreferredSize(new Dimension(600,100));
         barcos();
     }
 
@@ -33,7 +35,7 @@ public class PanelFlota extends JPanel{
         imageFragata = new ImageIcon(getClass().getResource(PATH+"fragata.png"));
         imageSubmarino = new ImageIcon(getClass().getResource(PATH+"submarino.png"));
 
-        // Botones
+        // Botones de aviones
         portavion = new JButton();
         portavion.setText("PORTAVION");
         portavion.setIcon(imagePortavion);
@@ -70,14 +72,61 @@ public class PanelFlota extends JPanel{
         submarino.setFocusable(false);
         submarino.setBorder(null);
 
+        // Botones de orientación
         vertical = new JButton("Vertical");
+        vertical.setFont(new Font(Font.SERIF,Font.ROMAN_BASELINE,15));
+        vertical.setBackground(Color.YELLOW);
+        vertical.setFocusable(false);
+        vertical.setBorder(null);
+
         horizontal = new JButton("Horizontal");
+        horizontal.setFont(new Font(Font.SERIF,Font.ROMAN_BASELINE,15));
+        horizontal.setBackground(Color.green);
+        horizontal.setFocusable(false);
+        horizontal.setBorder(null);
+
+        sup_inf = new JButton("Superior-Inferior");
+        sup_inf.setFont(new Font(Font.SERIF,Font.ROMAN_BASELINE,15));
+        sup_inf.setBackground(Color.orange);
+        sup_inf.setFocusable(false);
+        sup_inf.setBorder(null);
+
+        inf_sup = new JButton("Inferior-Superior");
+        inf_sup.setFont(new Font(Font.SERIF,Font.ROMAN_BASELINE,15));
+        inf_sup.setBackground(Color.pink);
+        inf_sup.setFocusable(false);
+        inf_sup.setBorder(null);
+
+        izq_der = new JButton("Izquierda-Derecha");
+        izq_der.setFont(new Font(Font.SERIF,Font.ROMAN_BASELINE,15));
+        izq_der.setBackground(Color.white);
+        izq_der.setFocusable(false);
+        izq_der.setBorder(null);
+
+        der_izq = new JButton("Derecha-Izquierda");
+        der_izq.setFont(new Font(Font.SERIF,Font.ROMAN_BASELINE,15));
+        der_izq.setBackground(Color.magenta);
+        der_izq.setFocusable(false);
+        der_izq.setBorder(null);
+
+        // Botón explicación de los botones de orientación
+        explicacionBotones = new JButton("¿Cómo usar los botones de orientación?");
+        explicacionBotones.setFont(new Font(Font.SERIF,Font.ROMAN_BASELINE,15));
+        explicacionBotones.setBackground(Color.red);
+        explicacionBotones.setFocusable(false);
+        explicacionBotones.setBorder(null);
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        this.add(explicacionBotones, gbc);
+
 
         // Flota
         blackline = BorderFactory.createLineBorder(Color.black);
         panelFlota = new JPanel();
         panelFlota.setLayout(new GridLayout(2,2,10,10));
-        panelFlota.setPreferredSize(new Dimension(350,400));
+        panelFlota.setPreferredSize(new Dimension(350,300));
         panelFlota.setBackground(Color.CYAN);
         tituloFlota = BorderFactory.createTitledBorder(blackline, "Tus barcos");
         tituloFlota.setTitleJustification(TitledBorder.CENTER);
@@ -98,17 +147,53 @@ public class PanelFlota extends JPanel{
         textoInfoBarcos= new JTextArea(4,5);
         textoInfoBarcos.setText(INFO);
         textoInfoBarcos.setEditable(false);
+        textoInfoBarcos.setBackground(Color.CYAN);
         textFlota.setPreferredSize(new Dimension(350,100));
-        textFlota.setBackground(Color.white);
+        textFlota.setBackground(Color.cyan);
         tituloInfo = BorderFactory.createTitledBorder(blackline, "Información de barcos");
         tituloInfo.setTitleJustification(TitledBorder.CENTER);
         textFlota.setBorder(tituloInfo);
         textFlota.add(textoInfoBarcos);
         gbc.gridx = 0;
-        gbc.gridy = 1;
+        gbc.gridy = 4;
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
         this.add(textFlota, gbc);
+
+        // Panel botones dentro de panel flota
+        panelBotones = new JPanel();
+        panelBotones.setLayout(new BorderLayout());
+        panelBotones.setBackground(Color.CYAN);
+        panelBotones.setPreferredSize(new Dimension(350,120));
+        titulo_Orientacion = BorderFactory.createTitledBorder(blackline, "¿Como quieres acomodar tu flota?");
+        titulo_Orientacion.setTitleJustification(TitledBorder.CENTER);
+        panelBotones.setBorder(titulo_Orientacion);
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        this.add(panelBotones,gbc);
+
+        // panel dentro de panel botones para los botones de horizontal y vertical
+        subpanelBotones = new JPanel();
+        subpanelBotones.setPreferredSize(new Dimension(175,120));
+        subpanelBotones.setBackground(Color.cyan);
+        subpanelBotones.setLayout(new GridLayout(2,0,50,0));
+        subpanelBotones.add(horizontal);
+        subpanelBotones.add(vertical);
+        panelBotones.add(subpanelBotones,BorderLayout.WEST);
+
+        // panel dentro de panel botones para los botones de sup_inf, inf_sup, der_izq, izq_der
+        subpanelBotones2 = new JPanel();
+        subpanelBotones2.setPreferredSize(new Dimension(175,120));
+        subpanelBotones2.setBackground(Color.cyan);
+        subpanelBotones2.setLayout(new GridLayout(4,0,50,0));
+        subpanelBotones2.add(sup_inf);
+        subpanelBotones2.add(inf_sup);
+        subpanelBotones2.add(izq_der);
+        subpanelBotones2.add(der_izq);
+        panelBotones.add(subpanelBotones2,BorderLayout.EAST);
+
     }
 
     public JButton getBotonPortavion(){

@@ -48,7 +48,7 @@ public class GUI_Principal extends JFrame {
         Image image = new ImageIcon(getClass().getResource(PATH+"barcoIcono.png")).getImage();
         this.setIconImage(image);
         this.setUndecorated(false);
-        this.setSize(1500,700);
+        this.setSize(1500,750);
         this.setResizable(true);
         this.setVisible(true);
         this.setLocationRelativeTo(null);
@@ -75,12 +75,12 @@ public class GUI_Principal extends JFrame {
         panelSur.setLayout(new FlowLayout(FlowLayout.CENTER,200,5));
         panelNorte.setLayout(new FlowLayout(FlowLayout.CENTER,200,5));
         panelEste.setLayout(new FlowLayout(FlowLayout.CENTER,100,60));
-        panelCentro.setLayout(new GridBagLayout());
+        panelCentro.setLayout(new GridLayout(1,1,0,100));
 
         panelSur.setPreferredSize(new Dimension(100,60));
         panelNorte.setPreferredSize(new Dimension(100,60));
         panelEste.setPreferredSize(new Dimension(1000,60));
-        panelCentro.setPreferredSize(new Dimension(500,60));
+        panelCentro.setPreferredSize(new Dimension(600,100));
 
         this.add(panelNorte,BorderLayout.NORTH);
         this.add(panelSur,BorderLayout.SOUTH);
@@ -131,6 +131,7 @@ public class GUI_Principal extends JFrame {
         panelEste.add(pintarTablero);
 
         // Flota
+
         panelCentro.add(flota);
 
         //JComponents de la parte Inferior
@@ -262,6 +263,9 @@ public class GUI_Principal extends JFrame {
         public void mouseClicked(MouseEvent e) {
             if(estadoJuego == 0){
                 int auxiliar = 0; // Variable para indicar cuando se debe terminar el primer ciclo
+                //int nextImage = 1; // Acumulador para cambiar de imagen
+                //int ultimasCasillas = 0;
+                int casillasUsadas = 0;
                 for (int row = 1; row < 11; row++) {
                     for (int col = 1; col < 11; col++) {
                         if(e.getSource() == pintarTablero.getMatrizPosicion()[row][col]) {
