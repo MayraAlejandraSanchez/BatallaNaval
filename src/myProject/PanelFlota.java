@@ -6,10 +6,9 @@ import javax.swing.border.TitledBorder;
 import java.awt.*;
 
 public class PanelFlota extends JPanel{
-    public static final String INFO = "• 1 portaaviones: ocupa 4 casillas"+"\n• 2 submarinos: ocupan 3 casillas cada uno"+"\n• 3 destructores: ocupan 2 casillas cada uno"+"\n• 4 fragatas: ocupan 1 casilla cada uno";
     public static final String PATH ="/recursos/";
     private JButton portavion, destuctor, fragata, submarino, vertical, horizontal,sup_inf,inf_sup,izq_der,der_izq,explicacionBotones;
-    private JPanel panelFlota, textFlota, panelBotones, subpanelBotones, subpanelBotones2;
+    private JPanel panelFlota, infojuego, panelBotones, subpanelBotones, subpanelBotones2;
     private JTextArea textoInfoBarcos;
     private ImageIcon imageDestructor, imagePortavion, imageFragata, imageSubmarino;
     private TitledBorder tituloFlota,tituloInfo, titulo_Orientacion;
@@ -124,7 +123,7 @@ public class PanelFlota extends JPanel{
         der_izq.setBorder(null);
 
         // Botón explicación de los botones de orientación
-        explicacionBotones = new JButton("¿Cómo usar los botones de orientación?");
+        explicacionBotones = new JButton("Conoce cómo jugar");
         explicacionBotones.setFont(new Font(Font.SERIF,Font.ROMAN_BASELINE,15));
         explicacionBotones.setBackground(Color.red);
         explicacionBotones.setFocusable(false);
@@ -156,23 +155,23 @@ public class PanelFlota extends JPanel{
         this.add(panelFlota, gbc);
 
         // Texto bajo flota
-        textFlota = new JPanel();
-        textoInfoBarcos = new JTextArea();
+        infojuego = new JPanel();
+        /*textoInfoBarcos = new JTextArea();
         textoInfoBarcos= new JTextArea(4,5);
         textoInfoBarcos.setText(INFO);
         textoInfoBarcos.setEditable(false);
-        textoInfoBarcos.setBackground(Color.CYAN);
-        textFlota.setPreferredSize(new Dimension(350,100));
-        textFlota.setBackground(Color.cyan);
-        tituloInfo = BorderFactory.createTitledBorder(blackline, "Información de barcos");
+        textoInfoBarcos.setBackground(Color.CYAN);*/
+        infojuego.setPreferredSize(new Dimension(350,100));
+        infojuego.setBackground(Color.cyan);
+        tituloInfo = BorderFactory.createTitledBorder(blackline, "Información del juego");
         tituloInfo.setTitleJustification(TitledBorder.CENTER);
-        textFlota.setBorder(tituloInfo);
-        textFlota.add(textoInfoBarcos);
+        infojuego.setBorder(tituloInfo);
+        //infojuego.add(textoInfoBarcos);
         gbc.gridx = 0;
         gbc.gridy = 4;
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
-        this.add(textFlota, gbc);
+        this.add(infojuego, gbc);
 
         // Panel botones dentro de panel flota
         panelBotones = new JPanel();
