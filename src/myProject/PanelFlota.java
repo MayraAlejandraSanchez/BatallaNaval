@@ -166,7 +166,7 @@ public class PanelFlota extends JPanel{
 
         // Panel botones dentro de panel flota
         panelBotones = new JPanel();
-        panelBotones.setLayout(new BorderLayout());
+        panelBotones.setLayout(new GridLayout(0,2,5,10));
         panelBotones.setBackground(Color.CYAN);
         panelBotones.setPreferredSize(new Dimension(350,120));
         titulo_Orientacion = BorderFactory.createTitledBorder(blackline, "¿Como quieres acomodar tu flota?");
@@ -179,19 +179,19 @@ public class PanelFlota extends JPanel{
         this.add(panelBotones,gbc);
 
         // panel dentro de panel botones para los botones de horizontal y vertical
-        subpanelBotones = new JPanel();
+        subpanelBotones = new JPanel(new GridLayout());
         subpanelBotones.setPreferredSize(new Dimension(175,120));
         subpanelBotones.setBackground(Color.cyan);
-        subpanelBotones.setLayout(new GridLayout(2,0,50,0));
-        subpanelBotones.add(horizontal);
+        subpanelBotones.setLayout(new GridLayout(2,0,5,5));
         subpanelBotones.add(vertical);
+        subpanelBotones.add(horizontal);
         panelBotones.add(subpanelBotones,BorderLayout.WEST);
 
         // panel dentro de panel botones para los botones de sup_inf, inf_sup, der_izq, izq_der
         subpanelBotones2 = new JPanel();
         subpanelBotones2.setPreferredSize(new Dimension(175,120));
         subpanelBotones2.setBackground(Color.cyan);
-        subpanelBotones2.setLayout(new GridLayout(4,0,50,0));
+        subpanelBotones2.setLayout(new GridLayout(4,0,5,5));
         subpanelBotones2.add(sup_inf);
         subpanelBotones2.add(inf_sup);
         subpanelBotones2.add(izq_der);

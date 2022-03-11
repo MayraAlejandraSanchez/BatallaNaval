@@ -151,6 +151,9 @@ public class GUI_Principal extends JFrame {
         panelSur.add(movimientosEnemigo,FlowLayout.CENTER);
 
         setEscuchaBotones("agregar");
+        setVerticalHorizontal("remover");
+        setOrientacionSentidoVertical("remover");
+        setOrientacionSentidoHorizontal("remover");
     }
 
     /**
@@ -194,24 +197,31 @@ public class GUI_Principal extends JFrame {
         }
     }
 
-    // Agrega o remueve el escucha a los botones que definen el sentido de cada barco
-    public void setOrientacionSentido(String evento){
+    // Agrega o remueve el escucha de los botones verticales
+    public void setOrientacionSentidoVertical(String evento){
         if(evento == "agregar"){
             flota.getBotonSup_inf().addActionListener(escucha);
             flota.getBotonInf_sup().addActionListener(escucha);
-            flota.getBotonDer_izq().addActionListener(escucha);
-            flota.getBotonIzq_der().addActionListener(escucha);
             flota.getBotonSup_inf().setEnabled(true);
             flota.getBotonInf_sup().setEnabled(true);
-            flota.getBotonDer_izq().setEnabled(true);
-            flota.getBotonIzq_der().setEnabled(true);
         }else{
             flota.getBotonSup_inf().removeActionListener(escucha);
             flota.getBotonInf_sup().removeActionListener(escucha);
-            flota.getBotonDer_izq().removeActionListener(escucha);
-            flota.getBotonIzq_der().removeActionListener(escucha);
             flota.getBotonSup_inf().setEnabled(false);
             flota.getBotonInf_sup().setEnabled(false);
+        }
+    }
+
+    // Agrega o remueve el escucha de los botones horizontales
+    public void setOrientacionSentidoHorizontal(String evento){
+        if(evento == "agregar"){
+            flota.getBotonDer_izq().addActionListener(escucha);
+            flota.getBotonIzq_der().addActionListener(escucha);
+            flota.getBotonDer_izq().setEnabled(true);
+            flota.getBotonIzq_der().setEnabled(true);
+        }else{
+            flota.getBotonDer_izq().removeActionListener(escucha);
+            flota.getBotonIzq_der().removeActionListener(escucha);
             flota.getBotonDer_izq().setEnabled(false);
             flota.getBotonIzq_der().setEnabled(false);
         }
@@ -290,7 +300,7 @@ public class GUI_Principal extends JFrame {
                                 if(e.getSource() == flota.getBotonVertical()){
                                     setVerticalHorizontal("remover");
                                     System.out.println("Escoge cuál sentido quieres usar");
-                                    setOrientacionSentido("agregar");
+                                    setOrientacionSentidoVertical("agregar");
                                     flota.setOrientacion(0);
                                     estadoJuego = 3;
                                     System.out.println(flota.getOrientacion());//
@@ -298,7 +308,7 @@ public class GUI_Principal extends JFrame {
                                     if(e.getSource() == flota.getBotonHorizontal()){
                                         setVerticalHorizontal("remover");
                                         System.out.println("Escoge cuál sentido quieres usar");
-                                        setOrientacionSentido("agregar");
+                                        setOrientacionSentidoHorizontal("agregar");
                                         flota.setOrientacion(1);
                                         estadoJuego = 3;
                                         System.out.println(flota.getOrientacion());//
@@ -307,7 +317,7 @@ public class GUI_Principal extends JFrame {
                                 break;
                             case 3:
                                 if(e.getSource() == flota.getBotonSup_inf()){
-                                    setOrientacionSentido("remover");
+                                    setOrientacionSentidoVertical("remover");
                                     System.out.println("Selecciona la casilla en la que quieres ubicar la nave");
                                     setEscuchaCasillas("agregar");
                                     flota.setSentidoOrientacion(1);
@@ -315,7 +325,7 @@ public class GUI_Principal extends JFrame {
                                     System.out.println(flota.getSentidoOrientacion());//
                                 }else{
                                     if(e.getSource() == flota.getBotonInf_sup()){
-                                        setOrientacionSentido("remover");
+                                        setOrientacionSentidoVertical("remover");
                                         System.out.println("Selecciona la casilla en la que quieres ubicar la nave");
                                         setEscuchaCasillas("agregar");
                                         flota.setSentidoOrientacion(2);
@@ -323,7 +333,7 @@ public class GUI_Principal extends JFrame {
                                         System.out.println(flota.getSentidoOrientacion());//
                                     }else{
                                         if(e.getSource() == flota.getBotonIzq_der()){
-                                            setOrientacionSentido("remover");
+                                            setOrientacionSentidoHorizontal("remover");
                                             System.out.println("Selecciona la casilla en la que quieres ubicar la nave");
                                             setEscuchaCasillas("agregar");
                                             flota.setSentidoOrientacion(3);
@@ -331,7 +341,7 @@ public class GUI_Principal extends JFrame {
                                             System.out.println(flota.getSentidoOrientacion());//
                                         }else{
                                             if(e.getSource() == flota.getBotonDer_izq()){
-                                                setOrientacionSentido("remover");
+                                                setOrientacionSentidoHorizontal("remover");
                                                 System.out.println("Selecciona la casilla en la que quieres ubicar la nave");
                                                 setEscuchaCasillas("agregar");
                                                 flota.setSentidoOrientacion(4);
@@ -366,9 +376,9 @@ public class GUI_Principal extends JFrame {
                                 // Condicional para saber si el usuario pudo colocar el barco
                                 if(pintarFlota.funcionesFlota(flota.getNombreBoton(), flota.getOrientacion(), flota.getSentidoOrientacion(), col, row)){
                                     setEscuchaCasillas("remover");
-                                    setEscuchaBotones("agregar");
                                     System.out.println("Escoge otro barco");
                                     setEscuchaBotones("agregar");
+                                    estadoJuego = 1;
                                 }
                                 auxiliar = 1;
                                 break;
