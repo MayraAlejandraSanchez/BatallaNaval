@@ -35,8 +35,9 @@ public class PintarFlota {
         return path;
     }
 
-    public void funcionesFlota(String barco, int estadoOrientacion, int estadoSentidoOrientacion, int col, int row, int casillasUsadas){
+    public void funcionesFlota(String barco, int estadoOrientacion, int estadoSentidoOrientacion, int col, int row){
         int casillasAUsar = 0;
+        int casillasUsadas = 0;
         int columnaReferencia = 0;
         int filaReferencia = 0;
         int nextImage = 0;
@@ -92,7 +93,7 @@ public class PintarFlota {
                     nextImage = casillasAUsar;
                     for(int casilla=col; casilla > col-casillasAUsar; casilla--){
                         if(pintarTablero.getCasillasOcupadas().get(pintarTablero.getMatrizPosicion()[row][casilla]) == Integer.valueOf(1)) {
-                            casillasUsadas--;
+                            casillasUsadas++;
                         }
                     }
 
@@ -146,7 +147,7 @@ public class PintarFlota {
                     nextImage = casillasAUsar;
                     for(int casilla=row; casilla > row-casillasAUsar; casilla--){
                         if(pintarTablero.getCasillasOcupadas().get(pintarTablero.getMatrizPosicion()[casilla][col]) == Integer.valueOf(1)) {
-                            casillasUsadas--;
+                            casillasUsadas++;
                         }
                     }
 

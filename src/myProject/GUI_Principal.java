@@ -96,14 +96,6 @@ public class GUI_Principal extends JFrame {
         // Creates Flota object
         flota = new PanelFlota();
 
-        // Se agrega el escucha a cada boton de la clase Flota
-        flota.getBotonPortavion().addActionListener(escucha);
-        flota.getBotonDestructor().addActionListener(escucha);
-        flota.getBotonFragata().addActionListener(escucha);
-        flota.getBotonSubmarino().addActionListener(escucha);
-        flota.getBotonVertical().addActionListener(escucha);
-        flota.getBotonHorizontal().addActionListener(escucha);
-
         // Set up JComponents
         // Imagenes
         team = new ImageIcon(getClass().getResource(PATH + "team.png"));
@@ -158,12 +150,7 @@ public class GUI_Principal extends JFrame {
         movimientosEnemigo.setBorder(null);
         panelSur.add(movimientosEnemigo,FlowLayout.CENTER);
 
-        // Agrega el escucha a cada uno de los JLabel de la matriz de PintarTablero
-        for (int row = 0; row < pintarTablero.getMatrizPosicion().length; row++) {
-            for (int col = 0; col < pintarTablero.getMatrizPosicion()[row].length; col++) {
-                pintarTablero.getMatrizPosicion()[row][col].addMouseListener(escucha);
-            }
-        }
+        setEscuchaBotones("agregar");
     }
 
     /**
@@ -175,6 +162,42 @@ public class GUI_Principal extends JFrame {
         EventQueue.invokeLater(() -> {
             GUI_Principal miProjectGUI = new GUI_Principal();
         });
+    }
+
+    // Agrega o remueve el escucha a cada boton de la clase Flota
+    public void setEscuchaBotones(String evento){
+        if(evento == "agregar"){
+            flota.getBotonPortavion().addActionListener(escucha);
+            flota.getBotonDestructor().addActionListener(escucha);
+            flota.getBotonFragata().addActionListener(escucha);
+            flota.getBotonSubmarino().addActionListener(escucha);
+            flota.getBotonVertical().addActionListener(escucha);
+            flota.getBotonHorizontal().addActionListener(escucha);
+        }else{
+            flota.getBotonPortavion().removeActionListener(escucha);
+            flota.getBotonDestructor().removeActionListener(escucha);
+            flota.getBotonFragata().removeActionListener(escucha);
+            flota.getBotonSubmarino().removeActionListener(escucha);
+            flota.getBotonVertical().removeActionListener(escucha);
+            flota.getBotonHorizontal().removeActionListener(escucha);
+        }
+    }
+
+    // Agrega o remueve el escucha a cada uno de los JLabel de la matriz posicion de PintarTablero
+    public void setEscuchaCasillas(String evento){
+        if(evento == "agregar"){
+            for (int row = 0; row < pintarTablero.getMatrizPosicion().length; row++) {
+                for (int col = 0; col < pintarTablero.getMatrizPosicion()[row].length; col++) {
+                    pintarTablero.getMatrizPosicion()[row][col].addMouseListener(escucha);
+                }
+            }
+        }else{
+            for (int row = 0; row < pintarTablero.getMatrizPosicion().length; row++) {
+                for (int col = 0; col < pintarTablero.getMatrizPosicion()[row].length; col++) {
+                    pintarTablero.getMatrizPosicion()[row][col].removeMouseListener(escucha);
+                }
+            }
+        }
     }
 
     /**
@@ -196,20 +219,28 @@ public class GUI_Principal extends JFrame {
 
                     }else {
                         if(e.getSource() == flota.getBotonPortavion()){
-                            flota.getBotonPortavion().removeActionListener(escucha);
-                            System.out.print("Selecciona la casilla donde quieres poner el portavion");
+                            setEscuchaBotones("remover");
+                            System.out.println("Selecciona la casilla donde quieres poner el portavion");
+                            setEscuchaCasillas("agregar");
+                            flota.setNombreBoton("portavion");
                         }else{
                             if(e.getSource() == flota.getBotonDestructor()){
-                                flota.getBotonPortavion().removeActionListener(escucha);
-                                System.out.print("Selecciona la casilla donde quieres poner el destructor");
+                                setEscuchaBotones("remover");
+                                System.out.println("Selecciona la casilla donde quieres poner el destructor");
+                                setEscuchaCasillas("agregar");
+                                flota.setNombreBoton("destructor");
                             }else{
                                 if(e.getSource() == flota.getBotonFragata()){
-                                    flota.getBotonPortavion().removeActionListener(escucha);
-                                    System.out.print("Selecciona la casilla donde quieres poner la fragata");
+                                    setEscuchaBotones("remover");
+                                    System.out.println("Selecciona la casilla donde quieres poner la fragata");
+                                    setEscuchaCasillas("agregar");
+                                    flota.setNombreBoton("fragata");
                                 }else{
                                     if(e.getSource() == flota.getBotonSubmarino()){
-                                        flota.getBotonPortavion().removeActionListener(escucha);
-                                        System.out.print("Selecciona la casilla donde quieres poner el submarino");
+                                        setEscuchaBotones("remover");
+                                        System.out.println("Selecciona la casilla donde quieres poner el submarino");
+                                        setEscuchaCasillas("agregar");
+                                        flota.setNombreBoton("submarino");
                                     }else{
 
                                     }
@@ -231,41 +262,10 @@ public class GUI_Principal extends JFrame {
         public void mouseClicked(MouseEvent e) {
             if(estadoJuego == 0){
                 int auxiliar = 0; // Variable para indicar cuando se debe terminar el primer ciclo
-                //int nextImage = 1; // Acumulador para cambiar de imagen
-                //int ultimasCasillas = 0;
-                int casillasUsadas = 0;
                 for (int row = 1; row < 11; row++) {
                     for (int col = 1; col < 11; col++) {
                         if(e.getSource() == pintarTablero.getMatrizPosicion()[row][col]) {
-                            pintarFlota.funcionesFlota("destructor", 1, 4, col, row, casillasUsadas);
-                            //funciones(2, 1, col, row, casillasUsadas, nextImage);
-                            /*
-                            ultimasCasillas = Math.abs(col - 10);
-                            System.out.print(ultimasCasillas);
-                            if(ultimasCasillas < 3){
-                                System.out.println("No hay espacio para colocar el portavion");
-                                System.out.println(col);
-                            }else{
-                                for(int casilla=col; casilla < col+4; casilla++){
-                                    if(pintarTablero.getCasillasOcupadas().get(pintarTablero.getMatrizPosicion()[row][casilla]) == Integer.valueOf(1)) {
-                                        casillasUsadas++;
-                                    }
-                                }
-
-                                if(casillasUsadas == 0){
-                                    for(int pic=col; pic < col+4; pic++){
-                                        pintarTablero.getMatrizPosicion()[row][pic].setIcon(new ImageIcon(getClass().getResource("/recursos/portavion_H_I_D/" + String.valueOf(nextImage) + ".png")));
-                                        pintarTablero.getCasillasOcupadas().put(pintarTablero.getMatrizPosicion()[row][pic], 1);
-                                        nextImage++;
-                                    }
-                                }else{
-                                    System.out.println("Oye, No se puede colocar aqui");
-                                    System.out.println(col);
-                                    System.out.println("Casillas usadas es " + casillasUsadas);
-                                }
-                            }
-
-                             */
+                            pintarFlota.funcionesFlota(flota.getNombreBoton(), 1, 4, col, row);
                             auxiliar = 1;
                             break;
                         }
@@ -275,7 +275,7 @@ public class GUI_Principal extends JFrame {
                     }
                 }
             }else{
-                System.out.println("hola");
+                // Codigo cuando el estado sea 1, es decir cuando empieza el combate
             }
         }
 
@@ -299,58 +299,4 @@ public class GUI_Principal extends JFrame {
 
         }
     }
-
-    /*
-    public void funciones(int estadoOrientacion, int estadoSentidoOrientacion, int col, int row, int casillasUsadas, int nextImage){
-        if(estadoOrientacion == 1){
-            int ultimasCasillas = Math.abs(col - 10);
-            if(ultimasCasillas < 3){
-                System.out.println("No hay espacio para colocar el portavion");
-                System.out.println(col);
-            }else{
-                for(int casilla=col; casilla < col+4; casilla++){
-                    if(pintarTablero.getCasillasOcupadas().get(pintarTablero.getMatrizPosicion()[row][casilla]) == Integer.valueOf(1)) {
-                        casillasUsadas++;
-                    }
-                }
-
-                if(casillasUsadas == 0){
-                    for(int pic=col; pic < col+4; pic++){
-                        pintarTablero.getMatrizPosicion()[row][pic].setIcon(new ImageIcon(getClass().getResource("/recursos/portavion_H_I_D/" + String.valueOf(nextImage) + ".png")));
-                        pintarTablero.getCasillasOcupadas().put(pintarTablero.getMatrizPosicion()[row][pic], 1);
-                        nextImage++;
-                    }
-                }else{
-                    System.out.println("Oye, No se puede colocar aqui");
-                    System.out.println(col);
-                    System.out.println("Casillas usadas es " + casillasUsadas);
-                }
-            }
-        }else{
-            int ultimasCasillas = Math.abs(row - 10);
-            if(ultimasCasillas < 3){
-                System.out.println("No hay espacio para colocar el portavion");
-                System.out.println(row);
-            }else{
-                for(int casilla=row; casilla < row+4; casilla++){
-                    if(pintarTablero.getCasillasOcupadas().get(pintarTablero.getMatrizPosicion()[casilla][col]) == Integer.valueOf(1)) {
-                        casillasUsadas++;
-                    }
-                }
-
-                if(casillasUsadas == 0){
-                    for(int pic=row; pic < row+4; pic++){
-                        pintarTablero.getMatrizPosicion()[pic][col].setIcon(new ImageIcon(getClass().getResource("/recursos/portavion_V_S_I/" + String.valueOf(nextImage) + ".png")));
-                        pintarTablero.getCasillasOcupadas().put(pintarTablero.getMatrizPosicion()[pic][col], 1);
-                        nextImage++;
-                    }
-                }else{
-                    System.out.println("Oye, No se puede colocar aqui");
-                    System.out.println(col);
-                    System.out.println("Casillas usadas es " + casillasUsadas);
-                }
-            }
-        }
-    }
-     */
 }

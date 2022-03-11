@@ -14,6 +14,7 @@ public class PanelFlota extends JPanel{
     private ImageIcon imageDestructor, imagePortavion, imageFragata, imageSubmarino;
     private TitledBorder tituloFlota,tituloInfo;
     private Border blackline;
+    private String nombreBoton; // Guarda el texto del boton
 
     public PanelFlota(){
         GridBagLayout gbl = new GridBagLayout();
@@ -23,6 +24,8 @@ public class PanelFlota extends JPanel{
 
     public void barcos(){
         GridBagConstraints gbc = new GridBagConstraints();
+
+        nombreBoton = "";
 
         // Imagenes
         imageDestructor = new ImageIcon(getClass().getResource(PATH + "destructor.png"));
@@ -130,5 +133,13 @@ public class PanelFlota extends JPanel{
 
     public JButton getBotonHorizontal(){
         return horizontal;
+    }
+
+    public void setNombreBoton(String _nombreBoton){
+        nombreBoton = _nombreBoton;
+    }
+
+    public String getNombreBoton(){
+        return nombreBoton;
     }
 }
