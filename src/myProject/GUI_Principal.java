@@ -265,32 +265,52 @@ public class GUI_Principal extends JFrame {
                         switch(estadoJuego){
                             case 1:
                                 if(e.getSource() == flota.getBotonPortavion()){
-                                    setEscuchaBotones("remover");
-                                    System.out.println("Escoge si quieres ubicarlo vertical u horizontal");
-                                    setVerticalHorizontal("agregar");
-                                    flota.setNombreBoton("portavion");
-                                    estadoJuego = 2;
-                                }else{
-                                    if(e.getSource() == flota.getBotonDestructor()){
+                                    if(flota.getCantidadPortavion() > 0){
+                                        flota.setCantidadPortavion();
                                         setEscuchaBotones("remover");
                                         System.out.println("Escoge si quieres ubicarlo vertical u horizontal");
                                         setVerticalHorizontal("agregar");
-                                        flota.setNombreBoton("destructor");
+                                        flota.setNombreBoton("portavion");
                                         estadoJuego = 2;
                                     }else{
-                                        if(e.getSource() == flota.getBotonFragata()){
+                                        System.out.println("No hay mas portaviones disponibles");
+                                    }
+                                }else{
+                                    if(e.getSource() == flota.getBotonDestructor()){
+                                        if(flota.getCantidadDestructor() > 0){
+                                            flota.setCantidadDestructor();
                                             setEscuchaBotones("remover");
                                             System.out.println("Escoge si quieres ubicarlo vertical u horizontal");
                                             setVerticalHorizontal("agregar");
-                                            flota.setNombreBoton("fragata");
+                                            flota.setNombreBoton("destructor");
                                             estadoJuego = 2;
                                         }else{
-                                            if(e.getSource() == flota.getBotonSubmarino()){
+                                            System.out.println("No hay mas destructores disponibles");
+                                        }
+                                    }else{
+                                        if(e.getSource() == flota.getBotonFragata()){
+                                            if(flota.getCantidadFragata() > 0){
+                                                flota.setCantidadFragata();
                                                 setEscuchaBotones("remover");
                                                 System.out.println("Escoge si quieres ubicarlo vertical u horizontal");
                                                 setVerticalHorizontal("agregar");
-                                                flota.setNombreBoton("submarino");
+                                                flota.setNombreBoton("fragata");
                                                 estadoJuego = 2;
+                                            }else{
+                                                System.out.println("No hay mas fragatas disponibles");
+                                            }
+                                        }else{
+                                            if(e.getSource() == flota.getBotonSubmarino()){
+                                                if(flota.getCantidadSubmarino() > 0){
+                                                    flota.setCantidadSubmarino();
+                                                    setEscuchaBotones("remover");
+                                                    System.out.println("Escoge si quieres ubicarlo vertical u horizontal");
+                                                    setVerticalHorizontal("agregar");
+                                                    flota.setNombreBoton("submarino");
+                                                    estadoJuego = 2;
+                                                }else{
+                                                    System.out.println("No hay mas submarinos disponibles");
+                                                }
                                             }
                                         }
                                     }

@@ -17,6 +17,10 @@ public class PanelFlota extends JPanel{
     private String nombreBoton; // Guarda el texto del boton
     private int orientacion; // 0 si es vertical, 1 si es horizontal
     private int sentidoOrientacion; // 1 superior-inferior, 2 inferior-superior, 3 izquierda-derecha, 4 derecha-izquierda
+    private int cantidadPortavion;
+    private int cantidadSubmarino;
+    private int cantidadDestructor;
+    private int cantidadFragata;
 
     public PanelFlota(){
         GridBagLayout gbl = new GridBagLayout();
@@ -32,6 +36,12 @@ public class PanelFlota extends JPanel{
         nombreBoton = "";
         orientacion = 0;
         sentidoOrientacion = 0;
+
+        // Cantidad inicial de barcos
+        cantidadPortavion = 1;
+        cantidadSubmarino = 2;
+        cantidadDestructor = 3;
+        cantidadFragata = 4;
 
         // Imagenes
         imageDestructor = new ImageIcon(getClass().getResource(PATH + "destructor.png"));
@@ -265,5 +275,45 @@ public class PanelFlota extends JPanel{
     // Retorna el estado de sentidoOrientacion
     public int getSentidoOrientacion(){
         return sentidoOrientacion;
+    }
+
+    // Reduce la cantidad de portaviones disponibles
+    public void setCantidadPortavion(){
+        cantidadPortavion--;
+    }
+
+    // Reduce la cantidad de submarinos disponibles
+    public void setCantidadSubmarino(){
+        cantidadSubmarino--;
+    }
+
+    // Reduce la cantidad de destructores disponibles
+    public void setCantidadDestructor(){
+        cantidadDestructor--;
+    }
+
+    // Reduce la cantidad de fragatas disponibles
+    public void setCantidadFragata(){
+        cantidadFragata--;
+    }
+
+    // Retorna la cantidad de portaviones disponibles
+    public int getCantidadPortavion(){
+        return cantidadPortavion;
+    }
+
+    // Retorna la cantidad de submarinos disponibles
+    public int getCantidadSubmarino(){
+        return cantidadSubmarino;
+    }
+
+    // Retorna la cantidad de destructores disponibles
+    public int getCantidadDestructor(){
+        return cantidadDestructor;
+    }
+
+    // Retorna la cantidad de fragatas disponibles
+    public int getCantidadFragata(){
+        return cantidadFragata;
     }
 }
