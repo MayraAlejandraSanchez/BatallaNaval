@@ -10,6 +10,8 @@ public class GUI_Secundaria extends JFrame {
     private Header titulo;
     private JLabel enemy;
     private ImageIcon enemyIcon;
+    private PanelTableroOponente panelTableroOponente;
+    private ModelTableroOponente modelTableroOponente;
 
     public GUI_Secundaria() {
         initGUI_Secundaria();
@@ -19,7 +21,7 @@ public class GUI_Secundaria extends JFrame {
         Image image = new ImageIcon(getClass().getResource(PATH + "barcoIcono.png")).getImage();
         this.setIconImage(image);
         this.setUndecorated(false);
-        this.setSize(500, 500);
+        this.setSize(600, 600);
         this.setResizable(true);
         this.setVisible(true);
         this.setLocationRelativeTo(null);
@@ -47,9 +49,10 @@ public class GUI_Secundaria extends JFrame {
         JPanel panelCentral = new JPanel();
         panelCentral.setBackground(Color.cyan);
         panelPrincipal.add(panelCentral,BorderLayout.CENTER);
-        panelCentral.setLayout(new BorderLayout(0,0));
-
-        // Create Listener Object and Control Object
+        panelCentral.setLayout(new GridBagLayout());
+        panelTableroOponente = new PanelTableroOponente();
+        modelTableroOponente = new ModelTableroOponente(panelTableroOponente);
+        panelCentral.add(panelTableroOponente);
 
         // Set up JComponents
         // Titulo
@@ -60,9 +63,5 @@ public class GUI_Secundaria extends JFrame {
         enemyIcon = new ImageIcon(getClass().getResource(PATH+"enemy.png"));
         JLabel enemy = new JLabel(enemyIcon);
         panelSup.add(enemy,FlowLayout.CENTER);
-
-
-
-
     }
 }

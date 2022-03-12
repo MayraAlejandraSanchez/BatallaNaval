@@ -32,10 +32,11 @@ public class GUI_Principal extends JFrame {
     private ImageIcon team, help, enemy, play;
     private JPanel panelNorte, panelSur, panelEste, panelCentro;
     private PanelTablero panelTablero;
+    private PanelTableroOponente panelTableroOponente;
     private ModelTablero modelTablero;
     private PintarFlota pintarFlota;
     private PanelFlota panelFlota;
-    private GUI_Secundaria ventanaEnemy;
+    private GUI_Secundaria ventanaOponente;
     private int estadoJuego; // 1 seleccionar barco, 2 seleccionar orientacion del barco, 3 seleccionar sentido del barco, 4 colocar barco en el tablero, 5 combate
 
     /**
@@ -265,8 +266,8 @@ public class GUI_Principal extends JFrame {
 
                     }else{
                         if(e.getSource()==movimientosEnemigo){
-                            GUI_Secundaria ventanaEnemy = new GUI_Secundaria();
-                            ventanaEnemy.setVisible(true);
+                            GUI_Secundaria ventanaOponente = new GUI_Secundaria();
+                            ventanaOponente.setVisible(true);
                         }else{
                             switch(estadoJuego){
                                 case 1:

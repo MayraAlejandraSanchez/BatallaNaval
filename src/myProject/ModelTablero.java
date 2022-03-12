@@ -15,7 +15,6 @@ public class ModelTablero {
         tableroPrincipal = new Tableros();
         abecedario = new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
         modelTablero();
-
     }
 
     public void modelTablero(){
@@ -45,6 +44,7 @@ public class ModelTablero {
                 tableroPrincipal.getMatriz()[row][col].setOpaque(true);
                 tableroPrincipal.getMatriz()[row][col].setBackground(Color.WHITE);
                 tableroPrincipal.getMatriz()[row][col].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
 
                 panelTablero.getPanelTableroPosicion().add(tableroPosicion.getMatriz()[row][col]);
                 panelTablero.getPanelTableroPrincipal().add(tableroPrincipal.getMatriz()[row][col]);

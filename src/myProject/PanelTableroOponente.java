@@ -3,11 +3,11 @@ package myProject;
 import javax.swing.*;
 import java.awt.*;
 
-public class PanelTablero extends JPanel {
-    private JPanel panelTableroPosicion, panelTableroPrincipal;
-    private JLabel nombreTableroPosicion, nombreTableroPrincipal;
+public class PanelTableroOponente extends JPanel {
+    private JPanel panelTableroPosicion;
+    private JLabel nombreTableroPosicion;
 
-    public PanelTablero(){
+    public PanelTableroOponente(){
         GridBagLayout gb = new GridBagLayout();
         this.setLayout(gb);
         this.setBackground(Color.CYAN);
@@ -37,36 +37,10 @@ public class PanelTablero extends JPanel {
         gbc.gridheight = 1;
         gbc.insets = new Insets(0,15,0,15);
         this.add(panelTableroPosicion, gbc);
-
-        // Panel tablero principal
-        nombreTableroPrincipal = new JLabel("T A B L E R O   P R I N C I P A L");
-        nombreTableroPrincipal.setForeground(new Color(0, 0, 0, 230));
-        nombreTableroPrincipal.setFont(new Font(Font.MONOSPACED,Font.BOLD,15));
-        gbc.gridx = 1;
-        gbc.gridy = 0;
-        gbc.gridwidth = 1;
-        gbc.gridheight = 1;
-        this.add(nombreTableroPrincipal, gbc);
-
-        panelTableroPrincipal = new JPanel(new GridLayout(11, 11));
-        panelTableroPrincipal.setPreferredSize(new Dimension(400, 400));
-        panelTableroPrincipal.setBorder(BorderFactory.createLineBorder(Color.WHITE));
-        panelTableroPrincipal.setBackground(Color.BLACK);
-        gbc.gridx = 1;
-        gbc.gridy = 1;
-        gbc.gridwidth = 1;
-        gbc.gridheight = 1;
-        gbc.insets = new Insets(0,15,0,15);
-        this.add(panelTableroPrincipal, gbc);
     }
 
     // Retorna el JPanel del tablero posicion
     public JPanel getPanelTableroPosicion(){
         return panelTableroPosicion;
-    }
-
-    // Retorna el JPanel del tablero principal
-    public JPanel getPanelTableroPrincipal(){
-        return panelTableroPrincipal;
     }
 }
