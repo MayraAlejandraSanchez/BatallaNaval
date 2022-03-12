@@ -32,6 +32,7 @@ public class GUI_Principal extends JFrame {
     private ImageIcon team, help, enemy, play;
     private JPanel panelNorte, panelSur, panelEste, panelCentro;
     private PanelTablero panelTablero;
+    private ModelTablero modelTablero;
     private PintarFlota pintarFlota;
     private PanelFlota panelFlota;
     private GUI_Secundaria ventanaEnemy;
@@ -127,7 +128,8 @@ public class GUI_Principal extends JFrame {
         // JComponents de la parte central
         // Tablero
         panelTablero = new PanelTablero();
-        pintarFlota = new PintarFlota(panelTablero);
+        modelTablero = new ModelTablero(panelTablero);
+        pintarFlota = new PintarFlota(modelTablero);
         panelEste.add(panelTablero);
 
         // Flota
@@ -230,15 +232,15 @@ public class GUI_Principal extends JFrame {
     // Agrega o remueve el escucha a cada uno de los JLabel de la matriz posicion de PintarTablero
     public void setEscuchaCasillas(String evento){
         if(evento == "agregar"){
-            for (int row = 0; row < panelTablero.getMatrizPosicion().length; row++) {
-                for (int col = 0; col < panelTablero.getMatrizPosicion()[row].length; col++) {
-                    panelTablero.getMatrizPosicion()[row][col].addMouseListener(escucha);
+            for (int row = 0; row < modelTablero.getMatrizPosicion().length; row++) {
+                for (int col = 0; col < modelTablero.getMatrizPosicion()[row].length; col++) {
+                    modelTablero.getMatrizPosicion()[row][col].addMouseListener(escucha);
                 }
             }
         }else{
-            for (int row = 0; row < panelTablero.getMatrizPosicion().length; row++) {
-                for (int col = 0; col < panelTablero.getMatrizPosicion()[row].length; col++) {
-                    panelTablero.getMatrizPosicion()[row][col].removeMouseListener(escucha);
+            for (int row = 0; row < modelTablero.getMatrizPosicion().length; row++) {
+                for (int col = 0; col < modelTablero.getMatrizPosicion()[row].length; col++) {
+                    modelTablero.getMatrizPosicion()[row][col].removeMouseListener(escucha);
                 }
             }
         }
@@ -392,7 +394,7 @@ public class GUI_Principal extends JFrame {
                     int auxiliar = 0; // Variable para indicar cuando se debe terminar el primer ciclo
                     for (int row = 1; row < 11; row++) {
                         for (int col = 1; col < 11; col++) {
-                            if(e.getSource() == panelTablero.getMatrizPosicion()[row][col]) {
+                            if(e.getSource() == modelTablero.getMatrizPosicion()[row][col]) {
                                 // Condicional para saber si el usuario pudo colocar el barco
                                 if(pintarFlota.funcionesFlota(panelFlota.getNombreBoton(), panelFlota.getOrientacion(), panelFlota.getSentidoOrientacion(), col, row)){
                                     if(panelFlota.cantidadTotalNaves() > 0){
