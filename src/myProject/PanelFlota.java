@@ -316,4 +316,9 @@ public class PanelFlota extends JPanel{
     public int getCantidadFragata(){
         return cantidadFragata;
     }
+
+    // Retorna la cantidad total de naves disponibles
+    public int cantidadTotalNaves(){
+        return cantidadPortavion + cantidadSubmarino + cantidadDestructor + cantidadFragata;
+    }
 }

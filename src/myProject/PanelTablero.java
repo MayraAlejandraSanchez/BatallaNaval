@@ -4,14 +4,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
 
-public class PintarTablero extends JPanel {
+public class PanelTablero extends JPanel {
     private Tableros tableroPosicion, tableroPrincipal;
     private JPanel panelTableroPosicion, panelTableroPrincipal;
     private JLabel nombreTableroPosicion, nombreTableroPrincipal;
     private String abecedario[];
-    private HashMap<JLabel, Integer> casillasOcupadas; // Si value es 1, el JLabel esta ocupado, de lo contrario 0
+    //private HashMap<JLabel, Integer> casillasOcupadas; // Si value es 1, el JLabel esta ocupado, de lo contrario 0
 
-    public PintarTablero(){
+    public PanelTablero(){
         iniciar();
     }
 
@@ -21,7 +21,7 @@ public class PintarTablero extends JPanel {
         this.setLayout(gb);
         this.setBackground(Color.CYAN);
 
-        casillasOcupadas = new HashMap<>();
+        //casillasOcupadas = new HashMap<>();
 
         // Panel tablero posicion
         nombreTableroPosicion = new JLabel("T A B L E R O   P O S I C I O N");
@@ -85,7 +85,6 @@ public class PintarTablero extends JPanel {
                         }else{
                             tableroPosicion.getMatriz()[row][col] = new JLabel(new ImageIcon(getClass().getResource("/recursos/enemy.png")), SwingConstants.CENTER);
                             tableroPrincipal.getMatriz()[row][col] = new JLabel(new ImageIcon(getClass().getResource("/recursos/enemy.png")), SwingConstants.CENTER);
-                            tableroPosicion.getCoordenadas().put(row, abecedario[col-1]);
                         }
                     }
                 }
@@ -115,6 +114,6 @@ public class PintarTablero extends JPanel {
 
     // Retorna el Map casillasOcupadas
     public HashMap getCasillasOcupadas(){
-        return casillasOcupadas;
+        return tableroPosicion.getCasillasOcupadas();
     }
 }

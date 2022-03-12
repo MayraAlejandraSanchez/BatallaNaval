@@ -3,10 +3,10 @@ package myProject;
 import javax.swing.*;
 
 public class PintarFlota {
-    private PintarTablero pintarTablero;
+    private PanelTablero pintarTablero;
 
     // Constructor
-    public PintarFlota(PintarTablero pintarTablero){
+    public PintarFlota(PanelTablero pintarTablero){
         this.pintarTablero = pintarTablero;
     }
 
