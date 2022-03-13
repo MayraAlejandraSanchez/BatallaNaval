@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 public class GUI_Secundaria extends JFrame {
     public static final String PATH = "/recursos/";
@@ -11,7 +12,6 @@ public class GUI_Secundaria extends JFrame {
     private JLabel enemy;
     private ImageIcon enemyIcon;
     private PanelTableroOponente panelTableroOponente;
-    private ModelTableroOponente modelTableroOponente;
 
     public GUI_Secundaria() {
         initGUI_Secundaria();
@@ -51,7 +51,6 @@ public class GUI_Secundaria extends JFrame {
         panelPrincipal.add(panelCentral,BorderLayout.CENTER);
         panelCentral.setLayout(new GridBagLayout());
         panelTableroOponente = new PanelTableroOponente();
-        modelTableroOponente = new ModelTableroOponente(panelTableroOponente);
         panelCentral.add(panelTableroOponente);
 
         // Set up JComponents
@@ -63,5 +62,8 @@ public class GUI_Secundaria extends JFrame {
         enemyIcon = new ImageIcon(getClass().getResource(PATH+"enemy.png"));
         JLabel enemy = new JLabel(enemyIcon);
         panelSup.add(enemy,FlowLayout.CENTER);
+    }
+
+    public void distribucionFlotaOponente(String barco, int estadoOrientacion, int estadoSentidoOrientacion, int col, int row){
     }
 }

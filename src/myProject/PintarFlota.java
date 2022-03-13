@@ -3,11 +3,11 @@ package myProject;
 import javax.swing.*;
 
 public class PintarFlota {
-    private ModelTablero modelTablero;
+    private PanelTablero panelTablero;
 
     // Constructor
-    public PintarFlota(ModelTablero _modelTablero){
-        this.modelTablero = _modelTablero;
+    public PintarFlota(PanelTablero _panelTablero){
+        this.panelTablero = _panelTablero;
     }
 
     public String pathImages(String barco, int estadoOrientacion, int estadoSentidoOrientacion){
@@ -74,15 +74,15 @@ public class PintarFlota {
                 if(estadoSentidoOrientacion == 3){
                     nextImage = 1;
                     for(int casilla=col; casilla < col+casillasAUsar; casilla++){
-                        if(modelTablero.getCasillasOcupadas().get(modelTablero.getMatrizPosicion()[row][casilla]) == Integer.valueOf(1)) {
+                        if(panelTablero.getCasillasOcupadas().get(panelTablero.getMatrizPosicion()[row][casilla]) == Integer.valueOf(1)) {
                             casillasUsadas++;
                         }
                     }
 
                     if(casillasUsadas == 0){
                         for(int pic=col; pic < col+casillasAUsar; pic++){
-                            modelTablero.getMatrizPosicion()[row][pic].setIcon(new ImageIcon(getClass().getResource(pathImages(barco, estadoOrientacion, estadoSentidoOrientacion) + String.valueOf(nextImage) + ".png")));
-                            modelTablero.getCasillasOcupadas().put(modelTablero.getMatrizPosicion()[row][pic], 1);
+                            panelTablero.getMatrizPosicion()[row][pic].setIcon(new ImageIcon(getClass().getResource(pathImages(barco, estadoOrientacion, estadoSentidoOrientacion) + String.valueOf(nextImage) + ".png")));
+                            panelTablero.getCasillasOcupadas().put(panelTablero.getMatrizPosicion()[row][pic], 1);
                             nextImage++;
                             auxiliar = true;
                         }
@@ -94,15 +94,15 @@ public class PintarFlota {
                 }else{
                     nextImage = casillasAUsar;
                     for(int casilla=col; casilla > col-casillasAUsar; casilla--){
-                        if(modelTablero.getCasillasOcupadas().get(modelTablero.getMatrizPosicion()[row][casilla]) == Integer.valueOf(1)) {
+                        if(panelTablero.getCasillasOcupadas().get(panelTablero.getMatrizPosicion()[row][casilla]) == Integer.valueOf(1)) {
                             casillasUsadas++;
                         }
                     }
 
                     if(casillasUsadas == 0){
                         for(int pic=col; pic > col-casillasAUsar; pic--){
-                            modelTablero.getMatrizPosicion()[row][pic].setIcon(new ImageIcon(getClass().getResource(pathImages(barco, estadoOrientacion, estadoSentidoOrientacion) + String.valueOf(nextImage) + ".png")));
-                            modelTablero.getCasillasOcupadas().put(modelTablero.getMatrizPosicion()[row][pic], 1);
+                            panelTablero.getMatrizPosicion()[row][pic].setIcon(new ImageIcon(getClass().getResource(pathImages(barco, estadoOrientacion, estadoSentidoOrientacion) + String.valueOf(nextImage) + ".png")));
+                            panelTablero.getCasillasOcupadas().put(panelTablero.getMatrizPosicion()[row][pic], 1);
                             nextImage--;
                             auxiliar = true;
                         }
@@ -130,15 +130,15 @@ public class PintarFlota {
                 if(estadoSentidoOrientacion == 1){
                     nextImage = 1;
                     for(int casilla=row; casilla < row+casillasAUsar; casilla++){
-                        if(modelTablero.getCasillasOcupadas().get(modelTablero.getMatrizPosicion()[casilla][col]) == Integer.valueOf(1)) {
+                        if(panelTablero.getCasillasOcupadas().get(panelTablero.getMatrizPosicion()[casilla][col]) == Integer.valueOf(1)) {
                             casillasUsadas++;
                         }
                     }
 
                     if(casillasUsadas == 0){
                         for(int pic=row; pic < row+casillasAUsar; pic++){
-                            modelTablero.getMatrizPosicion()[pic][col].setIcon(new ImageIcon(getClass().getResource(pathImages(barco, estadoOrientacion, estadoSentidoOrientacion) + String.valueOf(nextImage) + ".png")));
-                            modelTablero.getCasillasOcupadas().put(modelTablero.getMatrizPosicion()[pic][col], 1);
+                            panelTablero.getMatrizPosicion()[pic][col].setIcon(new ImageIcon(getClass().getResource(pathImages(barco, estadoOrientacion, estadoSentidoOrientacion) + String.valueOf(nextImage) + ".png")));
+                            panelTablero.getCasillasOcupadas().put(panelTablero.getMatrizPosicion()[pic][col], 1);
                             nextImage++;
                             auxiliar = true;
                         }
@@ -150,15 +150,15 @@ public class PintarFlota {
                 }else{
                     nextImage = casillasAUsar;
                     for(int casilla=row; casilla > row-casillasAUsar; casilla--){
-                        if(modelTablero.getCasillasOcupadas().get(modelTablero.getMatrizPosicion()[casilla][col]) == Integer.valueOf(1)) {
+                        if(panelTablero.getCasillasOcupadas().get(panelTablero.getMatrizPosicion()[casilla][col]) == Integer.valueOf(1)) {
                             casillasUsadas++;
                         }
                     }
 
                     if(casillasUsadas == 0){
                         for(int pic=row; pic > row-casillasAUsar; pic--){
-                            modelTablero.getMatrizPosicion()[pic][col].setIcon(new ImageIcon(getClass().getResource(pathImages(barco, estadoOrientacion, estadoSentidoOrientacion) + String.valueOf(nextImage) + ".png")));
-                            modelTablero.getCasillasOcupadas().put(modelTablero.getMatrizPosicion()[pic][col], 1);
+                            panelTablero.getMatrizPosicion()[pic][col].setIcon(new ImageIcon(getClass().getResource(pathImages(barco, estadoOrientacion, estadoSentidoOrientacion) + String.valueOf(nextImage) + ".png")));
+                            panelTablero.getCasillasOcupadas().put(panelTablero.getMatrizPosicion()[pic][col], 1);
                             nextImage--;
                             auxiliar = true;
                         }

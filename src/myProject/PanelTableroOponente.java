@@ -6,12 +6,17 @@ import java.awt.*;
 public class PanelTableroOponente extends JPanel {
     private JPanel panelTableroPosicion;
     private JLabel nombreTableroPosicion;
+    private Tableros tableroPosicionOponente;
+    private String abecedario[];
 
     public PanelTableroOponente(){
         GridBagLayout gb = new GridBagLayout();
         this.setLayout(gb);
         this.setBackground(Color.CYAN);
+        tableroPosicionOponente = new Tableros();
+        abecedario = new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
         iniciar();
+        modelTableroOponente();
     }
 
     public void iniciar(){
@@ -39,8 +44,29 @@ public class PanelTableroOponente extends JPanel {
         this.add(panelTableroPosicion, gbc);
     }
 
-    // Retorna el JPanel del tablero posicion
-    public JPanel getPanelTableroPosicion(){
-        return panelTableroPosicion;
+    public void modelTableroOponente(){
+        for (int row = 0; row < 11; row++) {
+            for (int col = 0; col < 11; col++) {
+                if(row == 0 && col == 0){
+                    tableroPosicionOponente.getMatriz()[row][col] = new JLabel("", SwingConstants.CENTER);
+                }else{
+                    if(row == 0 && col > 0){
+                        tableroPosicionOponente.getMatriz()[row][col] = new JLabel(abecedario[col-1], SwingConstants.CENTER);
+                    }else{
+                        if(row > 0 && col == 0){
+                            tableroPosicionOponente.getMatriz()[row][col] = new JLabel(String.valueOf(row), SwingConstants.CENTER);
+                        }else{
+                            tableroPosicionOponente.getMatriz()[row][col] = new JLabel(new ImageIcon(getClass().getResource("/recursos/enemy.png")), SwingConstants.CENTER);
+                        }
+                    }
+                }
+
+                tableroPosicionOponente.getMatriz()[row][col].setOpaque(true);
+                tableroPosicionOponente.getMatriz()[row][col].setBackground(Color.WHITE);
+                tableroPosicionOponente.getMatriz()[row][col].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+                panelTableroPosicion.add(tableroPosicionOponente.getMatriz()[row][col]);
+            }
+        }
     }
 }
