@@ -155,6 +155,13 @@ public class GUI_Principal extends JFrame {
         setVerticalHorizontal("remover");
         setOrientacionSentidoVertical("remover");
         setOrientacionSentidoHorizontal("remover");
+
+        // Display de GUI_Secundaria
+        ventanaOponente = new GUI_Secundaria();
+        ventanaOponente.getPanelTableroOponente();
+        while(ventanaOponente.getPintarFlotaOponente().cantidadTotalNaves() > 0){
+            ventanaOponente.distribucionFlotaOponente();
+        }
     }
 
     /**
@@ -264,7 +271,6 @@ public class GUI_Principal extends JFrame {
 
                     }else{
                         if(e.getSource()==movimientosEnemigo){
-                            GUI_Secundaria ventanaOponente = new GUI_Secundaria();
                             ventanaOponente.setVisible(true);
                         }else{
                             switch(estadoJuego){

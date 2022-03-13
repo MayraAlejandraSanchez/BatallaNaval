@@ -2,6 +2,7 @@ package myProject;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashMap;
 
 public class PanelTableroOponente extends JPanel {
     private JPanel panelTableroPosicion;
@@ -68,5 +69,16 @@ public class PanelTableroOponente extends JPanel {
                 panelTableroPosicion.add(tableroPosicionOponente.getMatriz()[row][col]);
             }
         }
+    }
+
+    // Retorna la matriz posicion
+    public JLabel[][] getMatrizPosicion(){
+        return tableroPosicionOponente.getMatriz();
+    }
+
+
+    // Retorna el Map casillasOcupadas
+    public HashMap getCasillasOcupadas(){
+        return tableroPosicionOponente.getCasillasOcupadas();
     }
 }

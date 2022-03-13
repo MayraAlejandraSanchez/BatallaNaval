@@ -12,6 +12,7 @@ public class GUI_Secundaria extends JFrame {
     private JLabel enemy;
     private ImageIcon enemyIcon;
     private PanelTableroOponente panelTableroOponente;
+    private PintarFlotaOponente pintarFlotaOponente;
 
     public GUI_Secundaria() {
         initGUI_Secundaria();
@@ -23,7 +24,7 @@ public class GUI_Secundaria extends JFrame {
         this.setUndecorated(false);
         this.setSize(600, 600);
         this.setResizable(true);
-        this.setVisible(true);
+        this.setVisible(false);
         this.setLocationRelativeTo(null);
     }
 
@@ -51,6 +52,7 @@ public class GUI_Secundaria extends JFrame {
         panelPrincipal.add(panelCentral,BorderLayout.CENTER);
         panelCentral.setLayout(new GridBagLayout());
         panelTableroOponente = new PanelTableroOponente();
+        pintarFlotaOponente = new PintarFlotaOponente(panelTableroOponente);
         panelCentral.add(panelTableroOponente);
 
         // Set up JComponents
@@ -64,6 +66,83 @@ public class GUI_Secundaria extends JFrame {
         panelSup.add(enemy,FlowLayout.CENTER);
     }
 
-    public void distribucionFlotaOponente(String barco, int estadoOrientacion, int estadoSentidoOrientacion, int col, int row){
+
+    public void distribucionFlotaOponente(){
+        Random barcoAleatorio = new Random();
+        String nombreBarco = "";
+        int numBarcoAleatorio = barcoAleatorio.nextInt(4)+1;
+
+        switch (numBarcoAleatorio){
+            case 1: nombreBarco = "portavion";
+                break;
+            case 2: nombreBarco = "submarino";
+                break;
+            case 3: nombreBarco = "destructor";
+                break;
+            case 4: nombreBarco = "fragata";
+                break;
+        }
+
+        Random orientacionAleatoria = new Random();
+        int numOrientacionAleatoria = orientacionAleatoria.nextInt(2);
+
+        Random sentidoAleatorio = new Random();
+        int numSentidoAleatorio = 0;
+        switch (numOrientacionAleatoria){
+            case 0:
+                numSentidoAleatorio = sentidoAleatorio.nextInt(2)+1;
+                break;
+            case 1:
+                numSentidoAleatorio = sentidoAleatorio.nextInt(4-3)+3;
+                break;
+        }
+
+        Random columnaAleatoria = new Random();
+        int numColumnaAleatoria = columnaAleatoria.nextInt(10)+1;
+
+        Random filaAleatoria = new Random();
+        int numFilaAleatoria = filaAleatoria.nextInt(10)+1;
+
+        if(numBarcoAleatorio == 1 &&  pintarFlotaOponente.getCantidadPortavion() > 0){
+            if(!pintarFlotaOponente.funcionesFlota(nombreBarco,numOrientacionAleatoria, numSentidoAleatorio, numColumnaAleatoria, numFilaAleatoria)){
+                distribucionFlotaOponente();
+            }else{
+                pintarFlotaOponente.setCantidadPortavion();
+            }
+        }else{
+            if(numBarcoAleatorio == 2 &&  pintarFlotaOponente.getCantidadSubmarino() > 0){
+                if(!pintarFlotaOponente.funcionesFlota(nombreBarco,numOrientacionAleatoria, numSentidoAleatorio, numColumnaAleatoria, numFilaAleatoria)){
+                    distribucionFlotaOponente();
+                }else{
+                    pintarFlotaOponente.setCantidadSubmarino();
+                }
+            }else{
+                if(numBarcoAleatorio == 3 &&  pintarFlotaOponente.getCantidadDestructor() > 0){
+                    if(!pintarFlotaOponente.funcionesFlota(nombreBarco,numOrientacionAleatoria, numSentidoAleatorio, numColumnaAleatoria, numFilaAleatoria)){
+                        distribucionFlotaOponente();
+                    }else{
+                        pintarFlotaOponente.setCantidadDestructor();
+                    }
+                }else{
+                    if(numBarcoAleatorio == 4 &&  pintarFlotaOponente.getCantidadFragata() > 0){
+                        if(!pintarFlotaOponente.funcionesFlota(nombreBarco,numOrientacionAleatoria, numSentidoAleatorio, numColumnaAleatoria, numFilaAleatoria)){
+                            distribucionFlotaOponente();
+                        }else{
+                            pintarFlotaOponente.setCantidadFragata();
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // Retorna el panelTableroOponente
+    public PanelTableroOponente getPanelTableroOponente(){
+        return panelTableroOponente;
+    }
+
+    // Retorna el objeto para pintar la flota oponente
+    public PintarFlotaOponente getPintarFlotaOponente(){
+        return pintarFlotaOponente;
     }
 }
