@@ -4,10 +4,12 @@ import javax.swing.*;
 
 public class PintarFlota {
     private PanelTablero panelTablero;
+    private int numBarco;
 
     // Constructor
     public PintarFlota(PanelTablero _panelTablero){
         this.panelTablero = _panelTablero;
+        numBarco = 0; // cantidad de barcos desplegados
     }
 
     public String pathImages(String barco, int estadoOrientacion, int estadoSentidoOrientacion){

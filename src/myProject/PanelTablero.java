@@ -112,8 +112,13 @@ public class PanelTablero extends JPanel {
         return tableroPrincipal.getMatriz();
     }
 
-    // Retorna el Map casillasOcupadas
+    // Retorna el Map casillasOcupadas de la matriz posicion
     public HashMap getCasillasOcupadas(){
         return tableroPosicion.getCasillasOcupadas();
+    }
+
+    // Retorna el map casillasOcupadas de la matriz principal
+    public HashMap getCasillasOcupadasPrincipal(){
+        return tableroPrincipal.getCasillasOcupadas();
     }
 }

@@ -37,6 +37,7 @@ public class GUI_Principal extends JFrame {
     private PanelFlota panelFlota;
     private GUI_Secundaria ventanaOponente;
     private int estadoJuego; // 1 seleccionar barco, 2 seleccionar orientacion del barco, 3 seleccionar sentido del barco, 4 colocar barco en el tablero, 5 combate
+    private Combate combate;
 
     /**
      * Constructor of GUI class
@@ -158,10 +159,13 @@ public class GUI_Principal extends JFrame {
 
         // Display de GUI_Secundaria
         ventanaOponente = new GUI_Secundaria();
-        ventanaOponente.getPanelTableroOponente();
+        //ventanaOponente.getPanelTableroOponente();
         while(ventanaOponente.getPintarFlotaOponente().cantidadTotalNaves() > 0){
             ventanaOponente.distribucionFlotaOponente();
         }
+
+        // Objeto para invocar funciones de combate
+        combate = new Combate(panelTablero, ventanaOponente.getPanelTableroOponente());
     }
 
     /**
@@ -247,6 +251,23 @@ public class GUI_Principal extends JFrame {
             for (int row = 0; row < panelTablero.getMatrizPosicion().length; row++) {
                 for (int col = 0; col < panelTablero.getMatrizPosicion()[row].length; col++) {
                     panelTablero.getMatrizPosicion()[row][col].removeMouseListener(escucha);
+                }
+            }
+        }
+    }
+
+    // Agrega o remueve el escucha a cada uno de los JLabel de la matriz principal de PintarTablero
+    public void setEscuchaCasillasPrincipal(String evento){
+        if(evento == "agregar"){
+            for (int row = 0; row < panelTablero.getMatrizPrincipal().length; row++) {
+                for (int col = 0; col < panelTablero.getMatrizPrincipal()[row].length; col++) {
+                    panelTablero.getMatrizPrincipal()[row][col].addMouseListener(escucha);
+                }
+            }
+        }else{
+            for (int row = 0; row < panelTablero.getMatrizPrincipal().length; row++) {
+                for (int col = 0; col < panelTablero.getMatrizPrincipal()[row].length; col++) {
+                    panelTablero.getMatrizPrincipal()[row][col].removeMouseListener(escucha);
                 }
             }
         }
@@ -394,9 +415,9 @@ public class GUI_Principal extends JFrame {
 
         @Override
         public void mouseClicked(MouseEvent e) {
+            int auxiliar = 0; // Variable para indicar cuando se debe terminar el primer ciclo
             switch(estadoJuego){
                 case 4:
-                    int auxiliar = 0; // Variable para indicar cuando se debe terminar el primer ciclo
                     for (int row = 1; row < 11; row++) {
                         for (int col = 1; col < 11; col++) {
                             if(e.getSource() == panelTablero.getMatrizPosicion()[row][col]) {
@@ -408,9 +429,30 @@ public class GUI_Principal extends JFrame {
                                         setEscuchaBotones("agregar");
                                         estadoJuego = 1;
                                     }else{
+                                        setEscuchaCasillas("remover");
                                         System.out.println("El combate comienza");
+                                        combate.UsuarioVsOponente();
+                                        setEscuchaCasillasPrincipal("agregar");
                                         estadoJuego = 5;
                                     }
+                                }
+                                auxiliar = 1;
+                                break;
+                            }
+                        }
+                        if(auxiliar == 1){
+                            break;
+                        }
+                    }
+                    break;
+                case 5:
+                    for (int row = 1; row < 11; row++) {
+                        for (int col = 1; col < 11; col++) {
+                            if(e.getSource() == panelTablero.getMatrizPrincipal()[row][col]) {
+                                if(panelTablero.getCasillasOcupadasPrincipal().get(panelTablero.getMatrizPrincipal()[row][col]) == Integer.valueOf(1)){
+                                    System.out.println("Le diste a una nave");
+                                }else{
+                                    System.out.println("Le diste al agua");
                                 }
                                 auxiliar = 1;
                                 break;
