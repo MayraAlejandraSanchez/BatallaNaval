@@ -449,8 +449,42 @@ public class GUI_Principal extends JFrame {
                     for (int row = 1; row < 11; row++) {
                         for (int col = 1; col < 11; col++) {
                             if(e.getSource() == panelTablero.getMatrizPrincipal()[row][col]) {
+                                // Verifica si la casilla seleccionada hay un barco oponente
                                 if(panelTablero.getCasillasOcupadasPrincipal().get(panelTablero.getMatrizPrincipal()[row][col]) == Integer.valueOf(1)){
-                                    System.out.println("Le diste a una nave");
+                                    // Verifica si todas las casillas del barco fueron seleccionadas
+                                    if(ventanaOponente.getPanelTableroOponente().getCasillaBarco().get(ventanaOponente.getPanelTableroOponente().getMatrizPosicion()[row][col]) != Integer.valueOf(0)){
+                                        if(ventanaOponente.getPanelTableroOponente().getCasillaNombreBarco().get(ventanaOponente.getPanelTableroOponente().getMatrizPosicion()[row][col]) == "portavion"){
+                                            ventanaOponente.getPanelTableroOponente().getMatrizPosicion()[row][col].setIcon(new ImageIcon(getClass().getResource("/recursos/team.png")));
+                                            panelTablero.getMatrizPrincipal()[row][col].setIcon(new ImageIcon(getClass().getResource("/recursos/team.png")));
+                                            System.out.println(ventanaOponente.getPintarFlotaOponente().getCasillasUsadasPortavion());
+                                            ventanaOponente.getPintarFlotaOponente().reducirCasillasUsadas(4);
+                                            for (int fila = 1; fila < 11; fila++) {
+                                                for (int columna = 1; columna < 11; columna++) {
+                                                    if(ventanaOponente.getPanelTableroOponente().getCasillaNombreBarco().get(ventanaOponente.getPanelTableroOponente().getMatrizPosicion()[fila][columna]) == "portavion"){
+                                                        ventanaOponente.getPanelTableroOponente().getCasillaBarco().replace(ventanaOponente.getPanelTableroOponente().getMatrizPosicion()[row][col], ventanaOponente.getPintarFlotaOponente().getCasillasUsadasPortavion());
+                                                    }
+                                                }
+                                            }
+                                            System.out.println(ventanaOponente.getPintarFlotaOponente().getCasillasUsadasPortavion());
+                                            if(ventanaOponente.getPintarFlotaOponente().getCasillasUsadasPortavion() == 0){
+                                                System.out.println("Barco hundido");
+                                                for (int fil = 1; fil < 11; fil++) {
+                                                    for (int colu = 1; colu < 11; colu++) {
+                                                        if(ventanaOponente.getPanelTableroOponente().getCasillaNombreBarco().get(ventanaOponente.getPanelTableroOponente().getMatrizPosicion()[fil][colu]) == "portavion"){
+                                                            ventanaOponente.getPanelTableroOponente().getMatrizPosicion()[fil][colu].setIcon(new ImageIcon(getClass().getResource("/recursos/play.png")));
+                                                            panelTablero.getMatrizPrincipal()[fil][colu].setIcon(new ImageIcon(getClass().getResource("/recursos/play.png")));
+                                                        }
+                                                    }
+                                                }
+                                            }else{
+                                                System.out.println("Le diste a una nave");
+                                            }
+                                        }
+                                        //System.out.println(ventanaOponente.getPintarFlotaOponente().getCasillasUsadasPortavion());
+                                        //System.out.println("Le diste a una nave");
+                                    }else{
+                                        //System.out.println("Barco hundido");
+                                    }
                                 }else{
                                     System.out.println("Le diste al agua");
                                 }

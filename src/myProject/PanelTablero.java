@@ -121,4 +121,9 @@ public class PanelTablero extends JPanel {
     public HashMap getCasillasOcupadasPrincipal(){
         return tableroPrincipal.getCasillasOcupadas();
     }
+
+    // Retorna el map casillaBarco de la clase Tableros
+    public HashMap getCasillaBarco(){
+        return tableroPrincipal.getCasillaBarco();
+    }
 }

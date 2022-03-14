@@ -37,6 +37,12 @@ public class PintarFlota {
         return path;
     }
 
+    public void relacionJLabelBarco(String barco){
+        if(barco == "portavion"){
+
+        }
+    }
+
     public boolean funcionesFlota(String barco, int estadoOrientacion, int estadoSentidoOrientacion, int col, int row){
         int casillasAUsar;
         int casillasUsadas = 0;
