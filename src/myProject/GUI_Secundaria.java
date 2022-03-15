@@ -104,7 +104,7 @@ public class GUI_Secundaria extends JFrame {
         int numFilaAleatoria = filaAleatoria.nextInt(10)+1;
 
         if(numBarcoAleatorio == 1 &&  pintarFlotaOponente.getCantidadPortavion() > 0){
-            if(!pintarFlotaOponente.funcionesFlota(nombreBarco,numOrientacionAleatoria, numSentidoAleatorio, numColumnaAleatoria, numFilaAleatoria)){
+            if(!pintarFlotaOponente.funcionesFlota(nombreBarco, numOrientacionAleatoria, numSentidoAleatorio, numColumnaAleatoria, numFilaAleatoria)){
                 distribucionFlotaOponente();
             }else{
                 pintarFlotaOponente.setCantidadPortavion();

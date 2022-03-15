@@ -1,12 +1,13 @@
 package myProject;
 
 import javax.swing.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Tableros {
     private JLabel tablero[][];
-    private HashMap<JLabel, Integer> casillasOcupadas; // Verifica si la casilla esta ocupada por una nava
-    private HashMap<JLabel, Integer> casillaBarco; // Cantidad de casillas usadas por barco
+    private HashMap<JLabel, Integer> casillasOcupadas; // Verifica si la casilla esta ocupada por una nave
+    private HashMap<JLabel, Integer> casillaBarco; // Relacion entre la casilla y las casillas que usa la nave
     private HashMap<JLabel, String> casillaNombreBarco; // Nombre de la nave ubicada en una casilla
 
     // Constructor
@@ -15,6 +16,19 @@ public class Tableros {
         casillasOcupadas = new HashMap<>();
         casillaBarco = new HashMap<>();
         casillaNombreBarco = new HashMap<>();
+    }
+
+    // Reduce la cantidad de casillas ocupadas por los barcos para que sea hundido
+    public void reducirCasillasUsadas(String barco, int num){
+        for (int row = 1; row < 11; row++) {
+            for (int col = 1; col < 11; col++) {
+                if(casillaNombreBarco.get(tablero[row][col]) != null){
+                    if(casillaNombreBarco.get(tablero[row][col]).equals(barco)){
+                        casillaBarco.replace(tablero[row][col], casillaBarco.get(tablero[row][col])-1);
+                    }
+                }
+            }
+        }
     }
 
     // Retorna la matriz

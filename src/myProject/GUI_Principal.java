@@ -6,6 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Random;
 
 /**
@@ -164,6 +167,11 @@ public class GUI_Principal extends JFrame {
             ventanaOponente.distribucionFlotaOponente();
         }
 
+        System.out.println("BRRRRRRRRRRRR");
+        System.out.println(ventanaOponente.getPintarFlotaOponente().getCasillasUsadasBarco());
+        System.out.println(ventanaOponente.getPanelTableroOponente().getCasillaBarco().values());
+        System.out.println(ventanaOponente.getPanelTableroOponente().getCasillaBarco().size());
+
         // Objeto para invocar funciones de combate
         combate = new Combate(panelTablero, ventanaOponente.getPanelTableroOponente());
     }
@@ -270,6 +278,58 @@ public class GUI_Principal extends JFrame {
                     panelTablero.getMatrizPrincipal()[row][col].removeMouseListener(escucha);
                 }
             }
+        }
+    }
+
+    // ESTA FUNCION TIENE UN ERROR
+    public void funcionesCombate(int row, int col, String barco, int num){
+        ventanaOponente.getPanelTableroOponente().getMatrizPosicion()[row][col].setIcon(new ImageIcon(getClass().getResource("/recursos/team.png")));
+        panelTablero.getMatrizPrincipal()[row][col].setIcon(new ImageIcon(getClass().getResource("/recursos/team.png")));
+        System.out.println(ventanaOponente.getPintarFlotaOponente().getCasillasUsadas(barco, num));
+        //ventanaOponente.getPintarFlotaOponente().reducirCasillasUsadas(barco, num); // cambiar
+        ventanaOponente.getPanelTableroOponente().getTableroPosicionOponente().reducirCasillasUsadas(barco, num);
+        /*
+
+        for (int row = 1; row < 11; row++) {
+            for (int col = 1; col < 11; col++) {
+                if(casillaNombreBarco.get(tablero[row][col]) != null){
+                    if(casillaNombreBarco.get(tablero[row][col]).equals(barco)){
+                        casillaBarco.replace(tablero[row][col], casillaBarco.get(tablero[row][col])-1);
+                    }
+                }
+            }
+        }
+
+        for (int fila = 1; fila < 11; fila++) {
+            for (int columna = 1; columna < 11; columna++) {
+                if(ventanaOponente.getPanelTableroOponente().getCasillaNombreBarco().get(ventanaOponente.getPanelTableroOponente().getMatrizPosicion()[fila][columna]) != null){
+                    if(ventanaOponente.getPanelTableroOponente().getCasillaNombreBarco().get(ventanaOponente.getPanelTableroOponente().getMatrizPosicion()[fila][columna]).equals(barco)){
+                        ventanaOponente.getPanelTableroOponente().getCasillaBarco().replace(ventanaOponente.getPanelTableroOponente().getMatrizPosicion()[row][col], ventanaOponente.getPintarFlotaOponente().getCasillasUsadas(barco, num)); // cambiar
+                    }
+                }else{
+                    continue;
+                }
+            }
+        }
+         */
+        System.out.println("ESTAMOS AQUI");
+        System.out.println(ventanaOponente.getPanelTableroOponente().getTableroPosicionOponente().getCasillaBarco().get(ventanaOponente.getPanelTableroOponente().getMatrizPosicion()[row][col]));
+        if(ventanaOponente.getPanelTableroOponente().getTableroPosicionOponente().getCasillaBarco().get(ventanaOponente.getPanelTableroOponente().getMatrizPosicion()[row][col]) == Integer.valueOf(0)){
+            System.out.println("Barco hundido");
+            for (int fil = 1; fil < 11; fil++) {
+                for (int colu = 1; colu < 11; colu++) {
+                    if(ventanaOponente.getPanelTableroOponente().getCasillaNombreBarco().get(ventanaOponente.getPanelTableroOponente().getMatrizPosicion()[fil][colu]) != null){
+                        if(ventanaOponente.getPanelTableroOponente().getCasillaNombreBarco().get(ventanaOponente.getPanelTableroOponente().getMatrizPosicion()[fil][colu]).equals(barco)){
+                            ventanaOponente.getPanelTableroOponente().getMatrizPosicion()[fil][colu].setIcon(new ImageIcon(getClass().getResource("/recursos/play.png")));
+                            panelTablero.getMatrizPrincipal()[fil][colu].setIcon(new ImageIcon(getClass().getResource("/recursos/play.png")));
+                        }
+                    }else{
+                        continue;
+                    }
+                }
+            }
+        }else{
+            System.out.println("Le diste a una nave");
         }
     }
 
@@ -452,38 +512,30 @@ public class GUI_Principal extends JFrame {
                                 // Verifica si la casilla seleccionada hay un barco oponente
                                 if(panelTablero.getCasillasOcupadasPrincipal().get(panelTablero.getMatrizPrincipal()[row][col]) == Integer.valueOf(1)){
                                     // Verifica si todas las casillas del barco fueron seleccionadas
-                                    if(ventanaOponente.getPanelTableroOponente().getCasillaBarco().get(ventanaOponente.getPanelTableroOponente().getMatrizPosicion()[row][col]) != Integer.valueOf(0)){
-                                        if(ventanaOponente.getPanelTableroOponente().getCasillaNombreBarco().get(ventanaOponente.getPanelTableroOponente().getMatrizPosicion()[row][col]) == "portavion"){
-                                            ventanaOponente.getPanelTableroOponente().getMatrizPosicion()[row][col].setIcon(new ImageIcon(getClass().getResource("/recursos/team.png")));
-                                            panelTablero.getMatrizPrincipal()[row][col].setIcon(new ImageIcon(getClass().getResource("/recursos/team.png")));
-                                            System.out.println(ventanaOponente.getPintarFlotaOponente().getCasillasUsadasPortavion());
-                                            ventanaOponente.getPintarFlotaOponente().reducirCasillasUsadas(4);
-                                            for (int fila = 1; fila < 11; fila++) {
-                                                for (int columna = 1; columna < 11; columna++) {
-                                                    if(ventanaOponente.getPanelTableroOponente().getCasillaNombreBarco().get(ventanaOponente.getPanelTableroOponente().getMatrizPosicion()[fila][columna]) == "portavion"){
-                                                        ventanaOponente.getPanelTableroOponente().getCasillaBarco().replace(ventanaOponente.getPanelTableroOponente().getMatrizPosicion()[row][col], ventanaOponente.getPintarFlotaOponente().getCasillasUsadasPortavion());
-                                                    }
-                                                }
-                                            }
-                                            System.out.println(ventanaOponente.getPintarFlotaOponente().getCasillasUsadasPortavion());
-                                            if(ventanaOponente.getPintarFlotaOponente().getCasillasUsadasPortavion() == 0){
-                                                System.out.println("Barco hundido");
-                                                for (int fil = 1; fil < 11; fil++) {
-                                                    for (int colu = 1; colu < 11; colu++) {
-                                                        if(ventanaOponente.getPanelTableroOponente().getCasillaNombreBarco().get(ventanaOponente.getPanelTableroOponente().getMatrizPosicion()[fil][colu]) == "portavion"){
-                                                            ventanaOponente.getPanelTableroOponente().getMatrizPosicion()[fil][colu].setIcon(new ImageIcon(getClass().getResource("/recursos/play.png")));
-                                                            panelTablero.getMatrizPrincipal()[fil][colu].setIcon(new ImageIcon(getClass().getResource("/recursos/play.png")));
+                                    if(ventanaOponente.getPanelTableroOponente().getCasillaBarco().get(ventanaOponente.getPanelTableroOponente().getMatrizPosicion()[row][col]) != Integer.valueOf(0)){ // cambiar
+
+                                        for(int num=1; num < 11; num++){
+                                            if(ventanaOponente.getPanelTableroOponente().getCasillaNombreBarco().get(ventanaOponente.getPanelTableroOponente().getMatrizPosicion()[row][col]).equals("portavion" + String.valueOf(num))){
+                                                funcionesCombate(row, col, "portavion" + String.valueOf(num), num);
+                                                System.out.println(ventanaOponente.getPanelTableroOponente().getCasillaNombreBarco().get(ventanaOponente.getPanelTableroOponente().getMatrizPosicion()[row][col]));
+                                                break;
+                                            }else{
+                                                if(ventanaOponente.getPanelTableroOponente().getCasillaNombreBarco().get(ventanaOponente.getPanelTableroOponente().getMatrizPosicion()[row][col]).equals("submarino" + String.valueOf(num))){
+                                                    funcionesCombate(row, col, "submarino" + String.valueOf(num), num);
+                                                    break;
+                                                }else{
+                                                    if(ventanaOponente.getPanelTableroOponente().getCasillaNombreBarco().get(ventanaOponente.getPanelTableroOponente().getMatrizPosicion()[row][col]).equals("destructor" + String.valueOf(num))){
+                                                        funcionesCombate(row, col, "destructor" + String.valueOf(num), num);
+                                                        break;
+                                                    }else{
+                                                        if(ventanaOponente.getPanelTableroOponente().getCasillaNombreBarco().get(ventanaOponente.getPanelTableroOponente().getMatrizPosicion()[row][col]).equals("fragata" + String.valueOf(num))){
+                                                            funcionesCombate(row, col, "fragata" + String.valueOf(num), num);
+                                                            break;
                                                         }
                                                     }
                                                 }
-                                            }else{
-                                                System.out.println("Le diste a una nave");
                                             }
                                         }
-                                        //System.out.println(ventanaOponente.getPintarFlotaOponente().getCasillasUsadasPortavion());
-                                        //System.out.println("Le diste a una nave");
-                                    }else{
-                                        //System.out.println("Barco hundido");
                                     }
                                 }else{
                                     System.out.println("Le diste al agua");

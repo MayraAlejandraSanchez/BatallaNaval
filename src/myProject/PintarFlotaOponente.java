@@ -1,6 +1,8 @@
 package myProject;
 
 import javax.swing.*;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class PintarFlotaOponente {
     private PanelTableroOponente panelTableroOponente;
@@ -12,6 +14,8 @@ public class PintarFlotaOponente {
     private int casillasUsadasSubmarino;
     private int casillasUsadasDestructor;
     private int casillasUsadasFragata;
+    private int barcoUsado;
+    private ArrayList<Integer> casillasUsadasBarco; // casillas usadas por cada barco
 
     // Constructor
     public PintarFlotaOponente(PanelTableroOponente _panelTableroOponente){
@@ -24,6 +28,8 @@ public class PintarFlotaOponente {
         casillasUsadasSubmarino = 3;
         casillasUsadasDestructor = 2;
         casillasUsadasFragata = 1;
+        barcoUsado = 1;
+        casillasUsadasBarco = new ArrayList<>();
     }
 
     public String pathImages(String barco, int estadoOrientacion, int estadoSentidoOrientacion){
@@ -51,21 +57,84 @@ public class PintarFlotaOponente {
         return path;
     }
 
-    public void relacionJLabelBarco(JLabel casilla, String barco){
-        Integer aux = 0;
-        if(barco == "portavion"){
-            panelTableroOponente.getCasillaBarco().put(casilla, casillasUsadasPortavion);
+    // Relaciona con un map la casilla y la cantidad de casillas que usa el barco ingresado
+    public void relacionJLabelBarco(JLabel casilla, String barco, int numeroBarco){
+        //Integer aux = numeroBarco-1;
+        if(barco.equals("portavion" + String.valueOf(numeroBarco)) /*&& num == numeroBarco*/){
+            casillasUsadasBarco.add(4);
+            System.out.println("El tamaño es " + casillasUsadasBarco.size());
+            System.out.println("barcoUsado es " + barcoUsado);
+            panelTableroOponente.getCasillaBarco().put(casilla, casillasUsadasBarco.get(casillasUsadasBarco.size()-1));
+            System.out.println(barco);
+            System.out.println(panelTableroOponente.getCasillaBarco().get(casilla));
+            System.out.println(panelTableroOponente.getCasillaBarco().size());
         }else{
-            if(barco == "submarino"){
-                panelTableroOponente.getCasillaBarco().put(casilla, casillasUsadasSubmarino);
+            if(barco.equals("submarino" + String.valueOf(numeroBarco)) /*&& num == numeroBarco*/){
+                casillasUsadasBarco.add(3);
+                System.out.println("El tamaño es " + casillasUsadasBarco.size());
+                System.out.println("barcoUsado es " + barcoUsado);
+                panelTableroOponente.getCasillaBarco().put(casilla, casillasUsadasBarco.get(casillasUsadasBarco.size()-1));
+                System.out.println(barco);
+                System.out.println(panelTableroOponente.getCasillaBarco().get(casilla));
+                System.out.println(panelTableroOponente.getCasillaBarco().size());
             }else{
-                if(barco == "destructor"){
-                    panelTableroOponente.getCasillaBarco().put(casilla, casillasUsadasDestructor);
+                if(barco.equals("destructor" + String.valueOf(numeroBarco)) /*&& num == numeroBarco*/){
+                    casillasUsadasBarco.add(2);
+                    System.out.println("El tamaño es " + casillasUsadasBarco.size());
+                    System.out.println("barcoUsado es " + barcoUsado);
+                    panelTableroOponente.getCasillaBarco().put(casilla, casillasUsadasBarco.get(casillasUsadasBarco.size()-1));
+                    System.out.println(barco);
+                    System.out.println(panelTableroOponente.getCasillaBarco().get(casilla));
+                    System.out.println(panelTableroOponente.getCasillaBarco().size());
                 }else{
-                    panelTableroOponente.getCasillaBarco().put(casilla, casillasUsadasFragata);
+                    if(barco.equals("fragata" + String.valueOf(numeroBarco)) /*&& num == numeroBarco*/){
+                        casillasUsadasBarco.add(1);
+                        System.out.println("El tamaño es " + casillasUsadasBarco.size());
+                        System.out.println("barcoUsado es " + barcoUsado);
+                        panelTableroOponente.getCasillaBarco().put(casilla, casillasUsadasBarco.get(casillasUsadasBarco.size()-1));
+                        System.out.println(barco);
+                        System.out.println(panelTableroOponente.getCasillaBarco().get(casilla));
+                        System.out.println(panelTableroOponente.getCasillaBarco().size());
+                    }
                 }
             }
         }
+        /*
+        for(int num=1; num < 11; num++){
+            if(barco.equals("portavion" + String.valueOf(numeroBarco)) && num == numeroBarco){
+                casillasUsadasBarco.add(4);
+                System.out.println("El tamaño es " + casillasUsadasBarco.size());
+                System.out.println("barcoUsado es " + barcoUsado);
+                panelTableroOponente.getCasillaBarco().put(casilla, casillasUsadasBarco.get(casillasUsadasBarco.size()-1));
+                break;
+            }else{
+                if(barco.equals("submarino" + String.valueOf(numeroBarco)) && num == numeroBarco){
+                    casillasUsadasBarco.add(3);
+                    System.out.println("El tamaño es " + casillasUsadasBarco.size());
+                    System.out.println("barcoUsado es " + barcoUsado);
+                    panelTableroOponente.getCasillaBarco().put(casilla, casillasUsadasBarco.get(casillasUsadasBarco.size()-1));
+                    break;
+                }else{
+                    if(barco.equals("destructor" + String.valueOf(numeroBarco)) && num == numeroBarco){
+                        casillasUsadasBarco.add(2);
+                        System.out.println("El tamaño es " + casillasUsadasBarco.size());
+                        System.out.println("barcoUsado es " + barcoUsado);
+                        panelTableroOponente.getCasillaBarco().put(casilla, casillasUsadasBarco.get(casillasUsadasBarco.size()-1));
+                        break;
+                    }else{
+                        if(barco.equals("fragata" + String.valueOf(numeroBarco)) && num == numeroBarco){
+                            casillasUsadasBarco.add(1);
+                            System.out.println("El tamaño es " + casillasUsadasBarco.size());
+                            System.out.println("barcoUsado es " + barcoUsado);
+                            panelTableroOponente.getCasillaBarco().put(casilla, casillasUsadasBarco.get(casillasUsadasBarco.size()-1));
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+         */
     }
 
     public boolean funcionesFlota(String barco, int estadoOrientacion, int estadoSentidoOrientacion, int col, int row){
@@ -116,15 +185,16 @@ public class PintarFlotaOponente {
                         for(int pic=col; pic < col+casillasAUsar; pic++){
                             panelTableroOponente.getMatrizPosicion()[row][pic].setIcon(new ImageIcon(getClass().getResource(pathImages(barco, estadoOrientacion, estadoSentidoOrientacion) + String.valueOf(nextImage) + ".png")));
                             panelTableroOponente.getCasillasOcupadas().put(panelTableroOponente.getMatrizPosicion()[row][pic], 1);
-                            relacionJLabelBarco(panelTableroOponente.getMatrizPosicion()[row][pic], barco);
-                            panelTableroOponente.getCasillaNombreBarco().put(panelTableroOponente.getMatrizPosicion()[row][pic], barco);
+                            panelTableroOponente.getCasillaNombreBarco().put(panelTableroOponente.getMatrizPosicion()[row][pic], barco + String.valueOf(barcoUsado));
+                            relacionJLabelBarco(panelTableroOponente.getMatrizPosicion()[row][pic], barco + String.valueOf(barcoUsado), barcoUsado);
                             nextImage++;
                             auxiliar = true;
                         }
+                        barcoUsado++;
                     }else{
                         System.out.println("Oye, No se puede colocar aqui");
                         System.out.println(col);
-                        System.out.println("Casillas usadas es " + casillasUsadas);
+                        //System.out.println("Casillas usadas es " + casillasUsadas);
                     }
                 }else{
                     nextImage = casillasAUsar;
@@ -138,15 +208,16 @@ public class PintarFlotaOponente {
                         for(int pic=col; pic > col-casillasAUsar; pic--){
                             panelTableroOponente.getMatrizPosicion()[row][pic].setIcon(new ImageIcon(getClass().getResource(pathImages(barco, estadoOrientacion, estadoSentidoOrientacion) + String.valueOf(nextImage) + ".png")));
                             panelTableroOponente.getCasillasOcupadas().put(panelTableroOponente.getMatrizPosicion()[row][pic], 1);
-                            relacionJLabelBarco(panelTableroOponente.getMatrizPosicion()[row][pic], barco);
-                            panelTableroOponente.getCasillaNombreBarco().put(panelTableroOponente.getMatrizPosicion()[row][pic], barco);
+                            panelTableroOponente.getCasillaNombreBarco().put(panelTableroOponente.getMatrizPosicion()[row][pic], barco + String.valueOf(barcoUsado));
+                            relacionJLabelBarco(panelTableroOponente.getMatrizPosicion()[row][pic], barco + String.valueOf(barcoUsado), barcoUsado);
                             nextImage--;
                             auxiliar = true;
                         }
+                        barcoUsado++;
                     }else{
                         System.out.println("Oye, No se puede colocar aqui");
                         System.out.println(col);
-                        System.out.println("Casillas usadas es " + casillasUsadas);
+                        //System.out.println("Casillas usadas es " + casillasUsadas);
                     }
                 }
             }
@@ -176,15 +247,16 @@ public class PintarFlotaOponente {
                         for(int pic=row; pic < row+casillasAUsar; pic++){
                             panelTableroOponente.getMatrizPosicion()[pic][col].setIcon(new ImageIcon(getClass().getResource(pathImages(barco, estadoOrientacion, estadoSentidoOrientacion) + String.valueOf(nextImage) + ".png")));
                             panelTableroOponente.getCasillasOcupadas().put(panelTableroOponente.getMatrizPosicion()[pic][col], 1);
-                            relacionJLabelBarco(panelTableroOponente.getMatrizPosicion()[row][pic], barco);
-                            panelTableroOponente.getCasillaNombreBarco().put(panelTableroOponente.getMatrizPosicion()[pic][col], barco);
+                            panelTableroOponente.getCasillaNombreBarco().put(panelTableroOponente.getMatrizPosicion()[pic][col], barco + String.valueOf(barcoUsado));
+                            relacionJLabelBarco(panelTableroOponente.getMatrizPosicion()[pic][col], barco + String.valueOf(barcoUsado), barcoUsado);
                             nextImage++;
                             auxiliar = true;
                         }
+                        barcoUsado++;
                     }else{
                         System.out.println("Oye, No se puede colocar aqui");
                         System.out.println(row);
-                        System.out.println("Casillas usadas es " + casillasUsadas);
+                        //System.out.println("Casillas usadas es " + casillasUsadas);
                     }
                 }else{
                     nextImage = casillasAUsar;
@@ -198,15 +270,16 @@ public class PintarFlotaOponente {
                         for(int pic=row; pic > row-casillasAUsar; pic--){
                             panelTableroOponente.getMatrizPosicion()[pic][col].setIcon(new ImageIcon(getClass().getResource(pathImages(barco, estadoOrientacion, estadoSentidoOrientacion) + String.valueOf(nextImage) + ".png")));
                             panelTableroOponente.getCasillasOcupadas().put(panelTableroOponente.getMatrizPosicion()[pic][col], 1);
-                            relacionJLabelBarco(panelTableroOponente.getMatrizPosicion()[row][pic], barco);
-                            panelTableroOponente.getCasillaNombreBarco().put(panelTableroOponente.getMatrizPosicion()[pic][col], barco);
+                            panelTableroOponente.getCasillaNombreBarco().put(panelTableroOponente.getMatrizPosicion()[pic][col], barco + String.valueOf(barcoUsado));
+                            relacionJLabelBarco(panelTableroOponente.getMatrizPosicion()[pic][col], barco + String.valueOf(barcoUsado), barcoUsado);
                             nextImage--;
                             auxiliar = true;
                         }
+                        barcoUsado++;
                     }else{
                         System.out.println("Oye, No se puede colocar aqui");
                         System.out.println(row);
-                        System.out.println("Casillas usadas es " + casillasUsadas);
+                        //System.out.println("Casillas usadas es " + casillasUsadas);
                     }
                 }
             }
@@ -214,20 +287,63 @@ public class PintarFlotaOponente {
         return auxiliar;
     }
 
-    public void reducirCasillasUsadas(int barco){
-        if(barco == 4){
-            casillasUsadasPortavion--;
+    public void reducirCasillasUsadas(String barco, int numeroBarco){
+        if(barco.equals("portavion" + String.valueOf(numeroBarco)) /*&& num == numeroBarco*/){
+            for (int row = 1; row < 11; row++) {
+                for (int col = 1; col < 11; col++) {
+                    if(panelTableroOponente.getCasillaNombreBarco().get(panelTableroOponente.getMatrizPosicion()[row][col]) != null){
+                        if(panelTableroOponente.getCasillaNombreBarco().get(panelTableroOponente.getMatrizPosicion()[row][col]).equals(barco)){
+
+                        }
+                        //panelTableroOponente.getCasillaBarco().replace(panelTableroOponente.getMatrizPosicion()[row][col], panelTableroOponente.getCasillaBarco().get();
+                    }
+                }
+            }
+            casillasUsadasBarco.set(numeroBarco-1, casillasUsadasBarco.get(numeroBarco-1)-1);
         }else{
-            if(barco == 3){
-                casillasUsadasSubmarino--;
+            if(barco.equals("submarino" + String.valueOf(numeroBarco)) /*&& num == numeroBarco*/){
+                casillasUsadasBarco.set(numeroBarco-1, casillasUsadasBarco.get(numeroBarco-1)-1);
             }else{
-                if(barco == 2){
-                    casillasUsadasDestructor--;
+                if(barco.equals("destructor" + String.valueOf(numeroBarco)) /*&& num == numeroBarco*/){
+                    casillasUsadasBarco.set(numeroBarco-1, casillasUsadasBarco.get(numeroBarco-1)-1);
                 }else{
-                    casillasUsadasFragata--;
+                    if(barco.equals("fragata" + String.valueOf(numeroBarco)) /*&& num == numeroBarco*/){
+                        casillasUsadasBarco.set(numeroBarco-1, casillasUsadasBarco.get(numeroBarco-1)-1);
+                    }
                 }
             }
         }
+    }
+
+    // Retorna la cantidad de casillas usadas por el barco ingresado
+    public int getCasillasUsadas(String barco, int numeroBarco) {
+        int casillas = 0;
+        for(int num=1; num <11; num++){
+            if(barco.equals("portavion" + String.valueOf(numeroBarco)) && num == numeroBarco){
+                casillas = casillasUsadasBarco.get(numeroBarco-1);
+                break;
+            }else{
+                if(barco.equals("submarino" + String.valueOf(numeroBarco)) && num == numeroBarco){
+                    casillas = casillasUsadasBarco.get(numeroBarco-1);
+                    break;
+                }else{
+                    if(barco.equals("destructor" + String.valueOf(numeroBarco)) && num == numeroBarco){
+                        casillas = casillasUsadasBarco.get(numeroBarco-1);
+                        //break;
+                    }else{
+                        if(barco.equals("fragata" + String.valueOf(numeroBarco)) && num == numeroBarco){
+                            casillas = casillasUsadasBarco.get(numeroBarco-1);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        return casillas;
+    }
+
+    public int getCasillasUsadasBarco(){
+        return casillasUsadasBarco.size();
     }
 
     // Retorna la cantidad de portaviones disponibles
@@ -273,45 +389,5 @@ public class PintarFlotaOponente {
     // Retorna la cantidad total de naves disponibles
     public int cantidadTotalNaves(){
         return cantidadPortavion + cantidadSubmarino + cantidadDestructor + cantidadFragata;
-    }
-
-    // Retorna la cantidad de casillas usadas por el portavion
-    public int getCasillasUsadasPortavion() {
-        return casillasUsadasPortavion;
-    }
-
-    // Retorna la cantidad de casillas usadas por el submarino
-    public int getCasillasUsadasSubmarino() {
-        return casillasUsadasSubmarino;
-    }
-
-    // Retorna la cantidad de casillas usadas por el destructor
-    public int getCasillasUsadasDestructor() {
-        return casillasUsadasDestructor;
-    }
-
-    // Retorna la cantidad de casillas usadas por la fragata
-    public int getCasillasUsadasFragata() {
-        return casillasUsadasFragata;
-    }
-
-    // Cambia la cantidad de casillas usadas por el portavion
-    public void setCasillasUsadasPortavion(){
-        casillasUsadasPortavion--;
-    }
-
-    // Cambia la cantidad de casillas usadas por el submarino
-    public void setCasillasUsadasSubmarino(){
-        casillasUsadasSubmarino--;
-    }
-
-    // Cambia la cantidad de casillas usadas por el destructor
-    public void setCasillasUsadasDestructor(){
-        casillasUsadasDestructor--;
-    }
-
-    // Cambia la cantidad de casillas usadas por la fragata
-    public void setCasillasUsadasFragata(){
-        casillasUsadasFragata--;
     }
 }

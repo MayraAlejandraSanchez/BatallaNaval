@@ -9,6 +9,7 @@ public class Combate {
         this.panelTableroOponente = _panelTableroOponente;
     }
 
+    // Busca las casillas ocupadas por naves del tablero del oponente y las marca en el tablero principal del usuario
     public void UsuarioVsOponente(){
         for(int row = 1; row < 11; row++) {
             for (int col = 1; col < 11; col++) {
