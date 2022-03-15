@@ -57,7 +57,7 @@ public class PanelTableroOponente extends JPanel {
                         if(row > 0 && col == 0){
                             tableroPosicionOponente.getMatriz()[row][col] = new JLabel(String.valueOf(row), SwingConstants.CENTER);
                         }else{
-                            tableroPosicionOponente.getMatriz()[row][col] = new JLabel(new ImageIcon(getClass().getResource("/recursos/enemy.png")), SwingConstants.CENTER);
+                            tableroPosicionOponente.getMatriz()[row][col] = new JLabel(new ImageIcon(getClass().getResource("/recursos/mar.jpg")), SwingConstants.CENTER);
                         }
                     }
                 }
