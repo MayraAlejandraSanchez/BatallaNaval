@@ -2,6 +2,7 @@ package myProject;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PanelTableroOponente extends JPanel {
@@ -82,7 +83,7 @@ public class PanelTableroOponente extends JPanel {
         return tableroPosicionOponente.getCasillasOcupadas();
     }
 
-    // Retorna el map casillaBarco de la clase Tableros
+    // Retorna la lista casillaBarco de la clase Tableros
     public HashMap getCasillaBarco(){
         return tableroPosicionOponente.getCasillaBarco();
     }
@@ -90,5 +91,10 @@ public class PanelTableroOponente extends JPanel {
     // Retorna el map casillaNombreBarco de la clase Tableros
     public HashMap getCasillaNombreBarco(){
         return tableroPosicionOponente.getCasillaNombreBarco();
+    }
+
+    // Retorna el objeto de la clase Tableros
+    public Tableros getTableroPosicionOponente(){
+        return tableroPosicionOponente;
     }
 }

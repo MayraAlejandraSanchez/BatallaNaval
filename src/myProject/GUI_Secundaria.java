@@ -103,32 +103,32 @@ public class GUI_Secundaria extends JFrame {
         Random filaAleatoria = new Random();
         int numFilaAleatoria = filaAleatoria.nextInt(10)+1;
 
-        if(numBarcoAleatorio == 1 &&  pintarFlotaOponente.getCantidadPortavion() > 0){
-            if(!pintarFlotaOponente.funcionesFlota(nombreBarco,numOrientacionAleatoria, numSentidoAleatorio, numColumnaAleatoria, numFilaAleatoria)){
+        if(numBarcoAleatorio == 1 &&  pintarFlotaOponente.getCantidadBarco("portavion") > 0){
+            if(!pintarFlotaOponente.funcionesFlota(nombreBarco, numOrientacionAleatoria, numSentidoAleatorio, numColumnaAleatoria, numFilaAleatoria)){
                 distribucionFlotaOponente();
             }else{
-                pintarFlotaOponente.setCantidadPortavion();
+                pintarFlotaOponente.setCantidadBarco("portavion");
             }
         }else{
-            if(numBarcoAleatorio == 2 &&  pintarFlotaOponente.getCantidadSubmarino() > 0){
+            if(numBarcoAleatorio == 2 &&  pintarFlotaOponente.getCantidadBarco("submarino") > 0){
                 if(!pintarFlotaOponente.funcionesFlota(nombreBarco,numOrientacionAleatoria, numSentidoAleatorio, numColumnaAleatoria, numFilaAleatoria)){
                     distribucionFlotaOponente();
                 }else{
-                    pintarFlotaOponente.setCantidadSubmarino();
+                    pintarFlotaOponente.setCantidadBarco("submarino");
                 }
             }else{
-                if(numBarcoAleatorio == 3 &&  pintarFlotaOponente.getCantidadDestructor() > 0){
+                if(numBarcoAleatorio == 3 &&  pintarFlotaOponente.getCantidadBarco("destructor") > 0){
                     if(!pintarFlotaOponente.funcionesFlota(nombreBarco,numOrientacionAleatoria, numSentidoAleatorio, numColumnaAleatoria, numFilaAleatoria)){
                         distribucionFlotaOponente();
                     }else{
-                        pintarFlotaOponente.setCantidadDestructor();
+                        pintarFlotaOponente.setCantidadBarco("destructor");
                     }
                 }else{
-                    if(numBarcoAleatorio == 4 &&  pintarFlotaOponente.getCantidadFragata() > 0){
+                    if(numBarcoAleatorio == 4 &&  pintarFlotaOponente.getCantidadBarco("fragata") > 0){
                         if(!pintarFlotaOponente.funcionesFlota(nombreBarco,numOrientacionAleatoria, numSentidoAleatorio, numColumnaAleatoria, numFilaAleatoria)){
                             distribucionFlotaOponente();
                         }else{
-                            pintarFlotaOponente.setCantidadFragata();
+                            pintarFlotaOponente.setCantidadBarco("fragata");
                         }
                     }
                 }
