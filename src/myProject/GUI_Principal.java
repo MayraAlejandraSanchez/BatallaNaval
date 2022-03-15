@@ -41,6 +41,7 @@ public class GUI_Principal extends JFrame {
     private GUI_Secundaria ventanaOponente;
     private int estadoJuego; // 1 seleccionar barco, 2 seleccionar orientacion del barco, 3 seleccionar sentido del barco, 4 colocar barco en el tablero, 5 combate
     private Combate combate;
+    private int contadorHundidos; // Contador de barcos hundidos
 
     /**
      * Constructor of GUI class
@@ -168,6 +169,8 @@ public class GUI_Principal extends JFrame {
 
         // Objeto para invocar funciones de combate
         combate = new Combate(panelTablero, ventanaOponente.getPanelTableroOponente());
+
+        contadorHundidos = 0;
     }
 
     /**
@@ -288,6 +291,7 @@ public class GUI_Principal extends JFrame {
         // Si no hay mas casillas ocupadas, el barco se hunde y se establecen las imagenes respectivas
         if(ventanaOponente.getPanelTableroOponente().getTableroPosicionOponente().getCasillaBarco().get(ventanaOponente.getPanelTableroOponente().getMatrizPosicion()[row][col]) == Integer.valueOf(0)){
             System.out.println("Barco hundido");
+            contadorHundidos++;
             for (int fil = 1; fil < 11; fil++) {
                 for (int colu = 1; colu < 11; colu++) {
                     if(ventanaOponente.getPanelTableroOponente().getCasillaNombreBarco().get(ventanaOponente.getPanelTableroOponente().getMatrizPosicion()[fil][colu]) != null){
@@ -302,6 +306,10 @@ public class GUI_Principal extends JFrame {
             }
         }else{
             System.out.println("Le diste a una nave");
+        }
+
+        if(contadorHundidos == 10){
+            System.out.println("Todos los barcos enemigos han sido hundidos, ganaste el juego");
         }
     }
 

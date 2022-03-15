@@ -2,7 +2,6 @@ package myProject;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PanelTableroOponente extends JPanel {
