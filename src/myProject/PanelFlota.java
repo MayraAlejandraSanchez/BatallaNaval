@@ -134,7 +134,6 @@ public class PanelFlota extends JPanel{
         gbc.gridheight = 1;
         this.add(explicacionBotones, gbc);
 
-
         // Flota
         blackline = BorderFactory.createLineBorder(Color.black);
         panelFlota = new JPanel();

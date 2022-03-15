@@ -1,7 +1,6 @@
 package myProject;
 
 import javax.swing.*;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Tableros {
@@ -19,7 +18,7 @@ public class Tableros {
     }
 
     // Reduce la cantidad de casillas ocupadas por los barcos para que sea hundido
-    public void reducirCasillasUsadas(String barco, int num){
+    public void reducirCasillasUsadas(String barco){
         for (int row = 1; row < 11; row++) {
             for (int col = 1; col < 11; col++) {
                 if(casillaNombreBarco.get(tablero[row][col]) != null){

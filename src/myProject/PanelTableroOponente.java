@@ -93,6 +93,7 @@ public class PanelTableroOponente extends JPanel {
         return tableroPosicionOponente.getCasillaNombreBarco();
     }
 
+    // Retorna el objeto de la clase Tableros
     public Tableros getTableroPosicionOponente(){
         return tableroPosicionOponente;
     }
