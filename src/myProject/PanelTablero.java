@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PanelTablero extends JPanel {
+
+    public static final String PATH ="/recursos/";
     private JPanel panelTableroPosicion, panelTableroPrincipal;
-    private JLabel nombreTableroPosicion, nombreTableroPrincipal;
+    private JLabel nombreTableroPosicion, nombreTableroPrincipal, imagenTiros;
     private Tableros tableroPosicion, tableroPrincipal;
     private String abecedario[];
 
@@ -66,6 +68,14 @@ public class PanelTablero extends JPanel {
         gbc.gridheight = 1;
         gbc.insets = new Insets(0,15,0,15);
         this.add(panelTableroPrincipal, gbc);
+
+        imagenTiros = new JLabel();
+        imagenTiros.setIcon(new ImageIcon(getClass().getResource(PATH + "tiros.png")));
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        this.add(imagenTiros, gbc);
     }
 
     public void modelTablero(){
