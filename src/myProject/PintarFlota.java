@@ -1,14 +1,17 @@
 package myProject;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class PintarFlota {
     private PanelTablero panelTablero;
+    private PanelFlota panelFlota;
     private int numBarco;
 
     // Constructor
-    public PintarFlota(PanelTablero _panelTablero){
+    public PintarFlota(PanelTablero _panelTablero, PanelFlota _panelFlota){
         this.panelTablero = _panelTablero;
+        this.panelFlota = _panelFlota;
         numBarco = 0; // cantidad de barcos desplegados
     }
 
@@ -70,7 +73,8 @@ public class PintarFlota {
 
             int ultimasCasillas = Math.abs(col - columnaReferencia);
             if(ultimasCasillas < casillasAUsar-1){
-                System.out.println("No hay espacio para colocar el portavion");
+                System.out.println("No hay espacio para colocar el " + barco);
+                panelFlota.getTextoInfoBarcos().setText("No hay espacio para colocar el " + barco);
                 System.out.println(col);
             }else{
                 if(estadoSentidoOrientacion == 3){
@@ -90,6 +94,7 @@ public class PintarFlota {
                         }
                     }else{
                         System.out.println("Oye, No se puede colocar aqui");
+                        panelFlota.getTextoInfoBarcos().setText("No hay espacio para colocar el " + barco);
                         System.out.println(col);
                         System.out.println("Casillas usadas es " + casillasUsadas);
                     }
@@ -110,6 +115,7 @@ public class PintarFlota {
                         }
                     }else{
                         System.out.println("Oye, No se puede colocar aqui");
+                        panelFlota.getTextoInfoBarcos().setText("No hay espacio para colocar el " + barco);
                         System.out.println(col);
                         System.out.println("Casillas usadas es " + casillasUsadas);
                     }
@@ -127,6 +133,7 @@ public class PintarFlota {
             int ultimasCasillas = Math.abs(row - filaReferencia);
             if(ultimasCasillas < casillasAUsar-1){
                 System.out.println("No hay espacio para colocar el portavion");
+                panelFlota.getTextoInfoBarcos().setText("No hay espacio para colocar el " + barco);
                 System.out.println(row);
             }else{
                 if(estadoSentidoOrientacion == 1){
@@ -146,6 +153,7 @@ public class PintarFlota {
                         }
                     }else{
                         System.out.println("Oye, No se puede colocar aqui");
+                        panelFlota.getTextoInfoBarcos().setText("No hay espacio para colocar el " + barco);
                         System.out.println(row);
                         System.out.println("Casillas usadas es " + casillasUsadas);
                     }
@@ -166,6 +174,7 @@ public class PintarFlota {
                         }
                     }else{
                         System.out.println("Oye, No se puede colocar aqui");
+                        panelFlota.getTextoInfoBarcos().setText("No hay espacio para colocar el " + barco);
                         System.out.println(row);
                         System.out.println("Casillas usadas es " + casillasUsadas);
                     }

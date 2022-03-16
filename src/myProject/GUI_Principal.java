@@ -136,7 +136,7 @@ public class GUI_Principal extends JFrame {
         // JComponents de la parte central
         // Tablero
         panelTablero = new PanelTablero();
-        pintarFlota = new PintarFlota(panelTablero);
+        pintarFlota = new PintarFlota(panelTablero, panelFlota);
         panelEste.add(panelTablero);
 
         // Flota
@@ -284,8 +284,8 @@ public class GUI_Principal extends JFrame {
     // Identifica si hay un barco en la casilla del tablero principal para hundirlo
     public void funcionesCombate(int row, int col, String barco){
         // Establece una imagen a la casilla seleccionada del tablero principal del usuario y del tablero posicion del oponente si un barco fue tocado
-        ventanaOponente.getPanelTableroOponente().getMatrizPosicion()[row][col].setIcon(new ImageIcon(getClass().getResource("/recursos/team.png")));
-        panelTablero.getMatrizPrincipal()[row][col].setIcon(new ImageIcon(getClass().getResource("/recursos/team.png")));
+        ventanaOponente.getPanelTableroOponente().getMatrizPosicion()[row][col].setIcon(new ImageIcon(getClass().getResource("/recursos/tocado.png")));
+        panelTablero.getMatrizPrincipal()[row][col].setIcon(new ImageIcon(getClass().getResource("/recursos/tocado.png")));
 
         // Reduce las casillas ocupadas del barco tocado para poder ser hundido
         ventanaOponente.getPanelTableroOponente().getTableroPosicionOponente().reducirCasillasUsadas(barco);
@@ -294,13 +294,14 @@ public class GUI_Principal extends JFrame {
         // Si no hay mas casillas ocupadas, el barco se hunde y se establecen las imagenes respectivas
         if(ventanaOponente.getPanelTableroOponente().getTableroPosicionOponente().getCasillaBarco().get(ventanaOponente.getPanelTableroOponente().getMatrizPosicion()[row][col]) == Integer.valueOf(0)){
             System.out.println("Barco hundido");
+            panelFlota.getTextoInfoBarcos().setText("Barco hundido");
             contadorHundidos++;
             for (int fil = 1; fil < 11; fil++) {
                 for (int colu = 1; colu < 11; colu++) {
                     if(ventanaOponente.getPanelTableroOponente().getCasillaNombreBarco().get(ventanaOponente.getPanelTableroOponente().getMatrizPosicion()[fil][colu]) != null){
                         if(ventanaOponente.getPanelTableroOponente().getCasillaNombreBarco().get(ventanaOponente.getPanelTableroOponente().getMatrizPosicion()[fil][colu]).equals(barco)){
-                            ventanaOponente.getPanelTableroOponente().getMatrizPosicion()[fil][colu].setIcon(new ImageIcon(getClass().getResource("/recursos/play.png")));
-                            panelTablero.getMatrizPrincipal()[fil][colu].setIcon(new ImageIcon(getClass().getResource("/recursos/play.png")));
+                            ventanaOponente.getPanelTableroOponente().getMatrizPosicion()[fil][colu].setIcon(new ImageIcon(getClass().getResource("/recursos/hundido.png")));
+                            panelTablero.getMatrizPrincipal()[fil][colu].setIcon(new ImageIcon(getClass().getResource("/recursos/hundido.png")));
                         }
                     }else{
                         continue;
@@ -309,10 +310,14 @@ public class GUI_Principal extends JFrame {
             }
         }else{
             System.out.println("Le diste a una nave");
+            panelFlota.getTextoInfoBarcos().setText("Le diste a una nave");
         }
 
         if(contadorHundidos == 10){
             System.out.println("Todos los barcos enemigos han sido hundidos, ganaste el juego");
+            panelFlota.getTextoInfoBarcos().setText("Todos los barcos enemigos han sido hundidos, ganaste el juego");
+            setEscuchaCasillasPrincipal("remover");
+
         }
     }
 
@@ -344,11 +349,13 @@ public class GUI_Principal extends JFrame {
                                             panelFlota.setCantidadPortavion();
                                             setEscuchaBotones("remover");
                                             System.out.println("Escoge si quieres ubicarlo vertical u horizontal");
+                                            panelFlota.getTextoInfoBarcos().setText("Escoge si quieres ubicarlo vertical u horizontal");
                                             setVerticalHorizontal("agregar");
                                             panelFlota.setNombreBoton("portavion");
                                             estadoJuego = 2;
                                         }else{
                                             System.out.println("No hay mas portaviones disponibles");
+                                            panelFlota.getTextoInfoBarcos().setText("No hay mas portaviones disponibles");
                                         }
                                     }else{
                                         if(e.getSource() == panelFlota.getBotonDestructor()){
@@ -356,11 +363,13 @@ public class GUI_Principal extends JFrame {
                                                 panelFlota.setCantidadDestructor();
                                                 setEscuchaBotones("remover");
                                                 System.out.println("Escoge si quieres ubicarlo vertical u horizontal");
+                                                panelFlota.getTextoInfoBarcos().setText("Escoge si quieres ubicarlo vertical u horizontal");
                                                 setVerticalHorizontal("agregar");
                                                 panelFlota.setNombreBoton("destructor");
                                                 estadoJuego = 2;
                                             }else{
                                                 System.out.println("No hay mas destructores disponibles");
+                                                panelFlota.getTextoInfoBarcos().setText("No hay mas destructores disponibles");
                                             }
                                         }else{
                                             if(e.getSource() == panelFlota.getBotonFragata()){
@@ -368,11 +377,13 @@ public class GUI_Principal extends JFrame {
                                                     panelFlota.setCantidadFragata();
                                                     setEscuchaBotones("remover");
                                                     System.out.println("Escoge si quieres ubicarlo vertical u horizontal");
+                                                    panelFlota.getTextoInfoBarcos().setText("Escoge si quieres ubicarlo vertical u horizontal");
                                                     setVerticalHorizontal("agregar");
                                                     panelFlota.setNombreBoton("fragata");
                                                     estadoJuego = 2;
                                                 }else{
                                                     System.out.println("No hay mas fragatas disponibles");
+                                                    panelFlota.getTextoInfoBarcos().setText("No hay mas fragatas disponibles");
                                                 }
                                             }else{
                                                 if(e.getSource() == panelFlota.getBotonSubmarino()){
@@ -380,11 +391,13 @@ public class GUI_Principal extends JFrame {
                                                         panelFlota.setCantidadSubmarino();
                                                         setEscuchaBotones("remover");
                                                         System.out.println("Escoge si quieres ubicarlo vertical u horizontal");
+                                                        panelFlota.getTextoInfoBarcos().setText("Escoge si quieres ubicarlo vertical u horizontal");
                                                         setVerticalHorizontal("agregar");
                                                         panelFlota.setNombreBoton("submarino");
                                                         estadoJuego = 2;
                                                     }else{
                                                         System.out.println("No hay mas submarinos disponibles");
+                                                        panelFlota.getTextoInfoBarcos().setText("No hay mas submarinos disponibles");
                                                     }
                                                 }
                                             }
@@ -394,14 +407,16 @@ public class GUI_Principal extends JFrame {
                                 case 2:
                                     if(e.getSource() == panelFlota.getBotonVertical()){
                                         setVerticalHorizontal("remover");
-                                        System.out.println("Escoge cuál sentido quieres usar");
+                                        System.out.println("Escoge cual sentido quieres usar");
+                                        panelFlota.getTextoInfoBarcos().setText("Escoge cual sentido quieres usar");
                                         setOrientacionSentidoVertical("agregar");
                                         panelFlota.setOrientacion(0);
                                         estadoJuego = 3;
                                     }else{
                                         if(e.getSource() == panelFlota.getBotonHorizontal()){
                                             setVerticalHorizontal("remover");
-                                            System.out.println("Escoge cuál sentido quieres usar");
+                                            System.out.println("Escoge cual sentido quieres usar");
+                                            panelFlota.getTextoInfoBarcos().setText("Escoge cual sentido quieres usar");
                                             setOrientacionSentidoHorizontal("agregar");
                                             panelFlota.setOrientacion(1);
                                             estadoJuego = 3;
@@ -412,6 +427,7 @@ public class GUI_Principal extends JFrame {
                                     if(e.getSource() == panelFlota.getBotonSup_inf()){
                                         setOrientacionSentidoVertical("remover");
                                         System.out.println("Selecciona la casilla en la que quieres ubicar la nave");
+                                        panelFlota.getTextoInfoBarcos().setText("Selecciona la casilla en la que quieres ubicar la nave");
                                         setEscuchaCasillas("agregar");
                                         panelFlota.setSentidoOrientacion(1);
                                         estadoJuego = 4;
@@ -419,6 +435,7 @@ public class GUI_Principal extends JFrame {
                                         if(e.getSource() == panelFlota.getBotonInf_sup()){
                                             setOrientacionSentidoVertical("remover");
                                             System.out.println("Selecciona la casilla en la que quieres ubicar la nave");
+                                            panelFlota.getTextoInfoBarcos().setText("Selecciona la casilla en la que quieres ubicar la nave");
                                             setEscuchaCasillas("agregar");
                                             panelFlota.setSentidoOrientacion(2);
                                             estadoJuego = 4;
@@ -426,6 +443,7 @@ public class GUI_Principal extends JFrame {
                                             if(e.getSource() == panelFlota.getBotonIzq_der()){
                                                 setOrientacionSentidoHorizontal("remover");
                                                 System.out.println("Selecciona la casilla en la que quieres ubicar la nave");
+                                                panelFlota.getTextoInfoBarcos().setText("Selecciona la casilla en la que quieres ubicar la nave");
                                                 setEscuchaCasillas("agregar");
                                                 panelFlota.setSentidoOrientacion(3);
                                                 estadoJuego = 4;
@@ -433,6 +451,7 @@ public class GUI_Principal extends JFrame {
                                                 if(e.getSource() == panelFlota.getBotonDer_izq()){
                                                     setOrientacionSentidoHorizontal("remover");
                                                     System.out.println("Selecciona la casilla en la que quieres ubicar la nave");
+                                                    panelFlota.getTextoInfoBarcos().setText("Selecciona la casilla en la que quieres ubicar la nave");
                                                     setEscuchaCasillas("agregar");
                                                     panelFlota.setSentidoOrientacion(4);
                                                     estadoJuego = 4;
@@ -461,11 +480,13 @@ public class GUI_Principal extends JFrame {
                                     if(panelFlota.cantidadTotalNaves() > 0){
                                         setEscuchaCasillas("remover");
                                         System.out.println("Escoge otro barco");
+                                        panelFlota.getTextoInfoBarcos().setText("Escoge otro barco");
                                         setEscuchaBotones("agregar");
                                         estadoJuego = 1;
                                     }else{
                                         setEscuchaCasillas("remover");
                                         System.out.println("El combate comienza");
+                                        panelFlota.getTextoInfoBarcos().setText("El combate comienza");
                                         combate.UsuarioVsOponente();
                                         setEscuchaCasillasPrincipal("agregar");
                                         estadoJuego = 5;
@@ -512,6 +533,9 @@ public class GUI_Principal extends JFrame {
                                     }
                                 }else{
                                     System.out.println("Le diste al agua");
+                                    panelFlota.getTextoInfoBarcos().setText("Le diste al agua");
+                                    ventanaOponente.getPanelTableroOponente().getMatrizPosicion()[row][col].setIcon(new ImageIcon(getClass().getResource("/recursos/agua.png")));
+                                    panelTablero.getMatrizPrincipal()[row][col].setIcon(new ImageIcon(getClass().getResource("/recursos/agua.png")));
                                 }
                                 auxiliar = 1;
                                 break;

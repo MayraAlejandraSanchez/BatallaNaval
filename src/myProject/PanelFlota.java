@@ -154,18 +154,18 @@ public class PanelFlota extends JPanel{
         this.add(panelFlota, gbc);
 
         // Texto bajo flota
-        infojuego = new JPanel();
-        /*textoInfoBarcos = new JTextArea();
+        infojuego = new JPanel(new GridBagLayout());
+        textoInfoBarcos = new JTextArea();
         textoInfoBarcos= new JTextArea(4,5);
-        textoInfoBarcos.setText(INFO);
+        textoInfoBarcos.setText("Selecciona la nave que quieres desplegar");
         textoInfoBarcos.setEditable(false);
-        textoInfoBarcos.setBackground(Color.CYAN);*/
+        textoInfoBarcos.setBackground(Color.CYAN);
         infojuego.setPreferredSize(new Dimension(350,100));
         infojuego.setBackground(Color.cyan);
         tituloInfo = BorderFactory.createTitledBorder(blackline, "Información del juego");
         tituloInfo.setTitleJustification(TitledBorder.CENTER);
         infojuego.setBorder(tituloInfo);
-        //infojuego.add(textoInfoBarcos);
+        infojuego.add(textoInfoBarcos);
         gbc.gridx = 0;
         gbc.gridy = 4;
         gbc.gridwidth = 1;
@@ -318,5 +318,10 @@ public class PanelFlota extends JPanel{
     // Retorna la cantidad total de naves disponibles
     public int cantidadTotalNaves(){
         return cantidadPortavion + cantidadSubmarino + cantidadDestructor + cantidadFragata;
+    }
+
+    // Retorna el JTextArea para editarlo
+    public JTextArea getTextoInfoBarcos(){
+        return textoInfoBarcos;
     }
 }
