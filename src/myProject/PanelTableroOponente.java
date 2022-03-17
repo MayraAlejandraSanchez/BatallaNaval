@@ -71,27 +71,6 @@ public class PanelTableroOponente extends JPanel {
         }
     }
 
-    // Retorna la matriz posicion de la clase Tableros
-    public JLabel[][] getMatrizPosicion(){
-        return tableroPosicionOponente.getMatriz();
-    }
-
-
-    // Retorna el Map casillasOcupadas de la clase Tableros
-    public HashMap getCasillasOcupadas(){
-        return tableroPosicionOponente.getCasillasOcupadas();
-    }
-
-    // Retorna la lista casillaBarco de la clase Tableros
-    public HashMap getCasillaBarco(){
-        return tableroPosicionOponente.getCasillaBarco();
-    }
-
-    // Retorna el map casillaNombreBarco de la clase Tableros
-    public HashMap getCasillaNombreBarco(){
-        return tableroPosicionOponente.getCasillaNombreBarco();
-    }
-
     // Retorna el objeto de la clase Tableros
     public Tableros getTableroPosicionOponente(){
         return tableroPosicionOponente;

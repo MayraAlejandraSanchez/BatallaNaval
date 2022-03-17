@@ -13,7 +13,7 @@ public class Combate {
     public void UsuarioVsOponente(){
         for(int row = 1; row < 11; row++) {
             for (int col = 1; col < 11; col++) {
-                if(panelTableroOponente.getCasillasOcupadas().get(panelTableroOponente.getMatrizPosicion()[row][col]) == Integer.valueOf(1)){
+                if(panelTableroOponente.getTableroPosicionOponente().getCasillasOcupadas().get(panelTableroOponente.getTableroPosicionOponente().getMatriz()[row][col]) == Integer.valueOf(1)){
                     panelTablero.getTablero("principal").getCasillasOcupadas().put(panelTablero.getTablero("principal").getMatriz()[row][col], 1);
                 }
             }
