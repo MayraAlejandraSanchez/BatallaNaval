@@ -5,9 +5,9 @@ import java.util.HashMap;
 
 public class Tableros {
     private JLabel tablero[][];
-    private HashMap<JLabel, Integer> casillasOcupadas; // Verifica si la casilla esta ocupada por una nave
+    private HashMap<JLabel, Integer> casillasOcupadas; // Verifica si la casilla esta ocupada por una nave, 1 si esta ocupado, 2 si fue atacado
     private HashMap<JLabel, Integer> casillaBarco; // Relacion entre la casilla y las casillas que usa la nave
-    private HashMap<JLabel, String> casillaNombreBarco; // Nombre de la nave ubicada en una casilla
+    private HashMap<JLabel, String> casillaNombreBarco; // Almacena el nombre del barco ubicado en la casilla
 
     // Constructor
     public Tableros(){
