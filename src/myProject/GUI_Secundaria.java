@@ -5,7 +5,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
-
+/**
+ * Clase GUI_Secundaria
+ * @autor Mayra Alejandra Sanchez - mayra.alejandra.sanchez@correounivalle.edu.co - 202040506
+ * @autor Brayan Stiven Sanchez - brayan.sanchez.leon@correounivalle.edu.co - 202043554
+ * @version 1.0.0 fecha 17/3/2022
+ */
 public class GUI_Secundaria extends JFrame {
     public static final String PATH = "/recursos/";
     private Header titulo;

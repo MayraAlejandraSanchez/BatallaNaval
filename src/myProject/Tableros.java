@@ -2,7 +2,12 @@ package myProject;
 
 import javax.swing.*;
 import java.util.HashMap;
-
+/**
+ * Clase Tableros
+ * @autor Mayra Alejandra Sanchez - mayra.alejandra.sanchez@correounivalle.edu.co - 202040506
+ * @autor Brayan Stiven Sanchez - brayan.sanchez.leon@correounivalle.edu.co - 202043554
+ * @version 1.0.0 fecha 17/3/2022
+ */
 public class Tableros {
     private JLabel tablero[][];
     private HashMap<JLabel, Integer> casillasOcupadas; // Verifica si la casilla esta ocupada por una nave

@@ -4,7 +4,12 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
-
+/**
+ * Clase PanelFlota
+ * @autor Mayra Alejandra Sanchez - mayra.alejandra.sanchez@correounivalle.edu.co - 202040506
+ * @autor Brayan Stiven Sanchez - brayan.sanchez.leon@correounivalle.edu.co - 202043554
+ * @version 1.0.0 fecha 17/3/2022
+ */
 public class PanelFlota extends JPanel{
     public static final String PATH ="/recursos/";
     private JButton portavion, destuctor, fragata, submarino, vertical, horizontal,sup_inf,inf_sup,izq_der,der_izq,explicacionBotones;
@@ -88,37 +93,43 @@ public class PanelFlota extends JPanel{
         // Botones de orientación
         vertical = new JButton("Vertical");
         vertical.setFont(new Font(Font.SERIF,Font.ROMAN_BASELINE,15));
-        vertical.setBackground(Color.YELLOW);
+        vertical.setBackground(new Color(255,0,128));
+        vertical.setForeground(Color.white);
         vertical.setFocusable(false);
         vertical.setBorder(null);
 
         horizontal = new JButton("Horizontal");
         horizontal.setFont(new Font(Font.SERIF,Font.ROMAN_BASELINE,15));
-        horizontal.setBackground(Color.green);
+        horizontal.setBackground(new Color(128,0,255));
+        horizontal.setForeground(Color.white);
         horizontal.setFocusable(false);
         horizontal.setBorder(null);
 
         sup_inf = new JButton("Superior-Inferior");
         sup_inf.setFont(new Font(Font.SERIF,Font.ROMAN_BASELINE,15));
-        sup_inf.setBackground(Color.orange);
+        sup_inf.setBackground(new Color(0,0,255));
+        sup_inf.setForeground(Color.white);
         sup_inf.setFocusable(false);
         sup_inf.setBorder(null);
 
         inf_sup = new JButton("Inferior-Superior");
         inf_sup.setFont(new Font(Font.SERIF,Font.ROMAN_BASELINE,15));
-        inf_sup.setBackground(Color.pink);
+        inf_sup.setBackground(new Color(255, 0, 255));
+        inf_sup.setForeground(Color.white);
         inf_sup.setFocusable(false);
         inf_sup.setBorder(null);
 
         izq_der = new JButton("Izquierda-Derecha");
         izq_der.setFont(new Font(Font.SERIF,Font.ROMAN_BASELINE,15));
-        izq_der.setBackground(Color.white);
+        izq_der.setBackground(new Color(0,0,255));
+        izq_der.setForeground(Color.white);
         izq_der.setFocusable(false);
         izq_der.setBorder(null);
 
         der_izq = new JButton("Derecha-Izquierda");
         der_izq.setFont(new Font(Font.SERIF,Font.ROMAN_BASELINE,15));
-        der_izq.setBackground(Color.magenta);
+        der_izq.setBackground(new Color(255, 0, 255));
+        der_izq.setForeground(Color.white);
         der_izq.setFocusable(false);
         der_izq.setBorder(null);
 
