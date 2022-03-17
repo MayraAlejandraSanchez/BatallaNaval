@@ -113,28 +113,16 @@ public class PanelTablero extends JPanel {
         }
     }
 
-    // Retorna la matriz posicion
-    public JLabel[][] getMatrizPosicion(){
-        return tableroPosicion.getMatriz();
-    }
-
-    // Retorna la matriz principal
-    public JLabel[][] getMatrizPrincipal(){
-        return tableroPrincipal.getMatriz();
-    }
-
-    // Retorna el Map casillasOcupadas de la matriz posicion
-    public HashMap getCasillasOcupadas(){
-        return tableroPosicion.getCasillasOcupadas();
-    }
-
-    // Retorna el map casillasOcupadas de la matriz principal
-    public HashMap getCasillasOcupadasPrincipal(){
-        return tableroPrincipal.getCasillasOcupadas();
-    }
-
-    // Retorna el map casillaBarco de la clase Tableros
-    public HashMap getCasillaBarco(){
-        return tableroPrincipal.getCasillaBarco();
+    // Retorna el tablero ingresado
+    public Tableros getTablero(String _tablero){
+        Tableros tablero = new Tableros();
+        if(_tablero.equals("posicion")){
+            tablero = tableroPosicion;
+        }else{
+            if(_tablero.equals("principal")){
+                tablero = tableroPrincipal;
+            }
+        }
+        return tablero;
     }
 }

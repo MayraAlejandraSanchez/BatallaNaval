@@ -123,7 +123,7 @@ public class PanelFlota extends JPanel{
         der_izq.setBorder(null);
 
         // Botón explicación de los botones de orientación
-        explicacionBotones = new JButton("Conoce cómo jugar");
+        explicacionBotones = new JButton("Conoce como jugar");
         explicacionBotones.setFont(new Font(Font.SERIF,Font.ROMAN_BASELINE,15));
         explicacionBotones.setBackground(Color.red);
         explicacionBotones.setFocusable(false);
@@ -208,49 +208,68 @@ public class PanelFlota extends JPanel{
 
     }
 
-    public JButton getBotonPortavion(){
-        return portavion;
+    // Retorna el boton del barco especificado
+    public JButton getBotonBarco(String barco){
+        JButton boton = new JButton();
+        if(barco.equals("portavion")){
+            boton = portavion;
+        }else{
+            if(barco.equals("submarino")){
+                boton = submarino;
+            }else{
+                if(barco.equals("destructor")){
+                    boton = destuctor;
+                }else{
+                    if(barco.equals("fragata")){
+                        boton = fragata;
+                    }
+                }
+            }
+        }
+        return boton;
     }
 
-    public JButton getBotonDestructor(){
-        return destuctor;
+    // Retorna el boton de orientacion especificado
+    public JButton getBotonOrientacion(String orientacion){
+        JButton boton = new JButton();
+        if(orientacion.equals("vertical")){
+            boton = vertical;
+        }else{
+            if(orientacion.equals("horizontal")){
+                boton = horizontal;
+            }
+        }
+        return boton;
     }
 
-    public JButton getBotonFragata(){
-        return fragata;
+
+    // Retorna el boton del sentido de la orientacion especificado
+    public JButton getBotonSentidoOrientacion(String sentido){
+        JButton boton = new JButton();
+        if(sentido.equals("sup_inf")){
+            boton = sup_inf;
+        }else{
+            if(sentido.equals("inf_sup")){
+                boton = inf_sup;
+            }else{
+                if(sentido.equals("izq_der")){
+                    boton = izq_der;
+                }else{
+                    if(sentido.equals("der_izq")){
+                        boton = der_izq;
+                    }
+                }
+            }
+        }
+        return boton;
     }
 
-    public JButton getBotonSubmarino(){
-        return submarino;
-    }
-
-    public JButton getBotonVertical(){
-        return vertical;
-    }
-
-    public JButton getBotonHorizontal(){
-        return horizontal;
-    }
-
-    public JButton getBotonSup_inf(){
-        return sup_inf;
-    }
-    public JButton getBotonInf_sup(){
-        return inf_sup;
-    }
-
-    public JButton getBotonIzq_der(){
-        return izq_der;
-    }
-
-    public JButton getBotonDer_izq(){
-        return der_izq;
-    }
-
+    // Guarda el nombre del boton presionado en un string
     public void setNombreBoton(String _nombreBoton){
         nombreBoton = _nombreBoton;
     }
 
+    // Retorna el nombre del barco que se presiono
     public String getNombreBoton(){
         return nombreBoton;
     }
@@ -275,44 +294,44 @@ public class PanelFlota extends JPanel{
         return sentidoOrientacion;
     }
 
-    // Reduce la cantidad de portaviones disponibles
-    public void setCantidadPortavion(){
-        cantidadPortavion--;
+    // Reduce la cantidad disponible del barco ingresado
+    public void setCantidadBarco(String barco){
+        if(barco.equals("portavion")){
+            cantidadPortavion--;
+        }else{
+            if(barco.equals("submarino")){
+                cantidadSubmarino--;
+            }else{
+                if(barco.equals("destructor")){
+                    cantidadDestructor--;
+                }else{
+                    if(barco.equals("fragata")){
+                        cantidadFragata--;
+                    }
+                }
+            }
+        }
     }
 
-    // Reduce la cantidad de submarinos disponibles
-    public void setCantidadSubmarino(){
-        cantidadSubmarino--;
-    }
-
-    // Reduce la cantidad de destructores disponibles
-    public void setCantidadDestructor(){
-        cantidadDestructor--;
-    }
-
-    // Reduce la cantidad de fragatas disponibles
-    public void setCantidadFragata(){
-        cantidadFragata--;
-    }
-
-    // Retorna la cantidad de portaviones disponibles
-    public int getCantidadPortavion(){
-        return cantidadPortavion;
-    }
-
-    // Retorna la cantidad de submarinos disponibles
-    public int getCantidadSubmarino(){
-        return cantidadSubmarino;
-    }
-
-    // Retorna la cantidad de destructores disponibles
-    public int getCantidadDestructor(){
-        return cantidadDestructor;
-    }
-
-    // Retorna la cantidad de fragatas disponibles
-    public int getCantidadFragata(){
-        return cantidadFragata;
+    // Retorna la cantidad disponible del barco ingresado
+    public int getCantidadBarco(String barco){
+        int cantidad = 0;
+        if(barco.equals("portavion")){
+            cantidad = cantidadPortavion;
+        }else{
+            if(barco.equals("submarino")){
+                cantidad = cantidadSubmarino;
+            }else{
+                if(barco.equals("destructor")){
+                    cantidad = cantidadDestructor;
+                }else{
+                    if(barco.equals("fragata")){
+                        cantidad = cantidadFragata;
+                    }
+                }
+            }
+        }
+        return cantidad;
     }
 
     // Retorna la cantidad total de naves disponibles
@@ -323,5 +342,10 @@ public class PanelFlota extends JPanel{
     // Retorna el JTextArea para editarlo
     public JTextArea getTextoInfoBarcos(){
         return textoInfoBarcos;
+    }
+
+    // Retorna el boton que explica la dinamica de los botones
+    public JButton getExplicacionBotones(){
+        return explicacionBotones;
     }
 }

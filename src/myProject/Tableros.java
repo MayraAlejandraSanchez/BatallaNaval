@@ -35,7 +35,7 @@ public class Tableros {
         return tablero;
     }
 
-    // Retorna el map csaillasOcupadas
+    // Retorna el map casillasOcupadas
     public HashMap getCasillasOcupadas(){
         return casillasOcupadas;
     }
