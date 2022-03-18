@@ -300,6 +300,7 @@ public class GUI_Principal extends JFrame {
         // Si no hay mas casillas ocupadas, el barco se hunde y se establecen las imagenes respectivas
         if(ventanaOponente.getPanelTableroOponente().getTableroOponente("posicion").getCasillaBarco().get(ventanaOponente.getPanelTableroOponente().getTableroOponente("posicion").getMatriz()[row][col]) == Integer.valueOf(0)){
             panelFlota.getTextoInfoBarcos().setText("Barco hundido");
+            estadoJuego = 5;
             contadorHundidos++;
             for (int fil = 1; fil < 11; fil++) {
                 for (int colu = 1; colu < 11; colu++) {
@@ -315,6 +316,7 @@ public class GUI_Principal extends JFrame {
             }
         }else{
             panelFlota.getTextoInfoBarcos().setText("Le diste a una nave");
+            estadoJuego = 5;
         }
 
         if(contadorHundidos == 10){
@@ -342,13 +344,6 @@ public class GUI_Principal extends JFrame {
                     JOptionPane.showMessageDialog(null,CREDITOS,"Créditos",JOptionPane.PLAIN_MESSAGE, team);
                 }else{
                     if(e.getSource() == comenzarPartida){
-                        /*
-                        if(estadoJuego == 6){
-                            ventanaOponente.oponenteVsUsuario();
-                            estadoJuego = 5;
-
-                        }
-                        */
 
                     }else{
                         if(e.getSource() == movimientosEnemigo){
@@ -358,12 +353,9 @@ public class GUI_Principal extends JFrame {
                                 JOptionPane.showMessageDialog(null,"","Como jugar",JOptionPane.PLAIN_MESSAGE, infoSentidos);
                             }else{
                                 if(estadoJuego == 6){
-                                    int contador = 0;
                                     if(e.getSource() == timer){
                                         ventanaOponente.oponenteVsUsuario();
-                                        estadoJuego = 5;
-                                        contador++;
-                                        if(contador == 1){
+                                        if(ventanaOponente.getEstado() == 0){
                                             timer.stop();
                                             estadoJuego = 5;
                                             panelFlota.getTextoInfoBarcos().setText("Tu turno");
@@ -549,11 +541,14 @@ public class GUI_Principal extends JFrame {
                                 }else{
                                     if(panelTablero.getTablero("principal").getCasillasOcupadas().get(panelTablero.getTablero("principal").getMatriz()[row][col]) == Integer.valueOf(2)){
                                         panelFlota.getTextoInfoBarcos().setText("Casilla usada, presiona otra");
+                                        estadoJuego = 5;
                                     }else{
                                         panelFlota.getTextoInfoBarcos().setText("Le diste al agua");
                                         panelTablero.getTablero("principal").getCasillasOcupadas().put(panelTablero.getTablero("principal").getMatriz()[row][col], Integer.valueOf(2));
                                         ventanaOponente.getPanelTableroOponente().getTableroOponente("posicion").getMatriz()[row][col].setIcon(new ImageIcon(getClass().getResource("/recursos/agua.png")));
                                         panelTablero.getTablero("principal").getMatriz()[row][col].setIcon(new ImageIcon(getClass().getResource("/recursos/agua.png")));
+                                        estadoJuego = 6;
+                                        timer.start();
                                     }
                                 }
                                 auxiliar = 1;
@@ -564,8 +559,8 @@ public class GUI_Principal extends JFrame {
                             break;
                         }
                     }
-                    estadoJuego = 6;
-                    timer.start();
+                    //estadoJuego = 6;
+                    //timer.start();
                     break;
             }
         }

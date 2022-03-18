@@ -20,6 +20,7 @@ public class GUI_Secundaria extends JFrame {
     private PintarFlotaOponente pintarFlotaOponente;
     private GUI_Principal guiPrincipal;
     private int contadorHundidos;
+    private int estado; // 1 si continua, de lo contrario 0
 
     public GUI_Secundaria(GUI_Principal _guiPrincipal) {
         this.guiPrincipal = _guiPrincipal;
@@ -110,12 +111,14 @@ public class GUI_Secundaria extends JFrame {
             }
         }else{
             if(panelTableroOponente.getTableroOponente("principal").getCasillasOcupadas().get(panelTableroOponente.getTableroOponente("principal").getMatriz()[row][col]) == Integer.valueOf(2)){
-                oponenteVsUsuario();
+                //oponenteVsUsuario();
+                estado = 1;
             }else{
                 //panelFlota.getTextoInfoBarcos().setText("Le diste al agua");
                 panelTableroOponente.getTableroOponente("principal").getCasillasOcupadas().put(panelTableroOponente.getTableroOponente("principal").getMatriz()[row][col], Integer.valueOf(2));
                 guiPrincipal.getPanelTablero().getTablero("posicion").getMatriz()[row][col].setIcon(new ImageIcon(getClass().getResource("/recursos/agua.png")));
                 panelTableroOponente.getTableroOponente("principal").getMatriz()[row][col].setIcon(new ImageIcon(getClass().getResource("/recursos/agua.png")));
+                estado = 0;
             }
         }
     }
@@ -132,6 +135,7 @@ public class GUI_Secundaria extends JFrame {
         // Si no hay mas casillas ocupadas, el barco se hunde y se establecen las imagenes respectivas
         if(guiPrincipal.getPanelTablero().getTablero("posicion").getCasillaBarco().get(guiPrincipal.getPanelTablero().getTablero("posicion").getMatriz()[row][col]) == Integer.valueOf(0)){
             contadorHundidos++;
+            estado = 1;
             for (int fil = 1; fil < 11; fil++) {
                 for (int colu = 1; colu < 11; colu++) {
                     if(guiPrincipal.getPanelTablero().getTablero("posicion").getCasillaNombreBarco().get(guiPrincipal.getPanelTablero().getTablero("posicion").getMatriz()[fil][colu]) != null){
@@ -143,10 +147,13 @@ public class GUI_Secundaria extends JFrame {
                     }
                 }
             }
+        }else{
+            estado = 1;
         }
 
         if(contadorHundidos == 10){
             System.out.println("Barcos del usuario hundidos");
+            estado = 0;
         }
     }
 
@@ -228,5 +235,10 @@ public class GUI_Secundaria extends JFrame {
     // Retorna el objeto para pintar la flota oponente
     public PintarFlotaOponente getPintarFlotaOponente(){
         return pintarFlotaOponente;
+    }
+
+    // Retorna la variable estado
+    public int getEstado(){
+        return estado;
     }
 }
