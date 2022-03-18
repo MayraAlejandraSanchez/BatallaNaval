@@ -2,7 +2,12 @@ package myProject;
 
 import javax.swing.*;
 import java.util.ArrayList;
-
+/**
+ * Clase PintarFlotaOponente
+ * @autor Mayra Alejandra Sanchez - mayra.alejandra.sanchez@correounivalle.edu.co - 202040506
+ * @autor Brayan Stiven Sanchez - brayan.sanchez.leon@correounivalle.edu.co - 202043554
+ * @version 1.0.0 fecha 17/3/2022
+ */
 public class PintarFlotaOponente {
     private PanelTableroOponente panelTableroOponente;
     private int cantidadPortavion; // Cantidad total de portaviones
