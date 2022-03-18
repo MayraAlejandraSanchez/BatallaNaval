@@ -104,7 +104,7 @@ public class PintarFlota {
 
             int ultimasCasillas = Math.abs(col - columnaReferencia);
             if(ultimasCasillas < casillasAUsar-1){
-                panelFlota.getTextoInfoBarcos().setText("No hay espacio para colocar el " + barco);
+                panelFlota.getInformacionJuego().setText("No hay espacio para colocar el " + barco);
             }else{
                 if(estadoSentidoOrientacion == 3){
                     nextImage = 1;
@@ -125,7 +125,7 @@ public class PintarFlota {
                         }
                         barcoUsado++;
                     }else{
-                        panelFlota.getTextoInfoBarcos().setText("No hay espacio para colocar el " + barco);
+                        panelFlota.getInformacionJuego().setText("No hay espacio para colocar el " + barco);
                     }
                 }else{
                     nextImage = casillasAUsar;
@@ -146,7 +146,7 @@ public class PintarFlota {
                         }
                         barcoUsado++;
                     }else{
-                        panelFlota.getTextoInfoBarcos().setText("No hay espacio para colocar el " + barco);
+                        panelFlota.getInformacionJuego().setText("No hay espacio para colocar el " + barco);
                     }
                 }
             }
@@ -161,7 +161,7 @@ public class PintarFlota {
 
             int ultimasCasillas = Math.abs(row - filaReferencia);
             if(ultimasCasillas < casillasAUsar-1){
-                panelFlota.getTextoInfoBarcos().setText("No hay espacio para colocar el " + barco);
+                panelFlota.getInformacionJuego().setText("No hay espacio para colocar el " + barco);
             }else{
                 if(estadoSentidoOrientacion == 1){
                     nextImage = 1;
@@ -182,7 +182,7 @@ public class PintarFlota {
                         }
                         barcoUsado++;
                     }else{
-                        panelFlota.getTextoInfoBarcos().setText("No hay espacio para colocar el " + barco);
+                        panelFlota.getInformacionJuego().setText("No hay espacio para colocar el " + barco);
                     }
                 }else{
                     nextImage = casillasAUsar;
@@ -203,7 +203,7 @@ public class PintarFlota {
                         }
                         barcoUsado++;
                     }else{
-                        panelFlota.getTextoInfoBarcos().setText("No hay espacio para colocar el " + barco);
+                        panelFlota.getInformacionJuego().setText("No hay espacio para colocar el " + barco);
                     }
                 }
             }

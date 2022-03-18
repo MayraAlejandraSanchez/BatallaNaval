@@ -111,10 +111,8 @@ public class GUI_Secundaria extends JFrame {
             }
         }else{
             if(panelTableroOponente.getTableroOponente("principal").getCasillasOcupadas().get(panelTableroOponente.getTableroOponente("principal").getMatriz()[row][col]) == Integer.valueOf(2)){
-                //oponenteVsUsuario();
                 estado = 1;
             }else{
-                //panelFlota.getTextoInfoBarcos().setText("Le diste al agua");
                 panelTableroOponente.getTableroOponente("principal").getCasillasOcupadas().put(panelTableroOponente.getTableroOponente("principal").getMatriz()[row][col], Integer.valueOf(2));
                 guiPrincipal.getPanelTablero().getTablero("posicion").getMatriz()[row][col].setIcon(new ImageIcon(getClass().getResource("/recursos/agua.png")));
                 panelTableroOponente.getTableroOponente("principal").getMatriz()[row][col].setIcon(new ImageIcon(getClass().getResource("/recursos/agua.png")));
@@ -152,7 +150,7 @@ public class GUI_Secundaria extends JFrame {
         }
 
         if(contadorHundidos == 10){
-            System.out.println("Barcos del usuario hundidos");
+            guiPrincipal.getPanelFlota().getInformacionJuego().setText("Tus barcos han sido hundidos, perdiste el juego");
             estado = 0;
         }
     }

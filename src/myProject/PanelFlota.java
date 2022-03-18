@@ -3,6 +3,9 @@ package myProject;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 import java.awt.*;
 /**
  * Clase PanelFlota
@@ -14,7 +17,8 @@ public class PanelFlota extends JPanel{
     public static final String PATH ="/recursos/";
     private JButton portavion, destuctor, fragata, submarino, vertical, horizontal,sup_inf,inf_sup,izq_der,der_izq,explicacionBotones;
     private JPanel panelFlota, infojuego, panelBotones, subpanelBotones, subpanelBotones2;
-    private JTextArea textoInfoBarcos;
+    private JLabel asignarTurno;
+    private JTextPane informacionJuego;
     private ImageIcon imageDestructor, imagePortavion, imageFragata, imageSubmarino;
     private TitledBorder tituloFlota,tituloInfo, titulo_Orientacion;
     private Border blackline;
@@ -165,18 +169,27 @@ public class PanelFlota extends JPanel{
         this.add(panelFlota, gbc);
 
         // Texto bajo flota
-        infojuego = new JPanel(new GridBagLayout());
-        textoInfoBarcos = new JTextArea();
-        textoInfoBarcos= new JTextArea(4,5);
-        textoInfoBarcos.setText("Selecciona la nave que quieres desplegar");
-        textoInfoBarcos.setEditable(false);
-        textoInfoBarcos.setBackground(Color.CYAN);
+        asignarTurno = new JLabel();
+        asignarTurno.setText("¡Es tu turno!");
+        asignarTurno.setHorizontalAlignment(SwingConstants.CENTER);
+
+        informacionJuego = new JTextPane();
+        informacionJuego.setText("Selecciona la nave que quieres desplegar");
+        informacionJuego.setEditable(false);
+        informacionJuego.setBackground(Color.cyan);
+        StyledDocument documentStyle = informacionJuego.getStyledDocument();
+        SimpleAttributeSet centerAttribute = new SimpleAttributeSet();
+        StyleConstants.setAlignment(centerAttribute, StyleConstants.ALIGN_CENTER);
+        documentStyle.setParagraphAttributes(0, documentStyle.getLength(), centerAttribute, false);
+
+        infojuego = new JPanel(new GridLayout(2,0,0,0));
         infojuego.setPreferredSize(new Dimension(350,100));
         infojuego.setBackground(Color.cyan);
         tituloInfo = BorderFactory.createTitledBorder(blackline, "Información del juego");
         tituloInfo.setTitleJustification(TitledBorder.CENTER);
         infojuego.setBorder(tituloInfo);
-        infojuego.add(textoInfoBarcos);
+        infojuego.add(asignarTurno);
+        infojuego.add(informacionJuego);
         gbc.gridx = 0;
         gbc.gridy = 4;
         gbc.gridwidth = 1;
@@ -350,9 +363,14 @@ public class PanelFlota extends JPanel{
         return cantidadPortavion + cantidadSubmarino + cantidadDestructor + cantidadFragata;
     }
 
-    // Retorna el JTextArea para editarlo
-    public JTextArea getTextoInfoBarcos(){
-        return textoInfoBarcos;
+    // Retorna el JTextPane para editar la informacion del juego
+    public JTextPane getInformacionJuego(){
+        return informacionJuego;
+    }
+
+    // Retorna el JLabel que edita el turno
+    public JLabel getAsignarTurno(){
+        return asignarTurno;
     }
 
     // Retorna el boton que explica la dinamica de los botones
