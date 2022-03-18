@@ -13,8 +13,12 @@ public class GUI_Secundaria extends JFrame {
     private ImageIcon enemyIcon;
     private PanelTableroOponente panelTableroOponente;
     private PintarFlotaOponente pintarFlotaOponente;
+    private GUI_Principal guiPrincipal;
+    private int contadorHundidos;
 
-    public GUI_Secundaria() {
+    public GUI_Secundaria(GUI_Principal _guiPrincipal) {
+        this.guiPrincipal = _guiPrincipal;
+        contadorHundidos = 0;
         initGUI_Secundaria();
 
         //Default JFrame configuration
@@ -64,6 +68,83 @@ public class GUI_Secundaria extends JFrame {
         enemyIcon = new ImageIcon(getClass().getResource(PATH+"enemy.png"));
         JLabel enemy = new JLabel(enemyIcon);
         panelSup.add(enemy,FlowLayout.CENTER);
+    }
+
+    public void oponenteVsUsuario(){
+        Random fila = new Random();
+        Random columna = new Random();
+
+        int row = fila.nextInt(10)+1;
+        int col = columna.nextInt(10)+1;
+
+        // Verifica si la casilla seleccionada hay un barco del usuario
+        if(panelTableroOponente.getTableroOponente("principal").getCasillasOcupadas().get(panelTableroOponente.getTableroOponente("principal").getMatriz()[row][col]) == Integer.valueOf(1)){
+            // Verifica si todas las casillas del barco fueron seleccionadas
+            if(guiPrincipal.getPanelTablero().getTablero("posicion").getCasillaBarco().get(guiPrincipal.getPanelTablero().getTablero("posicion").getMatriz()[row][col]) != Integer.valueOf(0)){
+                for(int num=1; num < 11; num++){
+                    if(guiPrincipal.getPanelTablero().getTablero("posicion").getCasillaNombreBarco().get(guiPrincipal.getPanelTablero().getTablero("posicion").getMatriz()[row][col]).equals("portavion" + String.valueOf(num))){
+                        funcionesCombate(row, col, "portavion" + String.valueOf(num));
+                        break;
+                    }else{
+                        if(guiPrincipal.getPanelTablero().getTablero("posicion").getCasillaNombreBarco().get(guiPrincipal.getPanelTablero().getTablero("posicion").getMatriz()[row][col]).equals("submarino" + String.valueOf(num))){
+                            funcionesCombate(row, col, "submarino" + String.valueOf(num));
+                            break;
+                        }else{
+                            if(guiPrincipal.getPanelTablero().getTablero("posicion").getCasillaNombreBarco().get(guiPrincipal.getPanelTablero().getTablero("posicion").getMatriz()[row][col]).equals("destructor" + String.valueOf(num))){
+                                funcionesCombate(row, col, "destructor" + String.valueOf(num));
+                                break;
+                            }else{
+                                if(guiPrincipal.getPanelTablero().getTablero("posicion").getCasillaNombreBarco().get(guiPrincipal.getPanelTablero().getTablero("posicion").getMatriz()[row][col]).equals("fragata" + String.valueOf(num))){
+                                    funcionesCombate(row, col, "fragata" + String.valueOf(num));
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }else{
+            if(panelTableroOponente.getTableroOponente("principal").getCasillasOcupadas().get(panelTableroOponente.getTableroOponente("principal").getMatriz()[row][col]) == Integer.valueOf(2)){
+                oponenteVsUsuario();
+                System.out.println("casilla usada");
+            }else{
+                //panelFlota.getTextoInfoBarcos().setText("Le diste al agua");
+                System.out.println("le diste al agua");
+                panelTableroOponente.getTableroOponente("principal").getCasillasOcupadas().put(panelTableroOponente.getTableroOponente("principal").getMatriz()[row][col], Integer.valueOf(2));
+                guiPrincipal.getPanelTablero().getTablero("posicion").getMatriz()[row][col].setIcon(new ImageIcon(getClass().getResource("/recursos/agua.png")));
+                panelTableroOponente.getTableroOponente("principal").getMatriz()[row][col].setIcon(new ImageIcon(getClass().getResource("/recursos/agua.png")));
+            }
+        }
+    }
+
+    // Identifica si hay un barco en la casilla del tablero principal para hundirlo
+    public void funcionesCombate(int row, int col, String barco){
+        // Establece una imagen a la casilla seleccionada del tablero posicion del usuario si un barco fue tocado
+        guiPrincipal.getPanelTablero().getTablero("posicion").getMatriz()[row][col].setIcon(new ImageIcon(getClass().getResource("/recursos/tocado.png")));
+        panelTableroOponente.getTableroOponente("principal").getCasillasOcupadas().replace(guiPrincipal.getPanelTablero().getTablero("posicion").getMatriz()[row][col], Integer.valueOf(2));
+
+        // Reduce las casillas ocupadas del barco tocado para poder ser hundido
+        guiPrincipal.getPanelTablero().getTablero("posicion").reducirCasillasUsadas(barco);
+
+        // Si no hay mas casillas ocupadas, el barco se hunde y se establecen las imagenes respectivas
+        if(guiPrincipal.getPanelTablero().getTablero("posicion").getCasillaBarco().get(guiPrincipal.getPanelTablero().getTablero("posicion").getMatriz()[row][col]) == Integer.valueOf(0)){
+            contadorHundidos++;
+            for (int fil = 1; fil < 11; fil++) {
+                for (int colu = 1; colu < 11; colu++) {
+                    if(guiPrincipal.getPanelTablero().getTablero("posicion").getCasillaNombreBarco().get(guiPrincipal.getPanelTablero().getTablero("posicion").getMatriz()[fil][colu]) != null){
+                        if(guiPrincipal.getPanelTablero().getTablero("posicion").getCasillaNombreBarco().get(guiPrincipal.getPanelTablero().getTablero("posicion").getMatriz()[fil][colu]).equals(barco)){
+                            guiPrincipal.getPanelTablero().getTablero("posicion").getMatriz()[fil][colu].setIcon(new ImageIcon(getClass().getResource("/recursos/hundido.png")));
+                        }
+                    }else{
+                        continue;
+                    }
+                }
+            }
+        }
+
+        if(contadorHundidos == 10){
+            System.out.println("Barcos del usuario hundidos");
+        }
     }
 
 

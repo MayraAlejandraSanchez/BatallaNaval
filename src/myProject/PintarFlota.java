@@ -2,17 +2,20 @@ package myProject;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class PintarFlota {
     private PanelTablero panelTablero;
     private PanelFlota panelFlota;
-    private int numBarco;
+    private int barcoUsado; // Acumulador para identificar cual nave ha sido desplegada (en orden del 1 al 10)
+    private ArrayList<Integer> casillasUsadasBarco; // casillas usadas por cada nave
 
     // Constructor
     public PintarFlota(PanelTablero _panelTablero, PanelFlota _panelFlota){
         this.panelTablero = _panelTablero;
         this.panelFlota = _panelFlota;
-        numBarco = 0; // cantidad de barcos desplegados
+        barcoUsado = 1;
+        casillasUsadasBarco = new ArrayList<>();
     }
 
     public String pathImages(String barco, int estadoOrientacion, int estadoSentidoOrientacion){
@@ -38,6 +41,29 @@ public class PintarFlota {
         }
 
         return path;
+    }
+
+    // Relaciona la casilla y la cantidad de casillas que usa el barco ingresado
+    public void relacionJLabelBarco(JLabel casilla, String barco, int numeroBarco){
+        if(barco.equals("portavion" + String.valueOf(numeroBarco))){
+            casillasUsadasBarco.add(4);
+            panelTablero.getTablero("posicion").getCasillaBarco().put(casilla, casillasUsadasBarco.get(casillasUsadasBarco.size()-1));
+        }else{
+            if(barco.equals("submarino" + String.valueOf(numeroBarco))){
+                casillasUsadasBarco.add(3);
+                panelTablero.getTablero("posicion").getCasillaBarco().put(casilla, casillasUsadasBarco.get(casillasUsadasBarco.size()-1));
+            }else{
+                if(barco.equals("destructor" + String.valueOf(numeroBarco))){
+                    casillasUsadasBarco.add(2);
+                    panelTablero.getTablero("posicion").getCasillaBarco().put(casilla, casillasUsadasBarco.get(casillasUsadasBarco.size()-1));
+                }else{
+                    if(barco.equals("fragata" + String.valueOf(numeroBarco))){
+                        casillasUsadasBarco.add(1);
+                        panelTablero.getTablero("posicion").getCasillaBarco().put(casilla, casillasUsadasBarco.get(casillasUsadasBarco.size()-1));
+                    }
+                }
+            }
+        }
     }
 
     public boolean funcionesFlota(String barco, int estadoOrientacion, int estadoSentidoOrientacion, int col, int row){
@@ -73,9 +99,7 @@ public class PintarFlota {
 
             int ultimasCasillas = Math.abs(col - columnaReferencia);
             if(ultimasCasillas < casillasAUsar-1){
-                System.out.println("No hay espacio para colocar el " + barco);
                 panelFlota.getTextoInfoBarcos().setText("No hay espacio para colocar el " + barco);
-                System.out.println(col);
             }else{
                 if(estadoSentidoOrientacion == 3){
                     nextImage = 1;
@@ -89,14 +113,14 @@ public class PintarFlota {
                         for(int pic=col; pic < col+casillasAUsar; pic++){
                             panelTablero.getTablero("posicion").getMatriz()[row][pic].setIcon(new ImageIcon(getClass().getResource(pathImages(barco, estadoOrientacion, estadoSentidoOrientacion) + String.valueOf(nextImage) + ".png")));
                             panelTablero.getTablero("posicion").getCasillasOcupadas().put(panelTablero.getTablero("posicion").getMatriz()[row][pic], 1);
+                            panelTablero.getTablero("posicion").getCasillaNombreBarco().put(panelTablero.getTablero("posicion").getMatriz()[row][pic], barco + String.valueOf(barcoUsado));
+                            relacionJLabelBarco(panelTablero.getTablero("posicion").getMatriz()[row][pic], barco + String.valueOf(barcoUsado), barcoUsado);
                             nextImage++;
                             auxiliar = true;
                         }
+                        barcoUsado++;
                     }else{
-                        System.out.println("Oye, No se puede colocar aqui");
                         panelFlota.getTextoInfoBarcos().setText("No hay espacio para colocar el " + barco);
-                        System.out.println(col);
-                        System.out.println("Casillas usadas es " + casillasUsadas);
                     }
                 }else{
                     nextImage = casillasAUsar;
@@ -110,14 +134,14 @@ public class PintarFlota {
                         for(int pic=col; pic > col-casillasAUsar; pic--){
                             panelTablero.getTablero("posicion").getMatriz()[row][pic].setIcon(new ImageIcon(getClass().getResource(pathImages(barco, estadoOrientacion, estadoSentidoOrientacion) + String.valueOf(nextImage) + ".png")));
                             panelTablero.getTablero("posicion").getCasillasOcupadas().put(panelTablero.getTablero("posicion").getMatriz()[row][pic], 1);
+                            panelTablero.getTablero("posicion").getCasillaNombreBarco().put(panelTablero.getTablero("posicion").getMatriz()[row][pic], barco + String.valueOf(barcoUsado));
+                            relacionJLabelBarco(panelTablero.getTablero("posicion").getMatriz()[row][pic], barco + String.valueOf(barcoUsado), barcoUsado);
                             nextImage--;
                             auxiliar = true;
                         }
+                        barcoUsado++;
                     }else{
-                        System.out.println("Oye, No se puede colocar aqui");
                         panelFlota.getTextoInfoBarcos().setText("No hay espacio para colocar el " + barco);
-                        System.out.println(col);
-                        System.out.println("Casillas usadas es " + casillasUsadas);
                     }
                 }
             }
@@ -132,9 +156,7 @@ public class PintarFlota {
 
             int ultimasCasillas = Math.abs(row - filaReferencia);
             if(ultimasCasillas < casillasAUsar-1){
-                System.out.println("No hay espacio para colocar el portavion");
                 panelFlota.getTextoInfoBarcos().setText("No hay espacio para colocar el " + barco);
-                System.out.println(row);
             }else{
                 if(estadoSentidoOrientacion == 1){
                     nextImage = 1;
@@ -148,14 +170,14 @@ public class PintarFlota {
                         for(int pic=row; pic < row+casillasAUsar; pic++){
                             panelTablero.getTablero("posicion").getMatriz()[pic][col].setIcon(new ImageIcon(getClass().getResource(pathImages(barco, estadoOrientacion, estadoSentidoOrientacion) + String.valueOf(nextImage) + ".png")));
                             panelTablero.getTablero("posicion").getCasillasOcupadas().put(panelTablero.getTablero("posicion").getMatriz()[pic][col], 1);
+                            panelTablero.getTablero("posicion").getCasillaNombreBarco().put(panelTablero.getTablero("posicion").getMatriz()[pic][col], barco + String.valueOf(barcoUsado));
+                            relacionJLabelBarco(panelTablero.getTablero("posicion").getMatriz()[pic][col], barco + String.valueOf(barcoUsado), barcoUsado);
                             nextImage++;
                             auxiliar = true;
                         }
+                        barcoUsado++;
                     }else{
-                        System.out.println("Oye, No se puede colocar aqui");
                         panelFlota.getTextoInfoBarcos().setText("No hay espacio para colocar el " + barco);
-                        System.out.println(row);
-                        System.out.println("Casillas usadas es " + casillasUsadas);
                     }
                 }else{
                     nextImage = casillasAUsar;
@@ -169,14 +191,14 @@ public class PintarFlota {
                         for(int pic=row; pic > row-casillasAUsar; pic--){
                             panelTablero.getTablero("posicion").getMatriz()[pic][col].setIcon(new ImageIcon(getClass().getResource(pathImages(barco, estadoOrientacion, estadoSentidoOrientacion) + String.valueOf(nextImage) + ".png")));
                             panelTablero.getTablero("posicion").getCasillasOcupadas().put(panelTablero.getTablero("posicion").getMatriz()[pic][col], 1);
+                            panelTablero.getTablero("posicion").getCasillaNombreBarco().put(panelTablero.getTablero("posicion").getMatriz()[pic][col], barco + String.valueOf(barcoUsado));
+                            relacionJLabelBarco(panelTablero.getTablero("posicion").getMatriz()[pic][col], barco + String.valueOf(barcoUsado), barcoUsado);
                             nextImage--;
                             auxiliar = true;
                         }
+                        barcoUsado++;
                     }else{
-                        System.out.println("Oye, No se puede colocar aqui");
                         panelFlota.getTextoInfoBarcos().setText("No hay espacio para colocar el " + barco);
-                        System.out.println(row);
-                        System.out.println("Casillas usadas es " + casillasUsadas);
                     }
                 }
             }
