@@ -140,9 +140,8 @@ public class PanelFlota extends JPanel{
         // Botón explicación de los botones de orientación
         explicacionBotones = new JButton("Conoce como jugar");
         explicacionBotones.setFont(new Font(Font.SERIF,Font.ROMAN_BASELINE,15));
-        explicacionBotones.setBackground(Color.red);
+        explicacionBotones.setBackground(new Color(255, 255, 255));
         explicacionBotones.setFocusable(false);
-        explicacionBotones.setBorder(null);
         gbc.gridx = 0;
         gbc.gridy = 3;
         gbc.gridwidth = 1;

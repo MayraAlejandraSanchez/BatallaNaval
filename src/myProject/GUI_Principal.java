@@ -32,7 +32,7 @@ public class GUI_Principal extends JFrame {
     public  static final String CREDITOS="CRÉDITOS\n" +
             "-> BRAYAN STIVEN SANCHEZ LEON\n" +
             "-> MAYRA ALEJANDRA SANCHEZ SALINAS";
-    public static final String INFO = "• 1 portaaviones: ocupa 4 casillas"+"\n• 2 submarinos: ocupan 3 casillas cada uno"+"\n• 3 destructores: ocupan 2 casillas cada uno"+"\n• 4 fragatas: ocupan 1 casilla cada uno";
+
     private Header headerProject;
     private JButton ayuda, creditos, comenzarPartida, movimientosEnemigo;
     private Escucha escucha;
