@@ -45,6 +45,7 @@ public class GUI_Principal extends JFrame {
     private int estadoJuego; // 1 seleccionar barco, 2 seleccionar orientacion del barco, 3 seleccionar sentido del barco, 4 colocar barco en el tablero, 5 combate
     private Combate combate;
     private int contadorHundidos; // Contador de barcos hundidos
+    private Timer timer; // establece el tiempo que tarde el oponente en escoger casilla
 
     /**
      * Constructor of GUI class
@@ -178,6 +179,7 @@ public class GUI_Principal extends JFrame {
         combate = new Combate(panelTablero, ventanaOponente.getPanelTableroOponente());
 
         contadorHundidos = 0;
+        timer = new Timer(2000, escucha);
     }
 
     /**
@@ -340,10 +342,13 @@ public class GUI_Principal extends JFrame {
                     JOptionPane.showMessageDialog(null,CREDITOS,"Créditos",JOptionPane.PLAIN_MESSAGE, team);
                 }else{
                     if(e.getSource() == comenzarPartida){
+                        /*
                         if(estadoJuego == 6){
                             ventanaOponente.oponenteVsUsuario();
                             estadoJuego = 5;
+
                         }
+                        */
 
                     }else{
                         if(e.getSource() == movimientosEnemigo){
@@ -352,110 +357,124 @@ public class GUI_Principal extends JFrame {
                             if(e.getSource() == panelFlota.getExplicacionBotones()){
                                 JOptionPane.showMessageDialog(null,"","Como jugar",JOptionPane.PLAIN_MESSAGE, infoSentidos);
                             }else{
-                                switch(estadoJuego){
-                                    case 1:
-                                        if(e.getSource() == panelFlota.getBotonBarco("portavion")){
-                                            if(panelFlota.getCantidadBarco("portavion") > 0){
-                                                panelFlota.setCantidadBarco("portavion");
-                                                setEscuchaBotones("remover");
-                                                panelFlota.getTextoInfoBarcos().setText("Escoge si quieres ubicarlo vertical u horizontal");
-                                                setVerticalHorizontal("agregar");
-                                                panelFlota.setNombreBoton("portavion");
-                                                estadoJuego = 2;
-                                            }else{
-                                                panelFlota.getTextoInfoBarcos().setText("No hay mas portaviones disponibles");
-                                            }
-                                        }else{
-                                            if(e.getSource() == panelFlota.getBotonBarco("destructor")){
-                                                if(panelFlota.getCantidadBarco("destructor") > 0){
-                                                    panelFlota.setCantidadBarco("destructor");
+                                if(estadoJuego == 6){
+                                    int contador = 0;
+                                    if(e.getSource() == timer){
+                                        ventanaOponente.oponenteVsUsuario();
+                                        estadoJuego = 5;
+                                        contador++;
+                                        if(contador == 1){
+                                            timer.stop();
+                                            estadoJuego = 5;
+                                            panelFlota.getTextoInfoBarcos().setText("Tu turno");
+                                        }
+                                    }
+                                }else{
+                                    switch(estadoJuego){
+                                        case 1:
+                                            if(e.getSource() == panelFlota.getBotonBarco("portavion")){
+                                                if(panelFlota.getCantidadBarco("portavion") > 0){
+                                                    panelFlota.setCantidadBarco("portavion");
                                                     setEscuchaBotones("remover");
                                                     panelFlota.getTextoInfoBarcos().setText("Escoge si quieres ubicarlo vertical u horizontal");
                                                     setVerticalHorizontal("agregar");
-                                                    panelFlota.setNombreBoton("destructor");
+                                                    panelFlota.setNombreBoton("portavion");
                                                     estadoJuego = 2;
                                                 }else{
-                                                    panelFlota.getTextoInfoBarcos().setText("No hay mas destructores disponibles");
+                                                    panelFlota.getTextoInfoBarcos().setText("No hay mas portaviones disponibles");
                                                 }
                                             }else{
-                                                if(e.getSource() == panelFlota.getBotonBarco("fragata")){
-                                                    if(panelFlota.getCantidadBarco("fragata") > 0){
-                                                        panelFlota.setCantidadBarco("fragata");
+                                                if(e.getSource() == panelFlota.getBotonBarco("destructor")){
+                                                    if(panelFlota.getCantidadBarco("destructor") > 0){
+                                                        panelFlota.setCantidadBarco("destructor");
                                                         setEscuchaBotones("remover");
                                                         panelFlota.getTextoInfoBarcos().setText("Escoge si quieres ubicarlo vertical u horizontal");
                                                         setVerticalHorizontal("agregar");
-                                                        panelFlota.setNombreBoton("fragata");
+                                                        panelFlota.setNombreBoton("destructor");
                                                         estadoJuego = 2;
                                                     }else{
-                                                        panelFlota.getTextoInfoBarcos().setText("No hay mas fragatas disponibles");
+                                                        panelFlota.getTextoInfoBarcos().setText("No hay mas destructores disponibles");
                                                     }
                                                 }else{
-                                                    if(e.getSource() == panelFlota.getBotonBarco("submarino")){
-                                                        if(panelFlota.getCantidadBarco("submarino") > 0){
-                                                            panelFlota.setCantidadBarco("submarino");
+                                                    if(e.getSource() == panelFlota.getBotonBarco("fragata")){
+                                                        if(panelFlota.getCantidadBarco("fragata") > 0){
+                                                            panelFlota.setCantidadBarco("fragata");
                                                             setEscuchaBotones("remover");
                                                             panelFlota.getTextoInfoBarcos().setText("Escoge si quieres ubicarlo vertical u horizontal");
                                                             setVerticalHorizontal("agregar");
-                                                            panelFlota.setNombreBoton("submarino");
+                                                            panelFlota.setNombreBoton("fragata");
                                                             estadoJuego = 2;
                                                         }else{
-                                                            panelFlota.getTextoInfoBarcos().setText("No hay mas submarinos disponibles");
+                                                            panelFlota.getTextoInfoBarcos().setText("No hay mas fragatas disponibles");
+                                                        }
+                                                    }else{
+                                                        if(e.getSource() == panelFlota.getBotonBarco("submarino")){
+                                                            if(panelFlota.getCantidadBarco("submarino") > 0){
+                                                                panelFlota.setCantidadBarco("submarino");
+                                                                setEscuchaBotones("remover");
+                                                                panelFlota.getTextoInfoBarcos().setText("Escoge si quieres ubicarlo vertical u horizontal");
+                                                                setVerticalHorizontal("agregar");
+                                                                panelFlota.setNombreBoton("submarino");
+                                                                estadoJuego = 2;
+                                                            }else{
+                                                                panelFlota.getTextoInfoBarcos().setText("No hay mas submarinos disponibles");
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }
-                                        }
-                                        break;
-                                    case 2:
-                                        if(e.getSource() == panelFlota.getBotonOrientacion("vertical")){
-                                            setVerticalHorizontal("remover");
-                                            panelFlota.getTextoInfoBarcos().setText("Escoge cual sentido quieres usar");
-                                            setOrientacionSentidoVertical("agregar");
-                                            panelFlota.setOrientacion(0);
-                                            estadoJuego = 3;
-                                        }else{
-                                            if(e.getSource() == panelFlota.getBotonOrientacion("horizontal")){
+                                            break;
+                                        case 2:
+                                            if(e.getSource() == panelFlota.getBotonOrientacion("vertical")){
                                                 setVerticalHorizontal("remover");
                                                 panelFlota.getTextoInfoBarcos().setText("Escoge cual sentido quieres usar");
-                                                setOrientacionSentidoHorizontal("agregar");
-                                                panelFlota.setOrientacion(1);
+                                                setOrientacionSentidoVertical("agregar");
+                                                panelFlota.setOrientacion(0);
                                                 estadoJuego = 3;
+                                            }else{
+                                                if(e.getSource() == panelFlota.getBotonOrientacion("horizontal")){
+                                                    setVerticalHorizontal("remover");
+                                                    panelFlota.getTextoInfoBarcos().setText("Escoge cual sentido quieres usar");
+                                                    setOrientacionSentidoHorizontal("agregar");
+                                                    panelFlota.setOrientacion(1);
+                                                    estadoJuego = 3;
+                                                }
                                             }
-                                        }
-                                        break;
-                                    case 3:
-                                        if(e.getSource() == panelFlota.getBotonSentidoOrientacion("sup_inf")){
-                                            setOrientacionSentidoVertical("remover");
-                                            panelFlota.getTextoInfoBarcos().setText("Selecciona la casilla en la que quieres ubicar la nave");
-                                            setEscuchaCasillas("agregar");
-                                            panelFlota.setSentidoOrientacion(1);
-                                            estadoJuego = 4;
-                                        }else{
-                                            if(e.getSource() == panelFlota.getBotonSentidoOrientacion("inf_sup")){
+                                            break;
+                                        case 3:
+                                            if(e.getSource() == panelFlota.getBotonSentidoOrientacion("sup_inf")){
                                                 setOrientacionSentidoVertical("remover");
                                                 panelFlota.getTextoInfoBarcos().setText("Selecciona la casilla en la que quieres ubicar la nave");
                                                 setEscuchaCasillas("agregar");
-                                                panelFlota.setSentidoOrientacion(2);
+                                                panelFlota.setSentidoOrientacion(1);
                                                 estadoJuego = 4;
                                             }else{
-                                                if(e.getSource() == panelFlota.getBotonSentidoOrientacion("izq_der")){
-                                                    setOrientacionSentidoHorizontal("remover");
+                                                if(e.getSource() == panelFlota.getBotonSentidoOrientacion("inf_sup")){
+                                                    setOrientacionSentidoVertical("remover");
                                                     panelFlota.getTextoInfoBarcos().setText("Selecciona la casilla en la que quieres ubicar la nave");
                                                     setEscuchaCasillas("agregar");
-                                                    panelFlota.setSentidoOrientacion(3);
+                                                    panelFlota.setSentidoOrientacion(2);
                                                     estadoJuego = 4;
                                                 }else{
-                                                    if(e.getSource() == panelFlota.getBotonSentidoOrientacion("der_izq")){
+                                                    if(e.getSource() == panelFlota.getBotonSentidoOrientacion("izq_der")){
                                                         setOrientacionSentidoHorizontal("remover");
                                                         panelFlota.getTextoInfoBarcos().setText("Selecciona la casilla en la que quieres ubicar la nave");
                                                         setEscuchaCasillas("agregar");
-                                                        panelFlota.setSentidoOrientacion(4);
+                                                        panelFlota.setSentidoOrientacion(3);
                                                         estadoJuego = 4;
+                                                    }else{
+                                                        if(e.getSource() == panelFlota.getBotonSentidoOrientacion("der_izq")){
+                                                            setOrientacionSentidoHorizontal("remover");
+                                                            panelFlota.getTextoInfoBarcos().setText("Selecciona la casilla en la que quieres ubicar la nave");
+                                                            setEscuchaCasillas("agregar");
+                                                            panelFlota.setSentidoOrientacion(4);
+                                                            estadoJuego = 4;
+                                                        }
                                                     }
                                                 }
                                             }
-                                        }
-                                        break;
+                                            break;
+                                    }
                                 }
                             }
                         }
@@ -546,6 +565,7 @@ public class GUI_Principal extends JFrame {
                         }
                     }
                     estadoJuego = 6;
+                    timer.start();
                     break;
             }
         }

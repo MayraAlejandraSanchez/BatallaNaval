@@ -111,10 +111,8 @@ public class GUI_Secundaria extends JFrame {
         }else{
             if(panelTableroOponente.getTableroOponente("principal").getCasillasOcupadas().get(panelTableroOponente.getTableroOponente("principal").getMatriz()[row][col]) == Integer.valueOf(2)){
                 oponenteVsUsuario();
-                System.out.println("casilla usada");
             }else{
                 //panelFlota.getTextoInfoBarcos().setText("Le diste al agua");
-                System.out.println("le diste al agua");
                 panelTableroOponente.getTableroOponente("principal").getCasillasOcupadas().put(panelTableroOponente.getTableroOponente("principal").getMatriz()[row][col], Integer.valueOf(2));
                 guiPrincipal.getPanelTablero().getTablero("posicion").getMatriz()[row][col].setIcon(new ImageIcon(getClass().getResource("/recursos/agua.png")));
                 panelTableroOponente.getTableroOponente("principal").getMatriz()[row][col].setIcon(new ImageIcon(getClass().getResource("/recursos/agua.png")));
@@ -126,7 +124,7 @@ public class GUI_Secundaria extends JFrame {
     public void funcionesCombate(int row, int col, String barco){
         // Establece una imagen a la casilla seleccionada del tablero posicion del usuario si un barco fue tocado
         guiPrincipal.getPanelTablero().getTablero("posicion").getMatriz()[row][col].setIcon(new ImageIcon(getClass().getResource("/recursos/tocado.png")));
-        panelTableroOponente.getTableroOponente("principal").getCasillasOcupadas().replace(guiPrincipal.getPanelTablero().getTablero("posicion").getMatriz()[row][col], Integer.valueOf(2));
+        panelTableroOponente.getTableroOponente("principal").getCasillasOcupadas().replace(panelTableroOponente.getTableroOponente("principal").getMatriz()[row][col], Integer.valueOf(2));
 
         // Reduce las casillas ocupadas del barco tocado para poder ser hundido
         guiPrincipal.getPanelTablero().getTablero("posicion").reducirCasillasUsadas(barco);
