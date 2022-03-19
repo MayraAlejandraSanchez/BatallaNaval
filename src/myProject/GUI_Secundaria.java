@@ -149,7 +149,6 @@ public class GUI_Secundaria extends JFrame {
         }
 
         if(contadorHundidos == 10){
-            //guiPrincipal.getPanelFlota().getInformacionJuego().setText("Tus barcos han sido hundidos, perdiste el juego");
             estado = 2;
         }
     }
@@ -237,10 +236,5 @@ public class GUI_Secundaria extends JFrame {
     // Retorna la variable estado
     public int getEstado(){
         return estado;
-    }
-
-    // Retorna la cantidad de barcos hundidos por el oponente
-    public int getContadorHundidos(){
-        return contadorHundidos;
     }
 }
