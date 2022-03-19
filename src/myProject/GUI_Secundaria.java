@@ -14,13 +14,12 @@ import java.util.Random;
 public class GUI_Secundaria extends JFrame {
     public static final String PATH = "/recursos/";
     private Header titulo;
-    private JLabel enemy;
     private ImageIcon enemyIcon;
     private PanelTableroOponente panelTableroOponente;
     private PintarFlotaOponente pintarFlotaOponente;
     private GUI_Principal guiPrincipal;
     private int contadorHundidos;
-    private int estado; // 1 si continua, de lo contrario 0
+    private int estado; // 1 si continua, 2 si gana el oponente, de lo contrario 0
 
     public GUI_Secundaria(GUI_Principal _guiPrincipal) {
         this.guiPrincipal = _guiPrincipal;
@@ -111,7 +110,7 @@ public class GUI_Secundaria extends JFrame {
             }
         }else{
             if(panelTableroOponente.getTableroOponente("principal").getCasillasOcupadas().get(panelTableroOponente.getTableroOponente("principal").getMatriz()[row][col]) == Integer.valueOf(2)){
-                estado = 1;
+                oponenteVsUsuario();
             }else{
                 panelTableroOponente.getTableroOponente("principal").getCasillasOcupadas().put(panelTableroOponente.getTableroOponente("principal").getMatriz()[row][col], Integer.valueOf(2));
                 guiPrincipal.getPanelTablero().getTablero("posicion").getMatriz()[row][col].setIcon(new ImageIcon(getClass().getResource("/recursos/agua.png")));
@@ -150,8 +149,8 @@ public class GUI_Secundaria extends JFrame {
         }
 
         if(contadorHundidos == 10){
-            guiPrincipal.getPanelFlota().getInformacionJuego().setText("Tus barcos han sido hundidos, perdiste el juego");
-            estado = 0;
+            //guiPrincipal.getPanelFlota().getInformacionJuego().setText("Tus barcos han sido hundidos, perdiste el juego");
+            estado = 2;
         }
     }
 
@@ -238,5 +237,10 @@ public class GUI_Secundaria extends JFrame {
     // Retorna la variable estado
     public int getEstado(){
         return estado;
+    }
+
+    // Retorna la cantidad de barcos hundidos por el oponente
+    public int getContadorHundidos(){
+        return contadorHundidos;
     }
 }

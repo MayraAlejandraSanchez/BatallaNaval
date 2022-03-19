@@ -392,6 +392,11 @@ public class GUI_Principal extends JFrame {
                                             estadoJuego = 5;
                                             panelFlota.getAsignarTurno().setText("Tu turno");
                                             panelFlota.getInformacionJuego().setText("Selecciona otra casilla del tablero principal");
+                                        }else{
+                                            if(ventanaOponente.getEstado() == 2){
+                                                timer.stop();
+                                                panelFlota.getInformacionJuego().setText("Tus barcos han sido hundidos, perdiste el juego");
+                                            }
                                         }
                                     }
                                 }else{
