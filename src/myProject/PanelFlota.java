@@ -138,7 +138,7 @@ public class PanelFlota extends JPanel{
         der_izq.setBorder(null);
 
         // Botón explicación de los botones de orientación
-        explicacionBotones = new JButton("Conoce como jugar");
+        explicacionBotones = new JButton("Explicacion de los botones");
         explicacionBotones.setFont(new Font(Font.SERIF,Font.ROMAN_BASELINE,15));
         explicacionBotones.setBackground(new Color(255, 255, 255));
         explicacionBotones.setFocusable(false);
@@ -169,11 +169,11 @@ public class PanelFlota extends JPanel{
 
         // Texto bajo flota
         asignarTurno = new JLabel();
-        asignarTurno.setText("¡Es tu turno!");
+        //asignarTurno.setText("¡Es tu turno!");
         asignarTurno.setHorizontalAlignment(SwingConstants.CENTER);
 
         informacionJuego = new JTextPane();
-        informacionJuego.setText("Selecciona la nave que quieres desplegar");
+        //informacionJuego.setText("Selecciona la nave que quieres desplegar");
         informacionJuego.setEditable(false);
         informacionJuego.setBackground(Color.cyan);
         StyledDocument documentStyle = informacionJuego.getStyledDocument();

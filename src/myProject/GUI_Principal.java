@@ -46,17 +46,16 @@ public class GUI_Principal extends JFrame {
     private Combate combate;
     private int contadorHundidos; // Contador de barcos hundidos
     private Timer timer; // establece el tiempo que tarde el oponente en escoger casilla
+    private Image image;
 
     /**
      * Constructor of GUI class
      */
     public GUI_Principal(){
-        ventanaOponente = new GUI_Secundaria(this);
         initGUI();
 
         //Default JFrame configuration
         this.setTitle("Batalla Naval");
-        Image image = new ImageIcon(getClass().getResource(PATH+"barcoIcono.png")).getImage();
         this.setIconImage(image);
         this.setUndecorated(false);
         this.setSize(1500,750);
@@ -71,6 +70,9 @@ public class GUI_Principal extends JFrame {
      * create Listener and control Objects used for the GUI class
      */
     private void initGUI() {
+        ventanaOponente = new GUI_Secundaria(this);
+        image = new ImageIcon(getClass().getResource(PATH+"barcoIcono.png")).getImage();
+
         // Set up JFrame Container's Layout
         panelNorte = new JPanel();
         panelSur = new JPanel();
@@ -165,7 +167,8 @@ public class GUI_Principal extends JFrame {
         movimientosEnemigo.setBorder(null);
         panelSur.add(movimientosEnemigo,FlowLayout.CENTER);
 
-        setEscuchaBotones("agregar");
+        // Se agrega el escucha a todos los botones de todas las clases
+        setEscuchaBotones("remover");
         setVerticalHorizontal("remover");
         setOrientacionSentidoVertical("remover");
         setOrientacionSentidoHorizontal("remover");
@@ -200,11 +203,19 @@ public class GUI_Principal extends JFrame {
             panelFlota.getBotonBarco("destructor").addActionListener(escucha);
             panelFlota.getBotonBarco("fragata").addActionListener(escucha);
             panelFlota.getBotonBarco("submarino").addActionListener(escucha);
+            panelFlota.getBotonBarco("portavion").setEnabled(true);
+            panelFlota.getBotonBarco("destructor").setEnabled(true);
+            panelFlota.getBotonBarco("fragata").setEnabled(true);
+            panelFlota.getBotonBarco("submarino").setEnabled(true);
         }else{
             panelFlota.getBotonBarco("portavion").removeActionListener(escucha);
             panelFlota.getBotonBarco("destructor").removeActionListener(escucha);
             panelFlota.getBotonBarco("fragata").removeActionListener(escucha);
             panelFlota.getBotonBarco("submarino").removeActionListener(escucha);
+            panelFlota.getBotonBarco("portavion").setEnabled(false);
+            panelFlota.getBotonBarco("destructor").setEnabled(false);
+            panelFlota.getBotonBarco("fragata").setEnabled(false);
+            panelFlota.getBotonBarco("submarino").setEnabled(false);
         }
     }
 
@@ -349,7 +360,13 @@ public class GUI_Principal extends JFrame {
                     JOptionPane.showMessageDialog(null,CREDITOS,"Créditos",JOptionPane.PLAIN_MESSAGE, team);
                 }else{
                     if(e.getSource() == comenzarPartida){
-
+                        comenzarPartida.removeActionListener(this);
+                        setEscuchaBotones("agregar");
+                        setVerticalHorizontal("remover");
+                        setOrientacionSentidoVertical("remover");
+                        setOrientacionSentidoHorizontal("remover");
+                        panelFlota.getAsignarTurno().setText("¡Tu turno!");
+                        panelFlota.getInformacionJuego().setText("Selecciona la nave que quieres desplegar");
                     }else{
                         if(e.getSource() == movimientosEnemigo){
                             ventanaOponente.setVisible(true);
