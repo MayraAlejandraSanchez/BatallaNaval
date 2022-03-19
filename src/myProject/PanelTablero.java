@@ -1,9 +1,11 @@
 package myProject;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.awt.image.BufferedImage;
+import java.io.File;
+
 /**
  * Clase PanelTablero
  * @autor Mayra Alejandra Sanchez - mayra.alejandra.sanchez@correounivalle.edu.co - 202040506
@@ -13,8 +15,8 @@ import java.util.HashMap;
 public class PanelTablero extends JPanel {
 
     public static final String PATH ="/recursos/";
-    private JPanel panelTableroPosicion, panelTableroPrincipal;
     private JLabel nombreTableroPosicion, nombreTableroPrincipal, imagenTiros;
+    private BackgroundPane panelTableroPosicion, panelTableroPrincipal;
     private Tableros tableroPosicion, tableroPrincipal;
     private String abecedario[];
 
@@ -44,10 +46,7 @@ public class PanelTablero extends JPanel {
         gbc.gridheight = 1;
         this.add(nombreTableroPosicion, gbc);
 
-        panelTableroPosicion = new JPanel(new GridLayout(11, 11));
-        panelTableroPosicion.setPreferredSize(new Dimension(400, 400));
-        panelTableroPosicion.setBorder(BorderFactory.createLineBorder(Color.WHITE));
-        panelTableroPosicion.setBackground(Color.BLACK);
+        panelTableroPosicion = new BackgroundPane();
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.gridwidth = 1;
@@ -65,10 +64,7 @@ public class PanelTablero extends JPanel {
         gbc.gridheight = 1;
         this.add(nombreTableroPrincipal, gbc);
 
-        panelTableroPrincipal = new JPanel(new GridLayout(11, 11));
-        panelTableroPrincipal.setPreferredSize(new Dimension(400, 400));
-        panelTableroPrincipal.setBorder(BorderFactory.createLineBorder(Color.WHITE));
-        panelTableroPrincipal.setBackground(Color.BLACK);
+        panelTableroPrincipal = new BackgroundPane();
         gbc.gridx = 1;
         gbc.gridy = 1;
         gbc.gridwidth = 1;
@@ -83,6 +79,26 @@ public class PanelTablero extends JPanel {
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
         this.add(imagenTiros, gbc);
+    }
+
+    // JPanel con imagen para agregar las matrices
+    public class BackgroundPane extends JPanel{
+        private Image img;
+
+        public BackgroundPane(){
+            img = new ImageIcon(getClass().getResource("/recursos/mar.jpg")).getImage();
+            this.setLayout(new GridLayout(11, 11));
+            this.setPreferredSize(new Dimension(400, 400));
+            this.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+        }
+
+        @Override
+        protected void paintComponent(Graphics g){
+            super.paintComponent(g);
+            g.drawImage(img, 0, 0, this);
+            revalidate();
+            repaint();
+        }
     }
 
     // Crea los tableros posicion y principal
@@ -101,19 +117,16 @@ public class PanelTablero extends JPanel {
                             tableroPosicion.getMatriz()[row][col] = new JLabel(String.valueOf(row), SwingConstants.CENTER);
                             tableroPrincipal.getMatriz()[row][col] = new JLabel(String.valueOf(row), SwingConstants.CENTER);
                         }else{
-                            tableroPosicion.getMatriz()[row][col] = new JLabel(new ImageIcon(getClass().getResource("/recursos/mar.jpg")), SwingConstants.CENTER);
-                            tableroPrincipal.getMatriz()[row][col] = new JLabel(new ImageIcon(getClass().getResource("/recursos/mar.jpg")), SwingConstants.CENTER);
+                            tableroPosicion.getMatriz()[row][col] = new JLabel();
+                            tableroPrincipal.getMatriz()[row][col] = new JLabel();
                         }
                     }
                 }
-                tableroPosicion.getMatriz()[row][col].setOpaque(true);
-                tableroPosicion.getMatriz()[row][col].setBackground(Color.WHITE);
+                tableroPosicion.getMatriz()[row][col].setOpaque(false);
                 tableroPosicion.getMatriz()[row][col].setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-                tableroPrincipal.getMatriz()[row][col].setOpaque(true);
-                tableroPrincipal.getMatriz()[row][col].setBackground(Color.WHITE);
+                tableroPrincipal.getMatriz()[row][col].setOpaque(false);
                 tableroPrincipal.getMatriz()[row][col].setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
 
                 panelTableroPosicion.add(tableroPosicion.getMatriz()[row][col]);
                 panelTableroPrincipal.add(tableroPrincipal.getMatriz()[row][col]);
