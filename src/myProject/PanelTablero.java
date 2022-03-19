@@ -106,27 +106,55 @@ public class PanelTablero extends JPanel {
         for (int row = 0; row < 11; row++) {
             for (int col = 0; col < 11; col++) {
                 if(row == 0 && col == 0){
-                    tableroPosicion.getMatriz()[row][col] = new JLabel("", SwingConstants.CENTER);
-                    tableroPrincipal.getMatriz()[row][col] = new JLabel("", SwingConstants.CENTER);
+                    tableroPosicion.getMatriz()[row][col] = new JLabel();
+                    tableroPosicion.getMatriz()[row][col].setOpaque(true);
+                    tableroPosicion.getMatriz()[row][col].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                    tableroPosicion.getMatriz()[row][col].setBackground(Color.WHITE);
+
+                    tableroPrincipal.getMatriz()[row][col] = new JLabel();
+                    tableroPrincipal.getMatriz()[row][col].setOpaque(true);
+                    tableroPrincipal.getMatriz()[row][col].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                    tableroPrincipal.getMatriz()[row][col].setBackground(Color.WHITE);
                 }else{
                     if(row == 0 && col > 0){
                         tableroPosicion.getMatriz()[row][col] = new JLabel(abecedario[col-1], SwingConstants.CENTER);
+                        tableroPosicion.getMatriz()[row][col].setOpaque(true);
+                        tableroPosicion.getMatriz()[row][col].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                        tableroPosicion.getMatriz()[row][col].setBackground(Color.WHITE);
+
                         tableroPrincipal.getMatriz()[row][col] = new JLabel(abecedario[col-1], SwingConstants.CENTER);
+                        tableroPrincipal.getMatriz()[row][col].setOpaque(true);
+                        tableroPrincipal.getMatriz()[row][col].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                        tableroPrincipal.getMatriz()[row][col].setBackground(Color.WHITE);
                     }else{
                         if(row > 0 && col == 0){
                             tableroPosicion.getMatriz()[row][col] = new JLabel(String.valueOf(row), SwingConstants.CENTER);
+                            tableroPosicion.getMatriz()[row][col].setOpaque(true);
+                            tableroPosicion.getMatriz()[row][col].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                            tableroPosicion.getMatriz()[row][col].setBackground(Color.WHITE);
+
                             tableroPrincipal.getMatriz()[row][col] = new JLabel(String.valueOf(row), SwingConstants.CENTER);
+                            tableroPrincipal.getMatriz()[row][col].setOpaque(true);
+                            tableroPrincipal.getMatriz()[row][col].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                            tableroPrincipal.getMatriz()[row][col].setBackground(Color.WHITE);
                         }else{
                             tableroPosicion.getMatriz()[row][col] = new JLabel();
+                            tableroPosicion.getMatriz()[row][col].setOpaque(false);
+                            tableroPosicion.getMatriz()[row][col].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
                             tableroPrincipal.getMatriz()[row][col] = new JLabel();
+                            tableroPrincipal.getMatriz()[row][col].setOpaque(false);
+                            tableroPrincipal.getMatriz()[row][col].setBorder(BorderFactory.createLineBorder(Color.BLACK));
                         }
                     }
                 }
+                /*
                 tableroPosicion.getMatriz()[row][col].setOpaque(false);
                 tableroPosicion.getMatriz()[row][col].setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
                 tableroPrincipal.getMatriz()[row][col].setOpaque(false);
                 tableroPrincipal.getMatriz()[row][col].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                 */
 
                 panelTableroPosicion.add(tableroPosicion.getMatriz()[row][col]);
                 panelTableroPrincipal.add(tableroPrincipal.getMatriz()[row][col]);

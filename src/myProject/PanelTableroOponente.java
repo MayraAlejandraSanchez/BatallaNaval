@@ -10,7 +10,7 @@ import java.util.HashMap;
  * @version 1.0.0 fecha 17/3/2022
  */
 public class PanelTableroOponente extends JPanel {
-    private JPanel panelTableroPosicion;
+    private BackgroundPane panelTableroPosicion;
     private JLabel nombreTableroPosicion;
     private Tableros tableroPosicionOponente, tableroPrincipalOponente;
     private String abecedario[];
@@ -41,10 +41,7 @@ public class PanelTableroOponente extends JPanel {
         gbc.gridheight = 1;
         this.add(nombreTableroPosicion, gbc);
 
-        panelTableroPosicion = new JPanel(new GridLayout(11, 11));
-        panelTableroPosicion.setPreferredSize(new Dimension(400, 400));
-        panelTableroPosicion.setBorder(BorderFactory.createLineBorder(Color.WHITE));
-        panelTableroPosicion.setBackground(Color.BLACK);
+        panelTableroPosicion = new BackgroundPane();
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.gridwidth = 1;
@@ -53,35 +50,73 @@ public class PanelTableroOponente extends JPanel {
         this.add(panelTableroPosicion, gbc);
     }
 
+    // JPanel con imagen para agregar las matrices
+    public class BackgroundPane extends JPanel{
+        private Image img;
+
+        public BackgroundPane(){
+            img = new ImageIcon(getClass().getResource("/recursos/mar.jpg")).getImage();
+            this.setLayout(new GridLayout(11, 11));
+            this.setPreferredSize(new Dimension(400, 400));
+            this.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+        }
+
+        @Override
+        protected void paintComponent(Graphics g){
+            super.paintComponent(g);
+            g.drawImage(img, 0, 0, this);
+            revalidate();
+            repaint();
+        }
+    }
+
     // Crea los tableros posicion y principal
     public void modelTableroOponente(){
         for (int row = 0; row < 11; row++) {
             for (int col = 0; col < 11; col++) {
                 if(row == 0 && col == 0){
-                    tableroPosicionOponente.getMatriz()[row][col] = new JLabel("", SwingConstants.CENTER);
-                    tableroPrincipalOponente.getMatriz()[row][col] = new JLabel("", SwingConstants.CENTER);
+                    tableroPosicionOponente.getMatriz()[row][col] = new JLabel();
+                    tableroPosicionOponente.getMatriz()[row][col].setOpaque(true);
+                    tableroPosicionOponente.getMatriz()[row][col].setBackground(Color.WHITE);
+                    tableroPosicionOponente.getMatriz()[row][col].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+                    tableroPrincipalOponente.getMatriz()[row][col] = new JLabel();
+                    tableroPrincipalOponente.getMatriz()[row][col].setOpaque(true);
+                    tableroPrincipalOponente.getMatriz()[row][col].setBackground(Color.WHITE);
+                    tableroPrincipalOponente.getMatriz()[row][col].setBorder(BorderFactory.createLineBorder(Color.BLACK));
                 }else{
                     if(row == 0 && col > 0){
                         tableroPosicionOponente.getMatriz()[row][col] = new JLabel(abecedario[col-1], SwingConstants.CENTER);
+                        tableroPosicionOponente.getMatriz()[row][col].setOpaque(true);
+                        tableroPosicionOponente.getMatriz()[row][col].setBackground(Color.WHITE);
+                        tableroPosicionOponente.getMatriz()[row][col].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
                         tableroPrincipalOponente.getMatriz()[row][col] = new JLabel(abecedario[col-1], SwingConstants.CENTER);
+                        tableroPrincipalOponente.getMatriz()[row][col].setOpaque(true);
+                        tableroPrincipalOponente.getMatriz()[row][col].setBackground(Color.WHITE);
+                        tableroPrincipalOponente.getMatriz()[row][col].setBorder(BorderFactory.createLineBorder(Color.BLACK));
                     }else{
                         if(row > 0 && col == 0){
                             tableroPosicionOponente.getMatriz()[row][col] = new JLabel(String.valueOf(row), SwingConstants.CENTER);
+                            tableroPosicionOponente.getMatriz()[row][col].setOpaque(true);
+                            tableroPosicionOponente.getMatriz()[row][col].setBackground(Color.WHITE);
+                            tableroPosicionOponente.getMatriz()[row][col].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
                             tableroPrincipalOponente.getMatriz()[row][col] = new JLabel(String.valueOf(row), SwingConstants.CENTER);
+                            tableroPrincipalOponente.getMatriz()[row][col].setOpaque(true);
+                            tableroPrincipalOponente.getMatriz()[row][col].setBackground(Color.WHITE);
+                            tableroPrincipalOponente.getMatriz()[row][col].setBorder(BorderFactory.createLineBorder(Color.BLACK));
                         }else{
-                            tableroPosicionOponente.getMatriz()[row][col] = new JLabel(new ImageIcon(getClass().getResource("/recursos/mar.jpg")), SwingConstants.CENTER);
-                            tableroPrincipalOponente.getMatriz()[row][col] = new JLabel(new ImageIcon(getClass().getResource("/recursos/mar.jpg")), SwingConstants.CENTER);
+                            tableroPosicionOponente.getMatriz()[row][col] = new JLabel();
+                            tableroPosicionOponente.getMatriz()[row][col].setOpaque(false);
+                            tableroPosicionOponente.getMatriz()[row][col].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+                            tableroPrincipalOponente.getMatriz()[row][col] = new JLabel();
+                            tableroPrincipalOponente.getMatriz()[row][col].setOpaque(false);
+                            tableroPrincipalOponente.getMatriz()[row][col].setBorder(BorderFactory.createLineBorder(Color.BLACK));
                         }
                     }
                 }
-
-                tableroPosicionOponente.getMatriz()[row][col].setOpaque(true);
-                tableroPosicionOponente.getMatriz()[row][col].setBackground(Color.WHITE);
-                tableroPosicionOponente.getMatriz()[row][col].setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
-                tableroPrincipalOponente.getMatriz()[row][col].setOpaque(true);
-                tableroPrincipalOponente.getMatriz()[row][col].setBackground(Color.WHITE);
-                tableroPrincipalOponente.getMatriz()[row][col].setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
                 panelTableroPosicion.add(tableroPosicionOponente.getMatriz()[row][col]);
             }
