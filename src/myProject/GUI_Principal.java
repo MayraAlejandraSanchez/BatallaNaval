@@ -34,9 +34,9 @@ public class GUI_Principal extends JFrame {
             "-> MAYRA ALEJANDRA SANCHEZ SALINAS";
 
     private Header headerProject;
-    private JButton ayuda, creditos, comenzarPartida, movimientosEnemigo;
+    private JButton ayuda, creditos, comenzarPartida, movimientosEnemigo,reiniciar;
     private Escucha escucha;
-    private ImageIcon team, help, enemy, play, infoSentidos;
+    private ImageIcon team, help, enemy, play, infoSentidos, reinicio;
     private JPanel panelNorte, panelSur, panelEste, panelCentro;
     private PanelTablero panelTablero;
     private PintarFlota pintarFlota;
@@ -119,6 +119,7 @@ public class GUI_Principal extends JFrame {
         play = new ImageIcon(getClass().getResource(PATH+"play.png"));
         enemy = new ImageIcon(getClass().getResource(PATH+"enemy.png"));
         infoSentidos = new ImageIcon(getClass().getResource(PATH + "info.png"));
+        reinicio = new ImageIcon(getClass().getResource(PATH + "reiniciarIcon.png"));
 
         // JComponents de la parte superior
         // Titulo
@@ -169,6 +170,14 @@ public class GUI_Principal extends JFrame {
         movimientosEnemigo.setFocusable(false);
         movimientosEnemigo.setBorder(null);
         panelSur.add(movimientosEnemigo,FlowLayout.CENTER);
+
+        // Creacion del botón de reinicio
+        reiniciar = new JButton("Reiniciar", reinicio);
+        reiniciar.addActionListener(escucha);
+        reiniciar.setBackground(Color.CYAN);
+        reiniciar.setFocusable(false);
+        reiniciar.setBorder(null);
+        panelSur.add(reiniciar,FlowLayout.CENTER);
 
         // Se agrega el escucha a todos los botones de todas las clases
         setEscuchaBotones("remover");
