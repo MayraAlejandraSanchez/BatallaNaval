@@ -77,6 +77,7 @@ public class PintarFlotaOponente {
         }
     }
 
+    // Pinta el barco en las respectivas casillas del tablero posicion
     public boolean funcionesFlota(String barco, int estadoOrientacion, int estadoSentidoOrientacion, int col, int row){
         int casillasAUsar; // Cantidad de casillas que ocupa el barco
         int casillasUsadas = 0; // Determina si las casillas siguientes estan ocupadas para poder desplegar el barco

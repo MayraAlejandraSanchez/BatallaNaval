@@ -23,6 +23,7 @@ public class PintarFlota {
         casillasUsadasBarco = new ArrayList<>();
     }
 
+    // Retorna la direccion de la imagen dependiendo del barco ingresado
     public String pathImages(String barco, int estadoOrientacion, int estadoSentidoOrientacion){
         String path = "";
         if(estadoOrientacion == 0){
@@ -71,6 +72,7 @@ public class PintarFlota {
         }
     }
 
+    // Pinta el barco en las respectivas casillas del tablero posicion
     public boolean funcionesFlota(String barco, int estadoOrientacion, int estadoSentidoOrientacion, int col, int row){
         int casillasAUsar;
         int casillasUsadas = 0;

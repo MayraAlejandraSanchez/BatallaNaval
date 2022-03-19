@@ -42,7 +42,7 @@ public class GUI_Principal extends JFrame {
     private PintarFlota pintarFlota;
     private PanelFlota panelFlota;
     private GUI_Secundaria ventanaOponente;
-    private int estadoJuego; // 1 seleccionar barco, 2 seleccionar orientacion del barco, 3 seleccionar sentido del barco, 4 colocar barco en el tablero, 5 combate
+    private int estadoJuego; // 1 seleccionar barco, 2 seleccionar orientacion del barco, 3 seleccionar sentido del barco, 4 colocar barco en el tablero, 5 combate, 6 turno del oponente
     private Combate combate;
     private int contadorHundidos; // Contador de barcos hundidos
     private Timer timer; // establece el tiempo que tarde el oponente en escoger casilla
@@ -70,7 +70,10 @@ public class GUI_Principal extends JFrame {
      * create Listener and control Objects used for the GUI class
      */
     private void initGUI() {
+        // Creacion de la ventana del oponente
         ventanaOponente = new GUI_Secundaria(this);
+
+        // Icono del JFrame
         image = new ImageIcon(getClass().getResource(PATH+"barcoIcono.png")).getImage();
 
         // Set up JFrame Container's Layout
@@ -103,10 +106,10 @@ public class GUI_Principal extends JFrame {
         // Estado del juego
         estadoJuego = 1;
 
-        // Create Listener Object and Control Object
+        // Creacion el evento escucha
         escucha = new Escucha();
 
-        // Creates Flota object
+        // Cracion del panel Flota
         panelFlota = new PanelFlota();
 
         // Set up JComponents
@@ -182,7 +185,14 @@ public class GUI_Principal extends JFrame {
         combate = new Combate(panelTablero, ventanaOponente.getPanelTableroOponente());
 
         contadorHundidos = 0;
+        // Timer para el turno del oponente
         timer = new Timer(2000, escucha);
+    }
+
+    // Reinicia el juego
+    public void reset(){
+        this.dispose();
+        GUI_Principal gui = new GUI_Principal();
     }
 
     /**

@@ -169,11 +169,9 @@ public class PanelFlota extends JPanel{
 
         // Texto bajo flota
         asignarTurno = new JLabel();
-        //asignarTurno.setText("¡Es tu turno!");
         asignarTurno.setHorizontalAlignment(SwingConstants.CENTER);
 
         informacionJuego = new JTextPane();
-        //informacionJuego.setText("Selecciona la nave que quieres desplegar");
         informacionJuego.setEditable(false);
         informacionJuego.setBackground(Color.cyan);
         StyledDocument documentStyle = informacionJuego.getStyledDocument();

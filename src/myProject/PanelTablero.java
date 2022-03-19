@@ -18,6 +18,7 @@ public class PanelTablero extends JPanel {
     private Tableros tableroPosicion, tableroPrincipal;
     private String abecedario[];
 
+    // Constructor
     public PanelTablero(){
         GridBagLayout gb = new GridBagLayout();
         this.setLayout(gb);
@@ -29,6 +30,7 @@ public class PanelTablero extends JPanel {
         modelTablero();
     }
 
+    // Establece la configuracion inicial del JComponent
     public void iniciar(){
         GridBagConstraints gbc = new GridBagConstraints();
 
@@ -83,6 +85,7 @@ public class PanelTablero extends JPanel {
         this.add(imagenTiros, gbc);
     }
 
+    // Crea los tableros posicion y principal
     public void modelTablero(){
         for (int row = 0; row < 11; row++) {
             for (int col = 0; col < 11; col++) {
