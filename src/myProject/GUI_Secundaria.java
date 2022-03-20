@@ -3,6 +3,7 @@ package myProject;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
+
 /**
  * Clase GUI_Secundaria
  * @autor Mayra Alejandra Sanchez - mayra.alejandra.sanchez@correounivalle.edu.co - 202040506
@@ -18,6 +19,7 @@ public class GUI_Secundaria extends JFrame {
     private GUI_Principal guiPrincipal;
     private int contadorHundidos;
     private int estado; // 1 si continua, 2 si gana el oponente, de lo contrario 0
+
     /**
      * Constructor de la clase GUI_Secundaria
      */

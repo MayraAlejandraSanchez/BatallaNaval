@@ -125,7 +125,6 @@ public class PanelTableroOponente extends JPanel {
                         }
                     }
                 }
-
                 panelTableroPosicion.add(tableroPosicionOponente.getMatriz()[row][col]);
             }
         }

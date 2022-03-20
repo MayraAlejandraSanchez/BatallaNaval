@@ -384,14 +384,6 @@ public class GUI_Principal extends JFrame {
     }
 
     /**
-     * Retorna el objeto de clase PanelFlota
-     * @return PanelFlota
-     */
-    public PanelFlota getPanelFlota(){
-        return panelFlota;
-    }
-
-    /**
      * clase interna que extiende una clase de adaptador o implementa oyentes utilizados por la clase GUI
      */
     private class Escucha implements ActionListener, MouseListener {

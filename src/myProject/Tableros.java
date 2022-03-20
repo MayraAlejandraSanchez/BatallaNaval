@@ -2,6 +2,7 @@ package myProject;
 
 import javax.swing.*;
 import java.util.HashMap;
+
 /**
  * Clase Tableros
  * @autor Mayra Alejandra Sanchez - mayra.alejandra.sanchez@correounivalle.edu.co - 202040506
