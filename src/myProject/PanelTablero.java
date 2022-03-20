@@ -164,7 +164,7 @@ public class PanelTablero extends JPanel {
     /**
      * Retorna el tablero ingresado
      * @param _tablero
-     * @return
+     * @return Tableros
      */
     public Tableros getTablero(String _tablero){
         Tableros tablero = new Tableros();

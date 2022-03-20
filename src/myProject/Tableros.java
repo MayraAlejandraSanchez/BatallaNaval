@@ -42,7 +42,7 @@ public class Tableros {
 
     /**
      * Retorna la matriz
-     * @return
+     * @return JLabel[][]
      */
     public JLabel[][] getMatriz(){
         return tablero;
@@ -50,7 +50,7 @@ public class Tableros {
 
     /**
      * Retorna el map casillasOcupadas
-     * @return
+     * @return HashMap
      */
     public HashMap getCasillasOcupadas(){
         return casillasOcupadas;
@@ -58,7 +58,7 @@ public class Tableros {
 
     /**
      * Retorna el map casillaBarco
-     * @return
+     * @return HashMap
      */
     public HashMap getCasillaBarco(){
         return casillaBarco;
@@ -66,7 +66,7 @@ public class Tableros {
 
     /**
      * Retorna el map casillaNombreBarco
-     * @return
+     * @return HashMap
      */
     public HashMap getCasillaNombreBarco(){
         return casillaNombreBarco;

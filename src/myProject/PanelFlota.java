@@ -239,7 +239,7 @@ public class PanelFlota extends JPanel{
     /**
      * Retorna el botón del barco especificado
      * @param barco
-     * @return
+     * @return JButton
      */
     public JButton getBotonBarco(String barco){
         JButton boton = new JButton();
@@ -264,7 +264,7 @@ public class PanelFlota extends JPanel{
     /**
      * Retorna el botón de orientación especificado
      * @param orientacion
-     * @return
+     * @return JButton
      */
     public JButton getBotonOrientacion(String orientacion){
         JButton boton = new JButton();
@@ -282,7 +282,7 @@ public class PanelFlota extends JPanel{
     /**
      * Retorna el botón del sentido de la orientación especificado
      * @param sentido
-     * @return
+     * @return JButton
      */
     public JButton getBotonSentidoOrientacion(String sentido){
         JButton boton = new JButton();
@@ -314,7 +314,7 @@ public class PanelFlota extends JPanel{
 
     /**
      * Retorna el nombre del barco que se presionó
-     * @return
+     * @return String
      */
     public String getNombreBoton(){
         return nombreBoton;
@@ -338,7 +338,7 @@ public class PanelFlota extends JPanel{
 
     /**
      * Retorna el estado de orientación
-     * @return
+     * @return int
      */
     public int getOrientacion(){
         return orientacion;
@@ -346,7 +346,7 @@ public class PanelFlota extends JPanel{
 
     /**
      * Retorna el estado de sentidoOrientacion
-     * @return
+     * @return int
      */
     public int getSentidoOrientacion(){
         return sentidoOrientacion;
@@ -377,7 +377,7 @@ public class PanelFlota extends JPanel{
     /**
      * Retorna la cantidad disponible del barco ingresado
      * @param barco
-     * @return
+     * @return int
      */
     public int getCantidadBarco(String barco){
         int cantidad = 0;
@@ -401,7 +401,7 @@ public class PanelFlota extends JPanel{
 
     /**
      * Retorna la cantidad total de naves disponibles
-     * @return
+     * @return int
      */
     public int cantidadTotalNaves(){
         return cantidadPortavion + cantidadSubmarino + cantidadDestructor + cantidadFragata;
@@ -409,7 +409,7 @@ public class PanelFlota extends JPanel{
 
     /**
      * Retorna el JTextPane para editar la información del juego
-     * @return
+     * @return JTextPane
      */
     public JTextPane getInformacionJuego(){
         return informacionJuego;
@@ -417,7 +417,7 @@ public class PanelFlota extends JPanel{
 
     /**
      * Retorna el JLabel que edita el turno
-     * @return
+     * @return JLabel
      */
     public JLabel getAsignarTurno(){
         return asignarTurno;
@@ -425,7 +425,7 @@ public class PanelFlota extends JPanel{
 
     /**
      * Retorna el boton que explica la dinámica de los botones
-     * @return
+     * @return JButton
      */
     public JButton getExplicacionBotones(){
         return explicacionBotones;

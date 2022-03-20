@@ -239,7 +239,7 @@ public class GUI_Secundaria extends JFrame {
 
     /**
      * Retorna el panelTableroOponente
-     * @return
+     * @return PanelTableroOponente
      */
     public PanelTableroOponente getPanelTableroOponente(){
         return panelTableroOponente;
@@ -247,7 +247,7 @@ public class GUI_Secundaria extends JFrame {
 
     /**
      * Retorna el objeto para pintar la flota oponente
-     * @return
+     * @return PintarFlotaOponente
      */
     public PintarFlotaOponente getPintarFlotaOponente(){
         return pintarFlotaOponente;
@@ -255,7 +255,7 @@ public class GUI_Secundaria extends JFrame {
 
     /**
      * Retorna la variable estado
-     * @return
+     * @return int
      */
     public int getEstado(){
         return estado;

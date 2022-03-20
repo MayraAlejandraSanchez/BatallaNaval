@@ -377,7 +377,7 @@ public class GUI_Principal extends JFrame {
 
     /**
      * Retorna el objeto de clase PanelTablero
-     * @return
+     * @return PanelTablero
      */
     public PanelTablero getPanelTablero(){
         return panelTablero;
@@ -385,7 +385,7 @@ public class GUI_Principal extends JFrame {
 
     /**
      * Retorna el objeto de clase PanelFlota
-     * @return
+     * @return PanelFlota
      */
     public PanelFlota getPanelFlota(){
         return panelFlota;

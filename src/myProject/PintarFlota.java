@@ -32,7 +32,7 @@ public class PintarFlota {
      * @param barco
      * @param estadoOrientacion
      * @param estadoSentidoOrientacion
-     * @return
+     * @return String
      */
     public String pathImages(String barco, int estadoOrientacion, int estadoSentidoOrientacion){
         String path = "";
@@ -94,7 +94,7 @@ public class PintarFlota {
      * @param estadoSentidoOrientacion
      * @param col
      * @param row
-     * @return
+     * @return boolean
      */
     public boolean funcionesFlota(String barco, int estadoOrientacion, int estadoSentidoOrientacion, int col, int row){
         int casillasAUsar;

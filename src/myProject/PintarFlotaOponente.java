@@ -36,7 +36,7 @@ public class PintarFlotaOponente {
      * @param barco
      * @param estadoOrientacion
      * @param estadoSentidoOrientacion
-     * @return
+     * @return String
      */
     public String pathImages(String barco, int estadoOrientacion, int estadoSentidoOrientacion){
         String path = "";
@@ -98,7 +98,7 @@ public class PintarFlotaOponente {
      * @param estadoSentidoOrientacion
      * @param col
      * @param row
-     * @return
+     * @return boolean
      */
     public boolean funcionesFlota(String barco, int estadoOrientacion, int estadoSentidoOrientacion, int col, int row){
         int casillasAUsar; // Cantidad de casillas que ocupa el barco
@@ -268,7 +268,7 @@ public class PintarFlotaOponente {
     /**
      * Retorna la cantidad disponible del barco ingresado
      * @param barco
-     * @return
+     * @return int
      */
     public int getCantidadBarco(String barco){
         int cantidad = 0;
@@ -292,7 +292,7 @@ public class PintarFlotaOponente {
 
     /**
      * Retorna la cantidad total de naves disponibles
-     * @return
+     * @return int
      */
     public int cantidadTotalNaves(){
         return cantidadPortavion + cantidadSubmarino + cantidadDestructor + cantidadFragata;
