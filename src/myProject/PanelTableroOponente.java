@@ -2,12 +2,12 @@ package myProject;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.HashMap;
+
 /**
  * Clase PanelTableroOponente
  * @autor Mayra Alejandra Sanchez - mayra.alejandra.sanchez@correounivalle.edu.co - 202040506
  * @autor Brayan Stiven Sanchez - brayan.sanchez.leon@correounivalle.edu.co - 202043554
- * @version 1.0.0 fecha 17/3/2022
+ * @version 1.0.0 fecha 19/3/2022
  */
 public class PanelTableroOponente extends JPanel {
     private BackgroundPane panelTableroPosicion;
@@ -15,7 +15,9 @@ public class PanelTableroOponente extends JPanel {
     private Tableros tableroPosicionOponente, tableroPrincipalOponente;
     private String abecedario[];
 
-    // Constructor
+    /**
+     * Constructor de la clase PanelTableroOponente
+     */
     public PanelTableroOponente(){
         GridBagLayout gb = new GridBagLayout();
         this.setLayout(gb);
@@ -27,11 +29,13 @@ public class PanelTableroOponente extends JPanel {
         modelTableroOponente();
     }
 
-    // Establece la configuracion inicial del JComponent
+    /**
+     * Establece la configuración inicial del JComponent
+     */
     public void iniciar(){
         GridBagConstraints gbc = new GridBagConstraints();
 
-        // Panel tablero posicion
+        // Panel tablero posición
         nombreTableroPosicion = new JLabel("T A B L E R O   P O S I C I O N");
         nombreTableroPosicion.setForeground(new Color(0, 0, 0, 230));
         nombreTableroPosicion.setFont(new Font(Font.MONOSPACED,Font.BOLD,15));
@@ -50,7 +54,9 @@ public class PanelTableroOponente extends JPanel {
         this.add(panelTableroPosicion, gbc);
     }
 
-    // JPanel con imagen para agregar las matrices
+    /**
+     * JPanel con imagen para agregar las matrices
+     */
     public class BackgroundPane extends JPanel{
         private Image img;
 
@@ -70,7 +76,9 @@ public class PanelTableroOponente extends JPanel {
         }
     }
 
-    // Crea los tableros posicion y principal
+    /**
+     * Crea los tableros posición y principal
+     */
     public void modelTableroOponente(){
         for (int row = 0; row < 11; row++) {
             for (int col = 0; col < 11; col++) {
@@ -123,7 +131,11 @@ public class PanelTableroOponente extends JPanel {
         }
     }
 
-    // Retorna el tablero ingresado
+    /**
+     * Retorna el tablero ingresado
+     * @param _tablero
+     * @return
+     */
     public Tableros getTableroOponente(String _tablero){
         Tableros tablero = new Tableros();
         if(_tablero.equals("posicion")){

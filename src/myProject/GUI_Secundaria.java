@@ -2,14 +2,12 @@ package myProject;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Random;
 /**
  * Clase GUI_Secundaria
  * @autor Mayra Alejandra Sanchez - mayra.alejandra.sanchez@correounivalle.edu.co - 202040506
  * @autor Brayan Stiven Sanchez - brayan.sanchez.leon@correounivalle.edu.co - 202043554
- * @version 1.0.0 fecha 17/3/2022
+ * @version 1.0.0 fecha 19/3/2022
  */
 public class GUI_Secundaria extends JFrame {
     public static final String PATH = "/recursos/";
@@ -20,13 +18,15 @@ public class GUI_Secundaria extends JFrame {
     private GUI_Principal guiPrincipal;
     private int contadorHundidos;
     private int estado; // 1 si continua, 2 si gana el oponente, de lo contrario 0
-
+    /**
+     * Constructor de la clase GUI_Secundaria
+     */
     public GUI_Secundaria(GUI_Principal _guiPrincipal) {
         this.guiPrincipal = _guiPrincipal;
         contadorHundidos = 0;
         initGUI_Secundaria();
 
-        //Default JFrame configuration
+        // Configuración del JFrame
         this.setTitle("Batalla Naval");
         Image image = new ImageIcon(getClass().getResource(PATH + "barcoIcono.png")).getImage();
         this.setIconImage(image);
@@ -37,6 +37,10 @@ public class GUI_Secundaria extends JFrame {
         this.setLocationRelativeTo(null);
     }
 
+    /**
+     * Este método se utiliza para configurar la configuración predeterminada de JComponent,
+     * crear objetos de escucha y control utilizados para la clase GUI
+     */
     private void initGUI_Secundaria() {
         // Set up JFrame Container's Layout
         getContentPane().setLayout(new BorderLayout(0,0));
@@ -75,6 +79,9 @@ public class GUI_Secundaria extends JFrame {
         panelSup.add(enemy,FlowLayout.CENTER);
     }
 
+    /**
+     * Selecciona aleatoriamente una casilla para atacar la flota del usuario
+     */
     public void oponenteVsUsuario(){
         Random fila = new Random();
         Random columna = new Random();
@@ -120,16 +127,21 @@ public class GUI_Secundaria extends JFrame {
         }
     }
 
-    // Identifica si hay un barco en la casilla del tablero principal para hundirlo
+    /**
+     * Identifica si hay un barco en la casilla del tablero principal para hundirlo
+     * @param row
+     * @param col
+     * @param barco
+     */
     public void funcionesCombate(int row, int col, String barco){
-        // Establece una imagen a la casilla seleccionada del tablero posicion del usuario si un barco fue tocado
+        // Establece una imagen a la casilla seleccionada del tablero posición del usuario si un barco fue tocado
         guiPrincipal.getPanelTablero().getTablero("posicion").getMatriz()[row][col].setIcon(new ImageIcon(getClass().getResource("/recursos/tocado.png")));
         panelTableroOponente.getTableroOponente("principal").getCasillasOcupadas().replace(panelTableroOponente.getTableroOponente("principal").getMatriz()[row][col], Integer.valueOf(2));
 
         // Reduce las casillas ocupadas del barco tocado para poder ser hundido
         guiPrincipal.getPanelTablero().getTablero("posicion").reducirCasillasUsadas(barco);
 
-        // Si no hay mas casillas ocupadas, el barco se hunde y se establecen las imagenes respectivas
+        // Si no hay más casillas ocupadas, el barco se hunde y se establecen las imágenes respectivas
         if(guiPrincipal.getPanelTablero().getTablero("posicion").getCasillaBarco().get(guiPrincipal.getPanelTablero().getTablero("posicion").getMatriz()[row][col]) == Integer.valueOf(0)){
             contadorHundidos++;
             estado = 1;
@@ -153,7 +165,9 @@ public class GUI_Secundaria extends JFrame {
         }
     }
 
-
+    /**
+     * Distribuye de forma aleatoria la flota en el tablero posición del oponente
+     */
     public void distribucionFlotaOponente(){
         Random barcoAleatorio = new Random();
         String nombreBarco = "";
@@ -223,17 +237,26 @@ public class GUI_Secundaria extends JFrame {
         }
     }
 
-    // Retorna el panelTableroOponente
+    /**
+     * Retorna el panelTableroOponente
+     * @return
+     */
     public PanelTableroOponente getPanelTableroOponente(){
         return panelTableroOponente;
     }
 
-    // Retorna el objeto para pintar la flota oponente
+    /**
+     * Retorna el objeto para pintar la flota oponente
+     * @return
+     */
     public PintarFlotaOponente getPintarFlotaOponente(){
         return pintarFlotaOponente;
     }
 
-    // Retorna la variable estado
+    /**
+     * Retorna la variable estado
+     * @return
+     */
     public int getEstado(){
         return estado;
     }

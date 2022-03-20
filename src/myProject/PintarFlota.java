@@ -7,15 +7,19 @@ import java.util.ArrayList;
  * Clase PintarFlota
  * @autor Mayra Alejandra Sanchez - mayra.alejandra.sanchez@correounivalle.edu.co - 202040506
  * @autor Brayan Stiven Sanchez - brayan.sanchez.leon@correounivalle.edu.co - 202043554
- * @version 1.0.0 fecha 17/3/2022
+ * @version 1.0.0 fecha 19/3/2022
  */
 public class PintarFlota {
     private PanelTablero panelTablero;
     private PanelFlota panelFlota;
-    private int barcoUsado; // Acumulador para identificar cual nave ha sido desplegada (en orden del 1 al 10)
+    private int barcoUsado; // Acumulador para identificar cuál nave ha sido desplegada (en orden del 1 al 10)
     private ArrayList<Integer> casillasUsadasBarco; // casillas usadas por cada nave
 
-    // Constructor
+    /**
+     * Constructor de la clase PintarFlota
+     * @param _panelTablero
+     * @param _panelFlota
+     */
     public PintarFlota(PanelTablero _panelTablero, PanelFlota _panelFlota){
         this.panelTablero = _panelTablero;
         this.panelFlota = _panelFlota;
@@ -23,7 +27,13 @@ public class PintarFlota {
         casillasUsadasBarco = new ArrayList<>();
     }
 
-    // Retorna la direccion de la imagen dependiendo del barco ingresado
+    /**
+     * Retorna la dirección de la imagen dependiendo del barco ingresado
+     * @param barco
+     * @param estadoOrientacion
+     * @param estadoSentidoOrientacion
+     * @return
+     */
     public String pathImages(String barco, int estadoOrientacion, int estadoSentidoOrientacion){
         String path = "";
         if(estadoOrientacion == 0){
@@ -49,7 +59,12 @@ public class PintarFlota {
         return path;
     }
 
-    // Relaciona la casilla y la cantidad de casillas que usa el barco ingresado
+    /**
+     * Relaciona la casilla y la cantidad de casillas que usa el barco ingresado
+     * @param casilla
+     * @param barco
+     * @param numeroBarco
+     */
     public void relacionJLabelBarco(JLabel casilla, String barco, int numeroBarco){
         if(barco.equals("portavion" + String.valueOf(numeroBarco))){
             casillasUsadasBarco.add(4);
@@ -72,7 +87,15 @@ public class PintarFlota {
         }
     }
 
-    // Pinta el barco en las respectivas casillas del tablero posicion
+    /**
+     * Pinta el barco en las respectivas casillas del tablero posición
+     * @param barco
+     * @param estadoOrientacion
+     * @param estadoSentidoOrientacion
+     * @param col
+     * @param row
+     * @return
+     */
     public boolean funcionesFlota(String barco, int estadoOrientacion, int estadoSentidoOrientacion, int col, int row){
         int casillasAUsar;
         int casillasUsadas = 0;

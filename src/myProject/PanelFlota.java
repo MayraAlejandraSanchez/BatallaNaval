@@ -11,7 +11,7 @@ import java.awt.*;
  * Clase PanelFlota
  * @autor Mayra Alejandra Sanchez - mayra.alejandra.sanchez@correounivalle.edu.co - 202040506
  * @autor Brayan Stiven Sanchez - brayan.sanchez.leon@correounivalle.edu.co - 202043554
- * @version 1.0.0 fecha 17/3/2022
+ * @version 1.0.0 fecha 19/3/2022
  */
 public class PanelFlota extends JPanel{
     public static final String PATH ="/recursos/";
@@ -30,6 +30,9 @@ public class PanelFlota extends JPanel{
     private int cantidadDestructor;
     private int cantidadFragata;
 
+    /**
+     * Constructor de clase PanelFlota
+     */
     public PanelFlota(){
         GridBagLayout gbl = new GridBagLayout();
         this.setLayout(gbl);
@@ -38,6 +41,9 @@ public class PanelFlota extends JPanel{
         barcos();
     }
 
+    /**
+     * Creación de panel con los barcos y los botones de sentido y orientación
+     */
     public void barcos(){
         GridBagConstraints gbc = new GridBagConstraints();
 
@@ -51,7 +57,7 @@ public class PanelFlota extends JPanel{
         cantidadDestructor = 3;
         cantidadFragata = 4;
 
-        // Imagenes
+        // Imágenes
         imageDestructor = new ImageIcon(getClass().getResource(PATH + "destructor.png"));
         imagePortavion = new  ImageIcon(getClass().getResource(PATH+"portavion.png"));
         imageFragata = new ImageIcon(getClass().getResource(PATH+"fragata.png"));
@@ -109,6 +115,7 @@ public class PanelFlota extends JPanel{
         horizontal.setFocusable(false);
         horizontal.setBorder(null);
 
+        // Botones de sentido
         sup_inf = new JButton("Superior-Inferior");
         sup_inf.setFont(new Font(Font.SERIF,Font.ROMAN_BASELINE,15));
         sup_inf.setBackground(new Color(0,0,255));
@@ -229,7 +236,11 @@ public class PanelFlota extends JPanel{
 
     }
 
-    // Retorna el boton del barco especificado
+    /**
+     * Retorna el botón del barco especificado
+     * @param barco
+     * @return
+     */
     public JButton getBotonBarco(String barco){
         JButton boton = new JButton();
         if(barco.equals("portavion")){
@@ -250,7 +261,11 @@ public class PanelFlota extends JPanel{
         return boton;
     }
 
-    // Retorna el boton de orientacion especificado
+    /**
+     * Retorna el botón de orientación especificado
+     * @param orientacion
+     * @return
+     */
     public JButton getBotonOrientacion(String orientacion){
         JButton boton = new JButton();
         if(orientacion.equals("vertical")){
@@ -264,7 +279,11 @@ public class PanelFlota extends JPanel{
     }
 
 
-    // Retorna el boton del sentido de la orientacion especificado
+    /**
+     * Retorna el botón del sentido de la orientación especificado
+     * @param sentido
+     * @return
+     */
     public JButton getBotonSentidoOrientacion(String sentido){
         JButton boton = new JButton();
         if(sentido.equals("sup_inf")){
@@ -285,37 +304,58 @@ public class PanelFlota extends JPanel{
         return boton;
     }
 
-    // Guarda el nombre del boton presionado en un string
+    /**
+     * Guarda el nombre del botón presionado en un string
+     * @param _nombreBoton
+     */
     public void setNombreBoton(String _nombreBoton){
         nombreBoton = _nombreBoton;
     }
 
-    // Retorna el nombre del barco que se presiono
+    /**
+     * Retorna el nombre del barco que se presionó
+     * @return
+     */
     public String getNombreBoton(){
         return nombreBoton;
     }
 
-    // Asigna el estado de orientacion
+    /**
+     * Asigna el estado de orientación
+     * @param _orientacion
+     */
     public void setOrientacion(int _orientacion){
         orientacion = _orientacion;
     }
 
-    // Asigna el estado de sentidoOrientacion
+    /**
+     * Asigna el estado de sentidoOrientacion
+     * @param _sentidoOrientacion
+     */
     public void setSentidoOrientacion(int _sentidoOrientacion){
         sentidoOrientacion = _sentidoOrientacion;
     }
 
-    // Retorna el estado de orientacion
+    /**
+     * Retorna el estado de orientación
+     * @return
+     */
     public int getOrientacion(){
         return orientacion;
     }
 
-    // Retorna el estado de sentidoOrientacion
+    /**
+     * Retorna el estado de sentidoOrientacion
+     * @return
+     */
     public int getSentidoOrientacion(){
         return sentidoOrientacion;
     }
 
-    // Reduce la cantidad disponible del barco ingresado
+    /**
+     * Reduce la cantidad disponible del barco ingresado
+     * @param barco
+     */
     public void setCantidadBarco(String barco){
         if(barco.equals("portavion")){
             cantidadPortavion--;
@@ -334,7 +374,11 @@ public class PanelFlota extends JPanel{
         }
     }
 
-    // Retorna la cantidad disponible del barco ingresado
+    /**
+     * Retorna la cantidad disponible del barco ingresado
+     * @param barco
+     * @return
+     */
     public int getCantidadBarco(String barco){
         int cantidad = 0;
         if(barco.equals("portavion")){
@@ -355,22 +399,34 @@ public class PanelFlota extends JPanel{
         return cantidad;
     }
 
-    // Retorna la cantidad total de naves disponibles
+    /**
+     * Retorna la cantidad total de naves disponibles
+     * @return
+     */
     public int cantidadTotalNaves(){
         return cantidadPortavion + cantidadSubmarino + cantidadDestructor + cantidadFragata;
     }
 
-    // Retorna el JTextPane para editar la informacion del juego
+    /**
+     * Retorna el JTextPane para editar la información del juego
+     * @return
+     */
     public JTextPane getInformacionJuego(){
         return informacionJuego;
     }
 
-    // Retorna el JLabel que edita el turno
+    /**
+     * Retorna el JLabel que edita el turno
+     * @return
+     */
     public JLabel getAsignarTurno(){
         return asignarTurno;
     }
 
-    // Retorna el boton que explica la dinamica de los botones
+    /**
+     * Retorna el boton que explica la dinámica de los botones
+     * @return
+     */
     public JButton getExplicacionBotones(){
         return explicacionBotones;
     }

@@ -3,18 +3,25 @@ package myProject;
  * Clase Combate
  * @autor Mayra Alejandra Sanchez - mayra.alejandra.sanchez@correounivalle.edu.co - 202040506
  * @autor Brayan Stiven Sanchez - brayan.sanchez.leon@correounivalle.edu.co - 202043554
- * @version 1.0.0 fecha 17/3/2022
+ * @version 1.0.0 fecha 19/3/2022
  */
 public class Combate {
     private PanelTablero panelTablero;
     private PanelTableroOponente panelTableroOponente;
 
+    /**
+     * Constructor de la clase Combate
+     * @param _panelTablero
+     * @param _panelTableroOponente
+     */
     public Combate(PanelTablero _panelTablero, PanelTableroOponente _panelTableroOponente){
         this.panelTablero =_panelTablero;
         this.panelTableroOponente = _panelTableroOponente;
     }
 
-    // Busca las casillas ocupadas por naves del tablero posicion del oponente y las marca en el tablero principal del usuario
+    /**
+     * Busca las casillas ocupadas por naves del tablero posición del oponente y las marca en el tablero principal del usuario
+     */
     public void usuarioVsOponente(){
         for(int row = 1; row < 11; row++) {
             for (int col = 1; col < 11; col++) {
@@ -25,7 +32,9 @@ public class Combate {
         }
     }
 
-    // Busca las casillas ocupadas por naves del tablero posicion del usuario y las marca en el tablero principal del oponente
+    /**
+     * Busca las casillas ocupadas por naves del tablero posición del usuario y las marca en el tablero principal del oponente
+     */
     public void oponenteVsUsuario(){
         for(int row = 1; row < 11; row++) {
             for (int col = 1; col < 11; col++) {

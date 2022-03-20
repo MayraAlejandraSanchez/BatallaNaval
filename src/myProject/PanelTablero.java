@@ -1,16 +1,13 @@
 package myProject;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
 
 /**
  * Clase PanelTablero
  * @autor Mayra Alejandra Sanchez - mayra.alejandra.sanchez@correounivalle.edu.co - 202040506
  * @autor Brayan Stiven Sanchez - brayan.sanchez.leon@correounivalle.edu.co - 202043554
- * @version 1.0.0 fecha 17/3/2022
+ * @version 1.0.0 fecha 19/3/2022
  */
 public class PanelTablero extends JPanel {
 
@@ -20,7 +17,9 @@ public class PanelTablero extends JPanel {
     private Tableros tableroPosicion, tableroPrincipal;
     private String abecedario[];
 
-    // Constructor
+    /**
+     * Constructor de la clase PanelTablero
+     */
     public PanelTablero(){
         GridBagLayout gb = new GridBagLayout();
         this.setLayout(gb);
@@ -32,11 +31,13 @@ public class PanelTablero extends JPanel {
         modelTablero();
     }
 
-    // Establece la configuracion inicial del JComponent
+    /**
+     * Establece la configuración inicial del JComponent
+     */
     public void iniciar(){
         GridBagConstraints gbc = new GridBagConstraints();
 
-        // Panel tablero posicion
+        // Panel tablero posición
         nombreTableroPosicion = new JLabel("T A B L E R O   P O S I C I O N");
         nombreTableroPosicion.setForeground(new Color(0, 0, 0, 230));
         nombreTableroPosicion.setFont(new Font(Font.MONOSPACED,Font.BOLD,15));
@@ -72,6 +73,7 @@ public class PanelTablero extends JPanel {
         gbc.insets = new Insets(0,15,0,15);
         this.add(panelTableroPrincipal, gbc);
 
+        // Imagen tiros
         imagenTiros = new JLabel();
         imagenTiros.setIcon(new ImageIcon(getClass().getResource(PATH + "tiros.png")));
         gbc.gridx = 1;
@@ -81,7 +83,9 @@ public class PanelTablero extends JPanel {
         this.add(imagenTiros, gbc);
     }
 
-    // JPanel con imagen para agregar las matrices
+    /**
+     * JPanel con imagen para agregar las matrices
+     */
     public class BackgroundPane extends JPanel{
         private Image img;
 
@@ -101,7 +105,9 @@ public class PanelTablero extends JPanel {
         }
     }
 
-    // Crea los tableros posicion y principal
+    /**
+     * Crea los tableros posición y principal
+     */
     public void modelTablero(){
         for (int row = 0; row < 11; row++) {
             for (int col = 0; col < 11; col++) {
@@ -148,13 +154,6 @@ public class PanelTablero extends JPanel {
                         }
                     }
                 }
-                /*
-                tableroPosicion.getMatriz()[row][col].setOpaque(false);
-                tableroPosicion.getMatriz()[row][col].setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
-                tableroPrincipal.getMatriz()[row][col].setOpaque(false);
-                tableroPrincipal.getMatriz()[row][col].setBorder(BorderFactory.createLineBorder(Color.BLACK));
-                 */
 
                 panelTableroPosicion.add(tableroPosicion.getMatriz()[row][col]);
                 panelTableroPrincipal.add(tableroPrincipal.getMatriz()[row][col]);
@@ -162,7 +161,11 @@ public class PanelTablero extends JPanel {
         }
     }
 
-    // Retorna el tablero ingresado
+    /**
+     * Retorna el tablero ingresado
+     * @param _tablero
+     * @return
+     */
     public Tableros getTablero(String _tablero){
         Tableros tablero = new Tableros();
         if(_tablero.equals("posicion")){

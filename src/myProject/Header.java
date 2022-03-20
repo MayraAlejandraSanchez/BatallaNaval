@@ -6,13 +6,13 @@ import java.awt.*;
  * Clase Header
  * @autor Mayra Alejandra Sanchez - mayra.alejandra.sanchez@correounivalle.edu.co - 202040506
  * @autor Brayan Stiven Sanchez - brayan.sanchez.leon@correounivalle.edu.co - 202043554
- * @version 1.0.0 fecha 17/3/2022
+ * @version 1.0.0 fecha 19/3/2022
  */
 public class Header extends JLabel {
     /**
-     * Constructor of the Header class
-     * @param title String that contains Header text
-     * @param colorBackground Color object to be assigned for the Header background
+     * Constructor de la clase Header
+     * @param title Cadena que contiene el texto del encabezado
+     * @param colorBackground Objeto de color que se asignará para el fondo del encabezado
      */
     public Header(String title, Color colorBackground){
         this.setText(title);

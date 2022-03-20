@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Clase PintarFlotaOponente
  * @autor Mayra Alejandra Sanchez - mayra.alejandra.sanchez@correounivalle.edu.co - 202040506
  * @autor Brayan Stiven Sanchez - brayan.sanchez.leon@correounivalle.edu.co - 202043554
- * @version 1.0.0 fecha 17/3/2022
+ * @version 1.0.0 fecha 19/3/2022
  */
 public class PintarFlotaOponente {
     private PanelTableroOponente panelTableroOponente;
@@ -14,10 +14,13 @@ public class PintarFlotaOponente {
     private int cantidadSubmarino; // Cantidad total de submarinos
     private int cantidadDestructor; // Cantidad total de destructores
     private int cantidadFragata; // Cantidad total de fragatas
-    private int barcoUsado; // Acumulador para identificar cual nave ha sido desplegada (en orden del 1 al 10)
+    private int barcoUsado; // Acumulador para identificar cuál nave ha sido desplegada (en orden del 1 al 10)
     private ArrayList<Integer> casillasUsadasBarco; // casillas usadas por cada nave
 
-    // Constructor
+    /**
+     * Constructor de la clase PintarFlotaOponente
+     * @param _panelTableroOponente
+     */
     public PintarFlotaOponente(PanelTableroOponente _panelTableroOponente){
         this.panelTableroOponente = _panelTableroOponente;
         cantidadPortavion = 1;
@@ -28,7 +31,13 @@ public class PintarFlotaOponente {
         casillasUsadasBarco = new ArrayList<>();
     }
 
-    // Retorna la direccion de la imagen dependiendo del barco ingresado
+    /**
+     * Retorna la dirección de la imagen dependiendo del barco ingresado
+     * @param barco
+     * @param estadoOrientacion
+     * @param estadoSentidoOrientacion
+     * @return
+     */
     public String pathImages(String barco, int estadoOrientacion, int estadoSentidoOrientacion){
         String path = "";
         if(estadoOrientacion == 0){
@@ -54,7 +63,12 @@ public class PintarFlotaOponente {
         return path;
     }
 
-    // Relaciona la casilla y la cantidad de casillas que usa el barco ingresado
+    /**
+     * Relaciona la casilla y la cantidad de casillas que usa el barco ingresado
+     * @param casilla
+     * @param barco
+     * @param numeroBarco
+     */
     public void relacionJLabelBarco(JLabel casilla, String barco, int numeroBarco){
         if(barco.equals("portavion" + String.valueOf(numeroBarco))){
             casillasUsadasBarco.add(4);
@@ -77,13 +91,21 @@ public class PintarFlotaOponente {
         }
     }
 
-    // Pinta el barco en las respectivas casillas del tablero posicion
+    /**
+     * Pinta el barco en las respectivas casillas del tablero posición
+     * @param barco
+     * @param estadoOrientacion
+     * @param estadoSentidoOrientacion
+     * @param col
+     * @param row
+     * @return
+     */
     public boolean funcionesFlota(String barco, int estadoOrientacion, int estadoSentidoOrientacion, int col, int row){
         int casillasAUsar; // Cantidad de casillas que ocupa el barco
-        int casillasUsadas = 0; // Determina si las casillas siguientes estan ocupadas para poder desplegar el barco
+        int casillasUsadas = 0; // Determina si las casillas siguientes están ocupadas para poder desplegar el barco
         int columnaReferencia = 0; // Es la columna de referencia dependiendo si es horizontal o vertical
         int filaReferencia = 0; // Es la fila de referencia dependiendo si es horizontal o vertical
-        int nextImage; // Acumulador para mostrar las imagenes en orden
+        int nextImage; // Acumulador para mostrar las imágenes en orden
         boolean auxiliar = false; // false si no se puede colocar el barco, de lo contrario true
 
         if(barco == "portavion"){
@@ -100,7 +122,7 @@ public class PintarFlotaOponente {
             }
         }
 
-        // Si la orientacion es horizontal, solo puede usar dos sentidos
+        // Si la orientación es horizontal, solo puede usar dos sentidos
         if(estadoOrientacion == 1){
             if(estadoSentidoOrientacion == 3){
                 columnaReferencia = 10;
@@ -221,7 +243,10 @@ public class PintarFlotaOponente {
         return auxiliar;
     }
 
-    // Cambia la cantidad disponible del barco ingresado
+    /**
+     * Cambia la cantidad disponible del barco ingresado
+     * @param barco
+     */
     public void setCantidadBarco(String barco){
         if(barco.equals("portavion")){
             cantidadPortavion--;
@@ -240,7 +265,11 @@ public class PintarFlotaOponente {
         }
     }
 
-    // Retorna la cantidad disponible del barco ingresado
+    /**
+     * Retorna la cantidad disponible del barco ingresado
+     * @param barco
+     * @return
+     */
     public int getCantidadBarco(String barco){
         int cantidad = 0;
         if(barco.equals("portavion")){
@@ -261,7 +290,10 @@ public class PintarFlotaOponente {
         return cantidad;
     }
 
-    // Retorna la cantidad total de naves disponibles
+    /**
+     * Retorna la cantidad total de naves disponibles
+     * @return
+     */
     public int cantidadTotalNaves(){
         return cantidadPortavion + cantidadSubmarino + cantidadDestructor + cantidadFragata;
     }

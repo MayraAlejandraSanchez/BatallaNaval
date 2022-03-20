@@ -6,19 +6,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Random;
 
 /**
  * Clase principal
  * @autor Mayra Alejandra Sanchez - mayra.alejandra.sanchez@correounivalle.edu.co - 202040506
  * @autor Brayan Stiven Sanchez - brayan.sanchez.leon@correounivalle.edu.co - 202043554
- * @version 1.0.0 fecha 14/3/2022
+ * @version 1.0.0 fecha 19/3/2022
  */
 public class GUI_Principal extends JFrame {
-
     public static final String PATH ="/recursos/";
     public static final String AYUDA ="Batalla Naval es un juego tradicional de estrategia y suerte, que involucra a dos participantes (para este caso un jugador vs el computador).\n"+
             "\nEl objetivo del juego es ser el primero en hundir los barcos del oponente. \n"+"\nCada jugador tiene 2 tableros compuesto por 10 filas y 10 columnas: \n"+
@@ -32,7 +27,6 @@ public class GUI_Principal extends JFrame {
     public  static final String CREDITOS="CRÉDITOS\n" +
             "-> BRAYAN STIVEN SANCHEZ LEON\n" +
             "-> MAYRA ALEJANDRA SANCHEZ SALINAS";
-
     private Header headerProject;
     private JButton ayuda, creditos, comenzarPartida, movimientosEnemigo,reiniciar;
     private Escucha escucha;
@@ -49,12 +43,12 @@ public class GUI_Principal extends JFrame {
     private Image image;
 
     /**
-     * Constructor of GUI class
+     * Constructor de la clase GUI
      */
     public GUI_Principal(){
         initGUI();
 
-        //Default JFrame configuration
+        // Configuración del JFrame
         this.setTitle("Batalla Naval");
         this.setIconImage(image);
         this.setUndecorated(false);
@@ -66,11 +60,11 @@ public class GUI_Principal extends JFrame {
     }
 
     /**
-     * This method is used to set up the default JComponent Configuration,
-     * create Listener and control Objects used for the GUI class
+     * Este método se utiliza para configurar la configuración predeterminada de JComponent,
+     * crear objetos de escucha y control utilizados para la clase GUI
      */
     private void initGUI() {
-        // Creacion de la ventana del oponente
+        // Creación de la ventana del oponente
         ventanaOponente = new GUI_Secundaria(this);
 
         // Icono del JFrame
@@ -82,7 +76,7 @@ public class GUI_Principal extends JFrame {
         panelEste = new JPanel();
         panelCentro = new JPanel();
 
-        // Creación de paneles
+        // Creación de paneles para el JFrame
         panelNorte.setBackground(Color.cyan);
         panelSur.setBackground(Color.cyan);
         panelEste.setBackground(Color.cyan);
@@ -98,6 +92,7 @@ public class GUI_Principal extends JFrame {
         panelEste.setPreferredSize(new Dimension(1000,60));
         panelCentro.setPreferredSize(new Dimension(600,100));
 
+        // Se agregan los paneles al JFrame
         this.add(panelNorte,BorderLayout.NORTH);
         this.add(panelSur,BorderLayout.SOUTH);
         this.add(panelEste,BorderLayout.EAST);
@@ -106,14 +101,14 @@ public class GUI_Principal extends JFrame {
         // Estado del juego
         estadoJuego = 1;
 
-        // Creacion el evento escucha
+        // Creación el evento escucha
         escucha = new Escucha();
 
-        // Cracion del panel Flota
+        // Creación del panel Flota
         panelFlota = new PanelFlota();
 
         // Set up JComponents
-        // Imagenes
+        // Imágenes
         team = new ImageIcon(getClass().getResource(PATH + "team.png"));
         help = new  ImageIcon(getClass().getResource(PATH+"signo.png"));
         play = new ImageIcon(getClass().getResource(PATH+"play.png"));
@@ -122,11 +117,11 @@ public class GUI_Principal extends JFrame {
         reinicio = new ImageIcon(getClass().getResource(PATH + "reiniciarIcon.png"));
 
         // JComponents de la parte superior
-        // Titulo
+        // Título
         headerProject = new Header("B A T A L L A   N A V A L", Color.CYAN);
         panelNorte.add(headerProject,FlowLayout.LEFT);
 
-        // Creacion boton ayuda
+        // Creación botón ayuda
         ayuda = new JButton("", help);
         ayuda.addActionListener(escucha);
         ayuda.setBackground(Color.CYAN);
@@ -134,7 +129,7 @@ public class GUI_Principal extends JFrame {
         ayuda.setBorder(null);
         panelNorte.add(ayuda,FlowLayout.CENTER);
 
-        // Creacion boton creditos
+        // Creación botón créditos
         creditos = new JButton("", team);
         creditos.addActionListener(escucha);
         creditos.setBackground(Color.CYAN);
@@ -142,11 +137,11 @@ public class GUI_Principal extends JFrame {
         creditos.setBorder(null);
         panelNorte.add(creditos,FlowLayout.LEFT);
 
-        // Se agrega escucha al boton de la informacion de los botones de la clase PanelFlota
+        // Se agrega escucha al botón de la información de los botones de la clase PanelFlota
         panelFlota.getExplicacionBotones().addActionListener(escucha);
 
         // JComponents de la parte central
-        // Tablero
+        // Tableros
         panelTablero = new PanelTablero();
         pintarFlota = new PintarFlota(panelTablero, panelFlota);
         panelEste.add(panelTablero);
@@ -155,7 +150,7 @@ public class GUI_Principal extends JFrame {
         panelCentro.add(panelFlota);
 
         //JComponents de la parte Inferior
-        // Creacion de botón comenzar partida
+        // Creación de botón comenzar partida
         comenzarPartida = new JButton("Comenzar partida", play);
         comenzarPartida.addActionListener(escucha);
         comenzarPartida.setBackground(Color.CYAN);
@@ -163,7 +158,7 @@ public class GUI_Principal extends JFrame {
         comenzarPartida.setBorder(null);
         panelSur.add(comenzarPartida,FlowLayout.LEFT);
 
-        // Creacion de botón de movimientos del oponente
+        // Creación de botón de movimientos del oponente
         movimientosEnemigo = new JButton("Movimientos oponente", enemy);
         movimientosEnemigo.addActionListener(escucha);
         movimientosEnemigo.setBackground(Color.CYAN);
@@ -171,7 +166,7 @@ public class GUI_Principal extends JFrame {
         movimientosEnemigo.setBorder(null);
         panelSur.add(movimientosEnemigo,FlowLayout.CENTER);
 
-        // Creacion del botón de reinicio
+        // Creación del botón de reinicio
         reiniciar = new JButton("Reiniciar", reinicio);
         reiniciar.addActionListener(escucha);
         reiniciar.setBackground(Color.CYAN);
@@ -179,7 +174,7 @@ public class GUI_Principal extends JFrame {
         reiniciar.setBorder(null);
         panelSur.add(reiniciar,FlowLayout.CENTER);
 
-        // Se agrega el escucha a todos los botones de todas las clases
+        // Se agrega él escucha a todos los botones de todas las clases
         setEscuchaBotones("remover");
         setVerticalHorizontal("remover");
         setOrientacionSentidoVertical("remover");
@@ -198,16 +193,18 @@ public class GUI_Principal extends JFrame {
         timer = new Timer(2000, escucha);
     }
 
-    // Reinicia el juego
+    /**
+     * Reinicia el juego
+     */
     public void reset(){
         this.dispose();
         GUI_Principal gui = new GUI_Principal();
     }
 
     /**
-     * Main process of the Java program
-     * @param args Object used in order to send input data from command line when
-     *             the program is execute by console.
+     * Proceso principal del programa Java
+     * @param args Objeto utilizado para enviar datos de entrada desde la línea de comando cuando
+     * el programa se ejecuta por consola.
      */
     public static void main(String[] args){
         EventQueue.invokeLater(() -> {
@@ -215,7 +212,10 @@ public class GUI_Principal extends JFrame {
         });
     }
 
-    // Agrega o remueve el escucha al boton de cada barco
+    /**
+     * Agrega o remueve él escucha al botón de cada barco
+     * @param evento
+     */
     public void setEscuchaBotones(String evento){
         if(evento == "agregar"){
             panelFlota.getBotonBarco("portavion").addActionListener(escucha);
@@ -238,7 +238,10 @@ public class GUI_Principal extends JFrame {
         }
     }
 
-    // Agrega o remueve el escucha a los botones Vertical y Horizontal
+    /**
+     *Agrega o remueve él escucha a los botones Vertical y Horizontal
+     * @param evento
+     */
     public void setVerticalHorizontal(String evento){
         if(evento == "agregar"){
             panelFlota.getBotonOrientacion("vertical").addActionListener(escucha);
@@ -253,7 +256,10 @@ public class GUI_Principal extends JFrame {
         }
     }
 
-    // Agrega o remueve el escucha de los botones verticales
+    /**
+     * Agrega o remueve él escucha de los botones verticales
+     * @param evento
+     */
     public void setOrientacionSentidoVertical(String evento){
         if(evento == "agregar"){
             panelFlota.getBotonSentidoOrientacion("sup_inf").addActionListener(escucha);
@@ -268,7 +274,10 @@ public class GUI_Principal extends JFrame {
         }
     }
 
-    // Agrega o remueve el escucha de los botones horizontales
+    /**
+     * Agrega o remueve él escucha de los botones horizontales
+     * @param evento
+     */
     public void setOrientacionSentidoHorizontal(String evento){
         if(evento == "agregar"){
             panelFlota.getBotonSentidoOrientacion("der_izq").addActionListener(escucha);
@@ -283,7 +292,10 @@ public class GUI_Principal extends JFrame {
         }
     }
 
-    // Agrega o remueve el escucha a cada uno de los JLabel de la matriz posicion de PintarTablero
+    /**
+     * Agrega o remueve él escucha a cada uno de los JLabel de la matriz posición de PintarTablero
+     * @param evento
+     */
     public void setEscuchaCasillas(String evento){
         if(evento == "agregar"){
             for (int row = 0; row < panelTablero.getTablero("posicion").getMatriz().length; row++) {
@@ -300,7 +312,10 @@ public class GUI_Principal extends JFrame {
         }
     }
 
-    // Agrega o remueve el escucha a cada uno de los JLabel de la matriz principal de PintarTablero
+    /**
+     * Agrega o remueve él escucha a cada uno de los JLabel de la matriz principal de PintarTablero
+     * @param evento
+     */
     public void setEscuchaCasillasPrincipal(String evento){
         if(evento == "agregar"){
             for (int row = 0; row < panelTablero.getTablero("principal").getMatriz().length; row++) {
@@ -317,7 +332,12 @@ public class GUI_Principal extends JFrame {
         }
     }
 
-    // Identifica si hay un barco en la casilla del tablero principal para hundirlo
+    /**
+     * Identifica si hay un barco en la casilla del tablero principal para hundirlo
+     * @param row
+     * @param col
+     * @param barco
+     */
     public void funcionesCombate(int row, int col, String barco){
         // Establece una imagen a la casilla seleccionada del tablero principal del usuario y del tablero posicion del oponente si un barco fue tocado
         ventanaOponente.getPanelTableroOponente().getTableroOponente("posicion").getMatriz()[row][col].setIcon(new ImageIcon(getClass().getResource("/recursos/tocado.png")));
@@ -355,18 +375,24 @@ public class GUI_Principal extends JFrame {
         }
     }
 
-    // Retorna el objeto de clase PanelTablero
+    /**
+     * Retorna el objeto de clase PanelTablero
+     * @return
+     */
     public PanelTablero getPanelTablero(){
         return panelTablero;
     }
 
-    // Retorna el objeto de clase PanelFlota
+    /**
+     * Retorna el objeto de clase PanelFlota
+     * @return
+     */
     public PanelFlota getPanelFlota(){
         return panelFlota;
     }
 
     /**
-     * inner class that extends an Adapter Class or implements Listeners used by GUI class
+     * clase interna que extiende una clase de adaptador o implementa oyentes utilizados por la clase GUI
      */
     private class Escucha implements ActionListener, MouseListener {
 

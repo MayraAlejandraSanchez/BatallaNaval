@@ -6,7 +6,7 @@ import java.util.HashMap;
  * Clase Tableros
  * @autor Mayra Alejandra Sanchez - mayra.alejandra.sanchez@correounivalle.edu.co - 202040506
  * @autor Brayan Stiven Sanchez - brayan.sanchez.leon@correounivalle.edu.co - 202043554
- * @version 1.0.0 fecha 17/3/2022
+ * @version 1.0.0 fecha 19/3/2022
  */
 public class Tableros {
     private JLabel tablero[][];
@@ -14,7 +14,9 @@ public class Tableros {
     private HashMap<JLabel, Integer> casillaBarco; // Relacion entre la casilla y las casillas que usa la nave
     private HashMap<JLabel, String> casillaNombreBarco; // Almacena el nombre del barco ubicado en la casilla
 
-    // Constructor
+    /**
+     * Constructor de la clase Tableros
+     */
     public Tableros(){
         tablero = new JLabel[11][11];
         casillasOcupadas = new HashMap<>();
@@ -22,7 +24,10 @@ public class Tableros {
         casillaNombreBarco = new HashMap<>();
     }
 
-    // Reduce la cantidad de casillas ocupadas por los barcos para que sea hundido
+    /**
+     * Reduce la cantidad de casillas ocupadas por los barcos para que sea hundido
+     * @param barco
+     */
     public void reducirCasillasUsadas(String barco){
         for (int row = 1; row < 11; row++) {
             for (int col = 1; col < 11; col++) {
@@ -35,22 +40,34 @@ public class Tableros {
         }
     }
 
-    // Retorna la matriz
+    /**
+     * Retorna la matriz
+     * @return
+     */
     public JLabel[][] getMatriz(){
         return tablero;
     }
 
-    // Retorna el map casillasOcupadas
+    /**
+     * Retorna el map casillasOcupadas
+     * @return
+     */
     public HashMap getCasillasOcupadas(){
         return casillasOcupadas;
     }
 
-    // Retorna el map casillaBarco
+    /**
+     * Retorna el map casillaBarco
+     * @return
+     */
     public HashMap getCasillaBarco(){
         return casillaBarco;
     }
 
-    // Retorna el map casillaNombreBarco
+    /**
+     * Retorna el map casillaNombreBarco
+     * @return
+     */
     public HashMap getCasillaNombreBarco(){
         return casillaNombreBarco;
     }
